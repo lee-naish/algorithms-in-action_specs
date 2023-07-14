@@ -1,0 +1,15 @@
+Union-Find
+
+Have array representation plus forest displayed
+
+Fixed size of 20 might be sufficient
+
+Use ranks (not size) and path halving; discuss other options
+
+for forest, have one element per column (number + rank below with less
+visual impact + maybe invisible at some levels of abstraction), each
+tree in sorted order and trees sorted on roots(?)
+
+Maybe have button to eliminate path compression so students can explore
+what happens
+

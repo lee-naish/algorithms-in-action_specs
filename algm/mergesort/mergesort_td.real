@@ -1,0 +1,73 @@
+\Note{ Real specification of merge sort (top down) for animation
+
+modifying quicksort spec...
+
+\Note}
+
+\Overview{
+XXX
+\Overview}
+
+
+\Code{
+main
+// Sort array A[left]..A[right] in ascending order
+Mergesort(A, left, right)
+\Expl{  We need left and right indices because the code is recursive
+        and both may be different for recursive calls.
+\Expl}
+    if (left < right)
+    \Expl{  Terminating condition (if there are less than two
+            elements in the array segment do nothing).
+    \Expl}
+    \In{
+        mid = (left + right)/2
+        Mergesort first half, A[left]..A[mid]    \Ref MergesortL
+        \Expl{ Sort elements in the first half of the array segment
+        \Expl}
+        \Note{ This should be animated in one step if not expanded
+        \Note}
+        Mergesort second half, A[mid+1]..A[right]    \Ref MergesortR
+        \Expl{ Sort elements in the second half of the array segment
+        \Expl}
+        \Note{ This should be animated in one step if not expanded
+        \Note}
+        Merge the two sorted halves, with the result in A \Ref MergeCopy
+        \Expl}
+    \In}
+\Code}
+
+\Code{
+MergesortL
+Mergesorg(A, left, (left + right)/2)
+\Code}
+
+\Code{
+MergesortR
+Mergesort(A, (left + right)/2 + 1, right)
+\Code}
+
+\Code{
+MergeCopy
+    Merge(A, left, mid, right, B) \Ref Merge
+    \Expl{ Takes two sorted array segments and puts them together to
+        form a single sorted array segment in temporary array B
+    \Expl}
+    Copy elements from B back to A \Ref CopyBack
+    \Note{ Need to expand this????
+    \Note}
+\Code}
+
+\Code{
+Merge
+    XXX
+\Code}
+
+\Code{
+CopyBack
+    XXX
+\Code}
+
+\Note{
+C implementation TBC
+\Note}

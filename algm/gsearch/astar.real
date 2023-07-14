@@ -1,0 +1,158 @@
+\Note{  REAL specification of breadth first search of graphs
+\Note}
+
+\Note{ There are several graph search algorithms that lead up to A*
+and we present them in a consistent way to show their similarities.
+\Note}
+
+\Note{
+Suggested visualisation:
+
+For consistency with the other search algorithms the graph could be
+layed out on a grid (not visible), used for determining edge cost and
+heuristic values for other algorithms. Colours/... can distinguish finished,
+frontier and other nodes. Edges in chosen paths highlighted.
+Cost for frontier nodes displayed, plus costs for edges displayed when
+frontier node is selected.
+Maybe if we click/hover over a node in the frontier the path costs on
+the path back to the start could be displayed?
+
+Use three (variable length) arrays for Frontier: n, Length[n] and
+heur(n), sorted on Length[n]+heur(n) (maybe have extra array for sum)
+\Note}
+
+\Overview{
+
+The A* (pronounced "A star") algorithm for graphs can be used to find
+the shortest (that is, lowest weight or cost) path from a single start
+node to a single end node. It uses a "heuristic" function to help guide
+the search.  The heuristic function estimates the path length from a
+given node to the end node. If the heuristic never over-estimates the path
+length it is said to be "admissible" and A* is then guaranteed to find a
+shortest path to the end node (assuming all edges have a positive weight).
+It is one of several algorithms that can be viewed as having a similar
+structure.  These algorithms can be used for both directed and undirected
+graphs; here we use undirected graphs for simplicity.  The way paths are
+represented is for each node to point to the previous node in the path
+(so paths are actually reversed in this representation and essentially we
+have a tree with "parent" pointers and the start node at the root). This
+allows multiple nodes to each have a single path returned.
+
+As all these algorithms execute, we can classify nodes into three sets.
+They are the nodes for which the final path has been found (this is a
+region of the graph around the start node), "frontier" nodes that are
+not finalised but are connected to a finalised node by a single edge,
+and the rest of the nodes, which have not been seen yet. The frontier
+nodes are stored explicitly in some data structure and the algorithms
+also need some way to check if a node has been seen. The frontier
+initially contains just the start node. The algorithms repeatedly
+pick a frontier node, finalise its path and update various things (for
+example, any neighbours of this node that have not previously been seen
+must be added to the frontier set).  The A* algorithm keeps track of
+the length of the shortest path found so far to each node (if any) and
+uses a priority queue for the frontier nodes, ordered according to this
+length plus the heuristic value for the node (with efficient access to
+the minimum element; a min heap could be used for this).  At each stage
+the node with minimum path length plus heuristic value is removed from
+the priority queue, neighbours that have not yet been seen are added
+and neighbours in the frontier are updated if the new path to them is
+shorter than the previously known shortest path.
+
+Here we number all nodes for simplicity so we can use arrays for the
+graph representation, the pointers to the previous node in paths, and
+the minimum path length found so far (this can also be used to check if a
+node has been seen yet). For many important applications, particularly in
+artificial intelligence, the graphs can be huge and arrays are impractical
+for representing the graph so other data structures are needed.
+
+In this animation the layout of the graph nodes is important. All nodes
+are on a two-dimensional, 100 by 100 grid.
+XXX
+The weight of each edge is
+the length of the edge in the grid, rounded to an integer.
+
+\Overview}
+
+\Code{
+Main
+Astar(G, s, e) // Given a graph G find a shortest path from start node s
+        // to the end node e.  Nodes are numbered 1..n. Returns the Prev
+        // array, which gives the previous node in the path from s to e
+\In{
+    initialise data structures - Fontier just has s \Ref Init
+    while Frontier not empty 
+    \In{
+        remove next node n from Frontier \Ref Next_node
+        // n now has its final path determined
+        if is_end_node(n)
+        \Expl{ n == e (we code it like this for consistency with the
+               other graph search algorithms)
+        \Expl} 
+        \In{
+            return // Found end node!
+        \In} 
+        for each node m neighbouring n // G has edge from n to m
+        \In{
+            update Frontier with m \Ref UpdateFrontier
+        \In}
+    \In}
+    // The whole component of the graph connected to s has been explored
+    \Expl{ The search for the end node has failed:( and
+            some indication of this should be returned.
+    \Expl}
+\In}
+\Code}
+
+\Code{
+Init
+    initialise each element of array Prev to zero
+    initialise each element of array Length to infinity
+    \Expl{ For nodes not yet seen the cost is set to infinity. Costs are
+        only displayed in the animation for nodes in the frontier.
+    \Expl}
+    \Note{ XXX Check explanation above is accurate when animation done
+    \Note}  
+    Length[s] <- 0      // Initially we have seen only the start node
+    Frontier <- empty priority queue
+    pqadd(Frontier, s, Length[s]+heur(s)) // Add start node to Frontier pqueue
+    \Note{ Should we explicitly give priority here or leave it implicit?
+            Must be consistent with pqadd and pqupdate. Probably best to
+            explicitly display priority/Length in the priority queue as
+            well as separately in the Length array plus heuristic values
+            and perhaps sum.
+    \Note}  
+\Code}
+
+\Code{
+Next_node
+n <- pqmin(Frontier) // remove PQ element with minimum length + heuristic
+\Code}
+
+\Code{
+UpdateFrontier
+    if Length[n] + Weight[n, m] < Length[m] 
+    \Expl{ The path from s to n to m is shorter than the current
+        shortest known path from s to m. If Length[m] == infinity
+        this is the first path we have found to m.
+    \Expl} 
+    \In{
+        Prev[m] <- n  // shortest known path to m now goes via n
+        if Length[m] == infinity
+        \Expl{ Length[m] == infinity implies m hasn't been seen before
+        \Expl} 
+        \In{
+            Length[m] <- Length[n] + Weight[n, m]
+            pqadd(Frontier, m, Length[m]+heur(m)) // add m to Frontier
+        \In}
+        else
+        \In{
+            Length[m] <- Length[n] + Weight[n, m]
+            pqupdate(Frontier, m, Length[m]+heur(m)) // update priority of m
+        \In}
+    \In} 
+\Code}
+
+\Note{  The following is an implementation in C:
+
+\Note}
+

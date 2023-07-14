@@ -1,0 +1,37 @@
+10
+4 6
+5 2
+5 8
+2 6
+1 9
+1 6
+7 2
+8 4
+9 2
+9 3
+0  1  1  1  1  0  0  0  0  0
+0  0  0  0  0  0  1  0  0  0
+0  0  0  0  0  0  0  1  0  0
+0  0  0  0  0  1  0  0  0  0
+0  0  0  0  0  1  0  0  0  0
+0  0  0  0  0  0  0  0  0  0
+0  0  0  0  0  0  0  0  1  0
+0  0  0  0  0  0  0  0  0  1
+0  0  0  0  0  0  0  0  0  1
+0  0  0  0  0  0  0  0  0  0
+1
+10
+0
+
+Bigger example better for layout sensitive weights; could change
+weights above to illustrate different algorithms better.
+After much experimentation, this illustrates non-optimality of
+inadmissible heuristics:
+gcc -DALGORITHM=4 -DWEIGHT=2 -DHEURISTIC=1 gsearch.c -lm
+versus
+gcc -DALGORITHM=4 -DWEIGHT=2 -DHEURISTIC=2 gsearch.c -lm
+(actually, *rounded* Euclidean/HEURISTIC=2 is not admissible either due
+to rounding): 45 degree line with nodes at each point has weight one
+per edge (1.41 is rounded down) but if we skip a node the weight is 3
+(2.82 is rounded up). Really need two Euclidean measures for
+admissibility - heuristic rounds down always, weight???

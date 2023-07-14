@@ -1,0 +1,163 @@
+\Note{  REAL specification of Dijkstra's shortest path algorithm for graphs
+
+Need to update this to be like BFS and Prims
+\Note}
+
+\Note{ There are several graph search algorithms that lead up to A*
+and we present them in a consistent way to show their similarities.
+\Note}
+
+\Note{
+Suggested visualisation:
+
+For consistency with the other search algorithms the graph could be
+layed out on a grid (not visible), used for determining edge cost and
+heuristic values for other algorithms. Colours/... can distinguish finished,
+frontier and other nodes. Edges in chosen paths highlighted.
+Cost for frontier nodes displayed, plus costs for edges displayed when
+frontier node is selected.
+Maybe if we click/hover over a node in the frontier the path costs on
+the path back to the start could be displayed?
+
+Use two (variable length) arrays for PQ: n and Cost[n],
+sorted on latter.
+\Note}
+
+\Overview{
+
+Dijkstra's shortest path algorithm for graphs can be used to find the
+shortest (that is, lowest weight or cost) path from a single start node
+to either a single end node, one of several end nodes, or all nodes that
+are connected (depending on the termination condition). It assumes all
+edges have a positive weight.
+
+It is one of several algorithms that can
+be viewed as having a similar structure.  These algorithms can be used
+for both directed and undirected graphs; here we use undirected graphs
+for simplicity.  The way paths are represented is for each node to point
+to the previous node in the path (so paths are actually reversed in this
+representation and essentially we have a tree with "parent" pointers and
+the start node at the root). This allows multiple nodes to each have
+a single path returned.
+
+As all these algorithms execute, we can classify nodes into three sets.
+They are the nodes for which the final path has been found (this is a
+region of the graph around the start node), "frontier" nodes that are
+not finalised but are connected to a finalised node by a single edge,
+and the rest of the nodes, which have not been seen yet. The frontier
+nodes are stored explicitly in some data structure and some algorithms
+also need some way to check if a node has been seen. The frontier
+initially contains just the start node. The algorithms repeatedly pick a
+frontier node, finalise the node (its current parent becomes its final
+parent) and updates information about neighbours of the node.
+Dijkstra's algorithm keeps track of
+the length of the shortest path found so far to each node (if any) and
+uses a priority queue for the frontier nodes, with the "cost" being this
+length. Priority queues allow access/deletion of the minimum-cost element.
+Various data structures (eg, a min heap) allow this to be done efficiently;
+we don't display the details in this animation.
+The coding of Dijkstra's algorithm is made simpler if unseen nodes are also kept
+in the priority queue, with an "infinite" cost.  At each stage the node
+with minimum cost is
+removed from the priority queue 
+and neighbours in the priority queue are updated if the new path to
+them has lower cost than the current cost.
+
+Here we number all nodes for simplicity so we can use arrays for the
+graph representation, the pointers to the parent node for paths, and
+the minimum path length found so far (this can also be used to check if a
+node has been seen yet). For many important applications, particularly in
+artificial intelligence, the graphs can be huge and arrays are impractical
+for representing the graph so other data structures are needed.
+
+In this animation the layout of the graph nodes is important. All nodes
+are on a two-dimensional, 100 by 100 grid. The weight of each edge is
+the length of the edge in the grid, rounded to an integer.
+
+\Overview}
+
+\Code{
+Main
+Shortest(G, s) // Given a graph G find a shortest path from start node s
+        // to an end node.  It is assumed the end node(s) are defined
+        // separately; with no end nodes, shortest paths to all connected
+        // nodes are found. Nodes are numbered 1..n. Returns the Parent
+        // array, which gives the previous node in the path from s to the
+        // node i (if one has been found; Parent[i] == 0 otherwise).
+\In{
+    initialise data structures - Fontier just has s \Ref Init
+    while Nodes not empty 
+    \In{
+        remove next node n from Nodes \Ref Next_node
+        // n is now finalised - its Parent determined
+        if task_completed(n) \Ref Completed
+        \Expl{ If there are no end nodes the whole connected componenent
+               of G will be explored and we can skip this "if".
+        \Expl} 
+        \In{
+            return
+            \Expl{ If there may be several end nodes we may want to
+                   return which one was found as well as the Parent array.
+            \Expl} 
+        \In} 
+        for each node m neighbouring n // G has edge from n to m
+        \In{
+            update Nodes with m \Ref UpdateNodes
+        \In}
+    \In}
+    // The whole component of the graph connected to s has been explored
+    \Expl{ If we were searching for an end node we have failed:( and
+            some indication of this should be returned.
+    \Expl}
+\In}
+\Code}
+
+\Code{
+Init
+    initialise each element of array Parent to zero
+    initialise each element of array Cost to infinity
+    \Expl{ For nodes not yet seen the cost is infinity
+    \Expl}
+    Cost[s] <- 0      // Initially we have seen only the start node
+    Nodes <- priority queue containing all nodes
+    \Expl{ The PQ contains the frontier (just s) plus all the unseen nodes
+            (with infinite cost) to simplify coding elsewhere
+    \Expl}
+\Code}
+
+\Code{
+Next_node
+    n <- pqmin(Nodes) // remove minimum length element of the PQ
+\Code}
+
+\Code{
+Completed
+    if is_end_node(n)
+    \Expl{ If we were searching for an end node we have succeeded!
+        If we just want to traverse the whole graph component connected
+        to s, we can skip this "if".
+    \Expl}
+\Code}
+
+\Code{
+UpdateNodes
+    if Cost[n] + Weight[n, m] < Cost[m] 
+    \Expl{ The path from s to n to m is shorter than the current
+        shortest known path from s to m. If Cost[m] == infinity
+        this is the first path we have found to m. If m has been
+        finalised, this test is guaranteed to fail.
+    \Expl} 
+    \In{
+        Parent[m] <- n  // shortest known path to m now goes via n
+        Cost[m] <- Cost[n] + Weight[n, m]
+        pqupdate(Nodes, m, Cost[m]) // update priority of m
+        \Expl{ If Cost[m] was previously infinity, this implicitly
+                moves m from the "unseen" part of the graph to the frontier.
+        \Expl} 
+    \In} 
+\Code}
+
+\Note{ See bfs.real for a C implementation with options for different
+algorithms.
+\Note}
+

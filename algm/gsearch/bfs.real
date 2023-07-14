@@ -1,0 +1,141 @@
+\Note{  REAL specification of breadth first search for graphs
+\Note}
+
+\Note{ There are several graph search algorithms that lead up to A*
+and we present them in a consistent way to show their similarities.
+Prim's MST tree is also similar.
+\Note}
+
+\Note{
+Suggested visualisation:
+
+For consistency with the other search algorithms the graph could be
+layed out on a grid (not visible), used for determining edge cost and
+heuristic values for other algorithms. Colours/... can distinguish finished,
+frontier and other nodes. Edges in chosen paths highlighted.
+
+Could possibly have multiple graph displays but the one above is
+generally preferred.
+
+Use (variable length) array for queue, next to be selected at the left.
+\Note}
+
+\Overview{
+
+Breadth first search (BFS) for graphs can be used to find a path from
+a single start node to either a single end node, one of several end
+nodes, or all nodes that are connected (depending on the termination
+condition).
+It is one of several algorithms that can be viewed as having a similar
+structure. Some of these work with weighted graphs (with positive weights
+for all edges), where the aim is to find the shortest path(s) (or the
+minimum spanning tree in the case of Prim's algorithm) but BFS ignores
+weights. These graph search algorithms can be used for both directed
+and undirected graphs; here we use undirected graphs for simplicity.
+The way paths are represented is for each node to point to the previous
+node in the path, so paths are actually reversed in this representation
+and we have a tree with "parent" pointers and the start node at the
+root. This allows multiple nodes to each have a single path returned
+(or we can return a spanning tree).
+BFS will find paths with
+the minimum number of edges, so the paths are shortest for unweighted
+graphs, or if all the weights/costs/lengths are the same.
+
+As all these algorithms execute, we can classify nodes into three sets. 
+They are the nodes for which the final parent node has been found 
+(this is a region of the graph around the start node), "frontier"
+nodes that are not finalised but are connected to a finalised node
+by a single edge, and the rest of the nodes, which have not been seen
+yet. The frontier nodes are stored explicitly in some data structure 
+and some algorithms also need some way to check if a node has been
+seen and/or finalised. The frontier initially contains just the start
+node. The algorithms repeatedly pick a frontier node, finalises the node
+(its current parent becomes its final parent) and updates information
+about neighbours of the node.  BFS uses a queue for the frontier nodes.
+At each stage the front node is removed from the queue and neighbours
+that have not yet been seen are added at the end.
+
+
+Here we number all nodes for simplicity so we can use arrays for the
+graph representation, the pointers to the previous node in paths,
+and the flags to indicate if a node has been seen yet. For many
+important applications, particularly in artificial intelligence, the
+graphs can be huge and arrays are impractical for representing the
+graph so other data structures are needed.
+
+\Overview}
+
+\Code{
+Main
+BFS(G, s) // Given a graph G find path(s) from start node s to an
+        // end node.  It is assumed the end node(s) are defined
+        // separately; if there are no end nodes, paths to all connected
+        // nodes are found. Nodes are numbered 1..n. Returns the Parent
+        // array, which gives the previous node in the path from s to the
+        // node i (if one has been found; Parent[i] == 0 otherwise).
+\In{
+    initialise, with fontier={s}, stored in Nodes \Ref Init
+    while Nodes not empty 
+    \In{
+        remove next node n from Nodes and finalise it \Ref Next_node
+        // The Parent of n has now been determined
+        if task_completed(n) \Ref Completed
+        \Expl{ If there are no end nodes the whole connected component
+               of G will be explored and we can skip this "if".
+        \Expl} 
+        \In{
+            return
+            \Expl{ If there may be several end nodes we may want to
+                   return which one is found as well as the Parent array.
+            \Expl} 
+        \In} 
+        for each node m neighbouring n // G has edge from n to m
+        \In{
+            update Nodes & Parent with n & m \Ref UpdateNodes
+        \In}
+    \In}
+    return
+    \Expl{ The whole component of the graph connected to s has been
+            explored. If we were searching for an end node we have failed:(
+            and some indication of this should be returned.
+    \Expl}
+\In}
+\Code}
+
+\Code{
+Init
+    initialise each element of array Parent to zero
+    initialise each element of array Seen to False
+    Seen[s] <- True      // Initially we have seen only the start node
+    Nodes <- queue containing just s
+\Code}
+
+\Code{
+Next_node
+    n <- dequeue(Nodes) // remove the first element of the queue
+\Code}
+
+\Code{
+Completed
+    if is_end_node(n)
+    \Expl{ If we were searching for an end node we have succeeded!
+        If we just want to traverse the whole graph component connected
+        to s, we can skip this "if".
+    \Expl}
+\Code}
+
+\Code{
+UpdateNodes
+    if not Seen[m]
+    \In{
+        Seen[m] <- True
+        Parent[m] <- n
+        enqueue(Nodes, m) // add m to frontier
+    \In} 
+\Code}
+
+\Note{
+We have C code that implements Prim's plus several graph search
+algorithms, depending on compilation flags.
+\Note}
+

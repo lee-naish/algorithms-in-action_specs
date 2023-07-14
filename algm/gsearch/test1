@@ -1,0 +1,25 @@
+5
+1 1
+1 5
+6 5
+2 5
+3 3
+0  2  6  0  0
+2  0  6  5  7
+6  6  0  1  4
+0  5  1  0  8
+0  7  4  8  0
+1
+4
+0
+
+Format is
+number of nodes
+position of each node - (x, y) coordinates
+edge matrix with costs (the costs are ignored and recomputed using
+distance metrics between coordinated; might be better to have a
+zero-terminated list of edges)
+start node
+end nodes, if any
+zero (to terminate list of end nodes)
+The rest of the file is ignored, allowing comments such as this.
