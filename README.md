@@ -10,6 +10,8 @@ teams doing development; its for fleshing out how the pseudocode with
 refinements, explanations etc should look like, plus C code to test
 things.
 
+There may well be some junk branches etc - clueless github user here
+
 
 ## Organisation of folders
 
