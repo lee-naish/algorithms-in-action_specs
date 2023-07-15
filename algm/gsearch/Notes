@@ -1,7 +1,9 @@
 Current status:
-Prim's and BFS Real specs are ready for review, need to do other Real
-files with similar style
+Prim's, BFS, Dijkstra's, A* Real specs close to ready for review.
 gsearch.c is messy but does Prims, BFS, Dijkstra, A* - should add DFS
+Need to reconsider unconnected graphs with Dijkstra's, A* - get node off
+PQ with infinite cost - could put explanation in task_completed + add
+assumption that graph is connected?
 
 
 

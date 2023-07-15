@@ -11,13 +11,27 @@ Suggested visualisation:
 
 For consistency with the other search algorithms the graph could be
 layed out on a grid (not visible), used for determining edge cost and
-heuristic values for other algorithms. Colours/... can distinguish finished,
-frontier and other nodes. Edges in chosen paths highlighted.
+heuristic values for other algorithms. Colours/... can distinguish
+finished, frontier and other nodes. Edges in chosen paths highlighted.
 
-Could possibly have multiple graph displays but the one above is
-generally preferred.
+Could possibly have multiple graph displays - the one above plus the
+previously implemented one. The one above is probably preferred as it's
+visually clearer.
+
+We also need to display the array "Parent" and the queue.
+The array should be shown as a table:
+
+    i            1      2      3      ...
+    Parent[i]
+
 
 Use (variable length) array for queue, next to be selected at the left.
+It probably shouldn't align with the table above and should be
+differentiated somehow as the Nodes queue elements are not related to
+the i indices above (unlike the way we display priority queues in other
+algorithms). Eg:
+
+       Nodes queue:  4   3  5  8
 \Note}
 
 \Overview{
@@ -41,41 +55,38 @@ BFS will find paths with
 the minimum number of edges, so the paths are shortest for unweighted
 graphs, or if all the weights/costs/lengths are the same.
 
-As all these algorithms execute, we can classify nodes into three sets. 
-They are the nodes for which the final parent node has been found 
-(this is a region of the graph around the start node), "frontier"
-nodes that are not finalised but are connected to a finalised node
-by a single edge, and the rest of the nodes, which have not been seen
-yet. The frontier nodes are stored explicitly in some data structure 
-and some algorithms also need some way to check if a node has been
-seen and/or finalised. The frontier initially contains just the start
-node. The algorithms repeatedly pick a frontier node, finalises the node
-(its current parent becomes its final parent) and updates information
-about neighbours of the node.  BFS uses a queue for the frontier nodes.
-At each stage the front node is removed from the queue and neighbours
-that have not yet been seen are added at the end.
-
+As all these algorithms execute, we can classify nodes into three sets.
+They are the nodes for which the final parent node has been found (this
+is a region of the graph around the start node), "frontier" nodes that
+are not finalised but are connected to a finalised node by a single edge,
+and the rest of the nodes, which have not been seen yet. The frontier
+nodes are stored explicitly in some data structure and some algorithms
+also need some way to check if a node has been seen and/or finalised. The
+frontier initially contains just the start node. The algorithms repeatedly
+pick a frontier node, finalises the node (its current parent becomes
+its final parent) and updates information about neighbours of the node.
+BFS uses a queue for the frontier nodes.  At each stage the front node
+is removed from the queue and neighbours that have not yet been seen
+are added at the end.
 
 Here we number all nodes for simplicity so we can use arrays for the
-graph representation, the pointers to the previous node in paths,
-and the flags to indicate if a node has been seen yet. For many
-important applications, particularly in artificial intelligence, the
-graphs can be huge and arrays are impractical for representing the
-graph so other data structures are needed.
-
+graph representation, the parent pointers, etc.  For many important
+applications, particularly in artificial intelligence, the graphs can
+be huge and arrays are impractical for representing the graph so other
+data structures are needed.
 \Overview}
 
 \Code{
 Main
-BFS(G, s) // Given a graph G find path(s) from start node s to an
+BFS(G, s) // Given a graph G find a path from start node s to an
         // end node.  It is assumed the end node(s) are defined
         // separately; if there are no end nodes, paths to all connected
-        // nodes are found. Nodes are numbered 1..n. Returns the Parent
+        // nodes are found. Nodes are numbered 1..nmax. Returns the Parent
         // array, which gives the previous node in the path from s to the
-        // node i (if one has been found; Parent[i] == 0 otherwise).
+        // node i (if one has been found; Parent[i] = 0 otherwise).
 \In{
     initialise, with fontier={s}, stored in Nodes \Ref Init
-    while Nodes not empty 
+    while Nodes not empty
     \In{
         remove next node n from Nodes and finalise it \Ref Next_node
         // The Parent of n has now been determined
@@ -91,12 +102,12 @@ BFS(G, s) // Given a graph G find path(s) from start node s to an
         \In} 
         for each node m neighbouring n // G has edge from n to m
         \In{
-            update Nodes & Parent with n & m \Ref UpdateNodes
+            update Nodes, Parent etc with n & m \Ref UpdateNodes
         \In}
     \In}
     return
     \Expl{ The whole component of the graph connected to s has been
-            explored. If we were searching for an end node we have failed:(
+            explored. If we were searching for an end node we have failed
             and some indication of this should be returned.
     \Expl}
 \In}
@@ -112,7 +123,7 @@ Init
 
 \Code{
 Next_node
-    n <- dequeue(Nodes) // remove the first element of the queue
+    n <- dequeue(Nodes) // remove the front element of the Nodes queue
 \Code}
 
 \Code{
@@ -130,7 +141,7 @@ UpdateNodes
     \In{
         Seen[m] <- True
         Parent[m] <- n
-        enqueue(Nodes, m) // add m to frontier
+        enqueue(Nodes, m) // add m to back of Nodes queue
     \In} 
 \Code}
 
