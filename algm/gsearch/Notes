@@ -1,10 +1,6 @@
 Current status:
-Prim's, BFS, Dijkstra's, A* Real specs close to ready for review.
+Prim's, BFS, Dijkstra's, A* Real specs ready for review.
 gsearch.c is messy but does Prims, BFS, Dijkstra, A* - should add DFS
-Need to reconsider unconnected graphs with Dijkstra's, A* - get node off
-PQ with infinite cost - could put explanation in task_completed + add
-assumption that graph is connected?
-
 
 
 Various graph search algorithms with similar structure emphasised.
