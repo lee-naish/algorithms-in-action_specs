@@ -1,4 +1,4 @@
-\Note{  REAL specification of breadth first search of graphs
+\Note{  REAL specification of A* search of graphs
 \Note}
 
 \Note{ There are several graph search algorithms that lead up to A*
@@ -119,10 +119,14 @@ Astar(G, s, e) // Given a graph G find a shortest path from start node s
         remove next node n from Nodes and finalise it \Ref Next_node
         // The Parent of n has now been determined
         if task_completed(n) \Ref Completed
-        \Expl{ We have found the end node!
+        \Expl{ Have we found the end node?
         \Expl}
         \In{
             return
+            \Expl{ If we have explored the whole graph component without
+                finding the end node that should be indicated, otherwise
+                the Parent array has the desired path information.
+            \Expl}
         \In}
         for each node m neighbouring n // G has edge from n to m
         \In{
@@ -140,8 +144,6 @@ Astar(G, s, e) // Given a graph G find a shortest path from start node s
 Init
     initialise each element of array Parent to zero
     initialise each element of array Length to infinity
-    \Expl{ For nodes not yet seen the cost is infinity.
-    \Expl}
     Length[s] <- 0
     Nodes <- PQ containing all nodes // only s has finite cost
     \Note{ Nodes in the PQ with finite cost are in the frontier; others
@@ -174,30 +176,24 @@ Completed
 
 \Code{
 UpdateNodes
-XXXX check this
-    if Length[n] + Weight[n, m] < Length[m] 
+    if n is in PQ and Length[n] + weight(n,m) < Length[m] 
     \Expl{ The path from s to n to m is shorter than the current
         shortest known path from s to m. If Length[m] == infinity
-        this is the first path we have found to m.
+        it will be replaced with a finite weight, implicitly moving
+        m from the unseen nodes to the frontier.
     \Expl} 
     \In{
-        Parent[m] <- n  // shortest known path to m now goes via n
-        if Length[m] == infinity
-        \Expl{ Length[m] == infinity implies m hasn't been seen before
-        \Expl} 
-        \In{
-            Length[m] <- Length[n] + Weight[n, m]
-            pqadd(Nodes, m, Length[m]+heur(m)) // add m to Nodes
-        \In}
-        else
-        \In{
-            Length[m] <- Length[n] + Weight[n, m]
-            pqupdate(Nodes, m, Length[m]+heur(m)) // update priority of m
-        \In}
-    \In} 
+        Length[m] <- Length[n] + weight(n,m) // smaller path length from s
+        UpdateCost(Nodes, m, Length[m]+heur(m)) // update cost in Nodes PQ
+        Parent[m] <- n
+        \Expl{ The shortest known path to m now goes via n.
+        \Expl}
+    \In}
 \Code}
 
-\Note{  The following is an implementation in C:
 
+\Note{
+We have C code that implements Prim's plus several graph search
+algorithms, depending on compilation flags.
 \Note}
 

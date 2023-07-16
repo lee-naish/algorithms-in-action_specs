@@ -247,8 +247,14 @@ task_completed(int n) {
     #else // return forest for whole graph
         return 0;
     #endif
+#elif ALGORITHM==DIJK // single end node
+    if (cost[n] == infty)
+        printf("Search failed:(\n");
+    return end[n] || cost[n] == infty;
 #elif ALGORITHM==ASTAR // single end node
-    return n == endnode;
+    if (cost[n] == infty)
+        printf("Search failed:(\n");
+    return n == endnode || cost[n] == infty;
 #else // other search algorithms can have any number of end nodes
     return end[n];
 #endif

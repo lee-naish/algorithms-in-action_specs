@@ -117,13 +117,14 @@ Shortest(G, s) // Given a graph G find a shortest path from start node s
         remove next node n from Nodes and finalise it \Ref Next_node
         // The Parent of n has now been determined
         if task_completed(n) \Ref Completed
-        \Expl{ If there are no end nodes the whole connected componenent
-               of G will be explored and we can skip this "if".
+        \Expl{ Have we found an end node?
         \Expl} 
         \In{
             return
             \Expl{ If there may be several end nodes we may want to
-                   return which one was found as well as the Parent array.
+                return which one was found as well as the Parent
+                array, and if we have explored the whole graph
+                component that should be indicated.
             \Expl} 
         \In} 
         for each node m neighbouring n // G has edge from n to m
