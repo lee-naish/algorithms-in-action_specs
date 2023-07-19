@@ -1,0 +1,136 @@
+\Note{ Real specification of merge sort (top down) for animation
+
+\Note}
+
+\Overview{
+XXX
+\Overview}
+
+
+\Code{
+Main
+// Sort array A[left]..A[right] in ascending order
+Mergesort(A, left, right)
+\Expl{  We need left and right indices because the code is recursive
+        and both may be different for recursive calls.
+\Expl}
+    if left < right
+    \Expl{  Terminating condition (if there are less than two
+            elements in the array segment it's already sorted).
+    \Expl}
+    \In{
+        mid <- (left + right)/2
+        Mergesort first half, A[left]..A[mid]    \Ref MergesortL
+        \Expl{ Sort elements in the first half of the array segment
+        \Expl}
+        \Note{ This should be animated in one step if not expanded
+        \Note}
+        Mergesort second half, A[mid+1]..A[right]    \Ref MergesortR
+        \Expl{ Sort elements in the second half of the array segment
+        \Expl}
+        \Note{ This should be animated in one step if not expanded
+        \Note}
+        Merge the two sorted halves, with the result in A \Ref MergeCopy
+        \Expl}
+    \In}
+\Code}
+
+\Code{
+MergesortL
+    Mergesort(A, left, mid)
+\Code}
+
+\Code{
+MergesortR
+    Mergesort(A, mid + 1, right)
+\Code}
+
+\Code{
+MergeCopy
+    Merge(A, left, mid, right, B) \Ref Merge
+    \Expl{ Takes two sorted array segments, A[left..mid] and A[mid+1],
+        and merges them together to form a single sorted array segment
+        in temporary array B[left..right]
+    \Expl}
+    Copy elements from B[left..right] back to A[left..right]
+    \Note{ Need to expand this? I dont think so.
+    \Note}
+    \Expl{ Since meregsort needs the extra array for the result of
+        merge it is not "in place". Copying can be reduced by merging
+        from A to B and from B to A in alternate levels of recursion -
+        slightly more tricky coding.
+    \Expl}
+    \Note{ Might be better to move above to overview.
+    \Note}
+\Code}
+
+\Code{
+Merge
+    ap1 <- left
+    ap1max <- mid
+    \Expl{ ap1 scans through the segment A[left..mid], "pointing at" or
+        indexing elements of this array segment we copy from
+    \Expl}
+    ap2 <- mid+1
+    ap2max <- right
+    \Expl{ ap2 scans through the segment A[mid+1..right], "pointing at" or
+        indexing elements of this array segment we copy from
+    \Expl}
+    bp <- left
+    \Expl{ bp scans through the segment B[left..right], "pointing at" or
+        indexing elements of this array segment we copy to
+    \Expl}
+    while both A segments still have elements to copy \Ref MergeWhile
+    \Expl{ we scan through both A segments from left to right by 
+        incrementing ap1 and ap2, copying to B as we go
+    \Expl}
+    \In{
+        copy the smaller A element, increment its pointer and bp \Ref CopySmaller
+        \Expl{ The smaller of A[ap1] and A[ap2] is copied to B[bp]
+        \Expl}
+    \In}
+    copy any remaining elements from A to B \Ref CopyRest
+    \Expl{ One of the A segments will have been completely copied;
+        the other has uncopied elements
+    \Expl}
+\Code}
+
+\Code{
+MergeWhile
+    while ap1 <= ap1max and ap2 <= ap2max
+    \Expl{ Elements up to ap1max/ap2max must be copied; those before
+        ap1/ap2 have been copied already
+    \Expl}
+\Code}
+
+\Code{
+CopySmaller
+    if A[ap1] < A[ap2]
+    \in{
+        B[bp] <- A[ap1]
+        ap1 <- ap1+1
+        bp <- bp+1
+        \Note{ Clearer to duplicate this in then and else branches(?)
+        \Note}
+    \in}
+    else
+    \in{
+        B[bp] <- A[ap2]
+        ap2 <- ap2+1
+        bp <- bp+1
+    \in}
+\Code}
+
+\Code{
+CopyRest
+    copy A[ap1..ap1max] to B[bp..]
+    \Note{ Need to expand this? I dont think so.
+    \Note}
+    copy A[ap2..ap2max] to B[bp..]
+    \Expl{ One of these copy steps will do nothing because one of the
+        A segments will be empty
+\Code}
+
+\Note{
+See sorts.c for an implementation of this plus other sorting algorithms
+\Note}

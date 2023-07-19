@@ -2,8 +2,10 @@
 // C code pretty much equivalent to pseudocode version for testing purposes
 
 // pick ONE of the following:
+// XXX redo so we can compile with -D to select algorithm
 // #define HEAPSORT
-#define QUICKSORT // some version of quicksort
+// #define QUICKSORT // some version of quicksort
+#define MERGE_TD // top-down merge sort
 
 #ifdef QUICKSORT
 // pick ONE of the following:
@@ -18,7 +20,7 @@
 #define True 1
 #define Swap(a,b) {int tmp; tmp=a; a=b; b=tmp;}
 
-#define Size 10
+#define Size 11
 int A[Size];
 // int i1; // for debugging
 // for (i1=1; i1 < Size; i1++) printf("%d ", A[i1]); printf("\n");
@@ -27,6 +29,10 @@ int A[Size];
 int IndexOfLargestChild(int *A, int i, int n);
 void heapsort(int A[], int n);
 #endif // HEAPSORT
+
+#ifdef MERGE_TD
+void mergesort_td(int A[], int left, int right);
+#endif // MERGE_TD
 
 #ifdef QUICKSORT
 int partition(int *A, int left, int right);
@@ -46,6 +52,9 @@ main() {
 #ifdef QUICKSORT
         quicksort(A, 1, Size-1);
 #endif // QUICKSORT
+#ifdef MERGE_TD
+        mergesort_td(A, 1, Size-1);
+#endif // MERGE_TD
         for (i=1; i < Size; i++) printf("%d ", A[i]); printf("\n");
 }
 
@@ -163,3 +172,53 @@ printf("partition %d %d with mid %d:", left, right, mid);
         return i;
 }
 #endif // QUICKSORT
+
+#ifdef MERGE_TD
+int B[Size];
+
+// Sort array A[left]..A[right] in ascending order
+// I can't quite believe this compiled and ran correctly first time!
+void
+mergesort_td(int A[], int left, int right) {
+        int ap1, ap1max, ap2, ap2max, bp, mid;
+
+        if (left < right) {
+                mid = (left + right)/2;
+                mergesort_td(A, left, mid);
+                mergesort_td(A, mid + 1, right);
+                ap1 = left;
+                ap1max = mid;
+                ap2 = mid+1;
+                ap2max = right;
+                bp = left;
+                while (ap1 <= ap1max && ap2 <= ap2max)
+                        if (A[ap1] < A[ap2]) {
+                                B[bp] = A[ap1];
+                                ap1 = ap1+1;
+                                bp = bp+1;
+                        } else {
+                                B[bp] = A[ap2];
+                                ap2 = ap2+1;
+                                bp = bp+1;
+                        }
+                while (ap1 <= ap1max) {
+                        B[bp] = A[ap1];
+                        ap1 = ap1+1;
+                        bp = bp+1;
+                }
+                while (ap2 <= ap2max) {
+                        B[bp] = A[ap2];
+                        ap2 = ap2+1;
+                        bp = bp+1;
+                }
+                for (bp = left; bp <= right; bp++)
+                        A[bp] = B[bp];
+        }
+// if (left < right-1) { // for testing/debugging
+// int i1;
+// printf("Ret from ms(%d, %d): ", left, right);
+// for (i1=1; i1 < Size; i1++) printf("%d ", A[i1]); printf("\n");
+// }
+}
+
+#endif // MERGE_TD
