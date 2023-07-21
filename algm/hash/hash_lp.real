@@ -1,0 +1,229 @@
+\Note{  REAL specification for hashing - linear probing
+Currently includes double hashing pseudocode as well - will split into
+two versions at some point when the pseudocode is stable (or just get
+the implementors to do that?
+\Note}
+
+
+\Overview{
+
+Hashing is a method for storing and looking up records that can be very
+effiient.  It is based on the arithmetic transformation of the record
+key into a table address.
+
+Hashing provides a good quick search, providing that certain conditions
+are observed.
+
+In particular, the hashed keys should spread out over the table as evenly
+as possible.  To achieve this, the hash function should use as much
+of the key as possible, and the hashed key and the table size should
+be be relatively prime.  This last can be achieved by making the table
+size prime.
+
+Additionally, even in sparse tables, sometimes two keys will hash to the
+same value. Provision must be taken to resolve collisions, as there is
+always the chance resolve these collisions. Three commonly used methods
+for collision resolution common and are shown in this module: linear
+probing, double hashing, and chaining.
+
+While the average case for search is quite fast for hash, performance
+degrades quite dramatically as the table starts to get full, particularly
+for unsuccessful searches, which must effecively search the whole
+table XXX.  It is necessary to keep track of the number of records in
+the table, and to make sure this is well below the size of the table.
+One tactic used is to increase the table size every time the number of
+records gets above the capacity; previously inserted records need to
+have their keys rehashed and relocated in the larger table.
+
+
+
+
+The hash table size and the
+
+
+
+
+blah blah  O(1), catastrophic failure, chaining advantages and complexity
+see Sedgewick p592 for heuristic O() for double and linear.
+
+
+
+This module uses open addressing methods for collision resolution -
+linear probing and double hashing.
+
+Deletion from hash tables can be complex, and is not covered in this
+module.  XXX not too hard if you just mark things as deleted - could
+include it perhaps?
+
+Put this somewhere:
+The performance of open addressing hash methods degrades 
+as the table gets full.  Setting a maximum capacity prevents 
+this degradation. Often the strategy will be to double the
+table size when the capacity is met.     
+
+Load factor stuff separate from Real but we should have a quick way for
+students to set various load factors to see what happens, maybe 0, 50%,
+80%, 95%?
+
+\Overview}
+
+
+
+\Note{
+This module is open addressing only, and will have to be split into two modules -- 
+linear probing and double hashing, see Code block hash2 (duplicated here). 
+\Note}
+
+
+
+\Note{
+Lee: Not sure we need separate init function. Could just say somewhere that
+unused table entries are Null/Empty? Animation would have empty box so
+maybe Empty is better?
+\Note}
+\Code{
+HashInit
+HashInit(T)    // TableSize is prime
+    \In{    
+    Initialize Hash Table Slots to Empty   \Ref NullTable    
+    Insertions <- 0    // Keep track of how full table is
+    \In}
+\Code}
+
+\Note{
+Lee: Not sure we need to spell this out - probably delete
+\Note}
+\Code{
+NullTable
+    i <- 0            
+    while i<TableSize  
+    {\In
+        T[i] <- Empty     // Table must start with all slots empty
+        i <- i+1
+    \In}
+\Code}
+
+
+\Code{
+Insert
+HashInsert(T, k)  // Insert key k into table T
+    \In{
+    Check how full the table is
+    \Expl{ If the table gets too full (over 80%, say), performance degrades
+        a lot. Ideally, we should prevent this by allocating a larger table
+        (eg, the size being a prime number around twice the size of T),
+        inserting each element into the new table and continuing with T
+        being the larger table. It is essential the table has at least one
+        slot Empty, otherwise the Search code may loop; we just return
+        with failure here rather than fill the last slot or expand the table.
+    \Expl}
+    \Note{ The animation could stop with a "Table too full" message here.
+        Above should be shortened and maybe refer to overview - I wrote
+        it before looking at the overview.
+    \Note}
+    Insertions <- Insertions + 1
+    \Expl{ To check how full the table is we can maintain a simple
+        counter.
+    \Expl}
+    \Note{
+    \Note}
+    i <- hash(k) \Ref Hash1
+    Choose Increment value in case of collisions \Ref SetIncrement
+    while T[i] is not Empty // search for Empty slot to insert k
+    \Expl{ If T[i] = k then k already exists in the table. Ideally,
+        duplicates should be avoided as they decrease performance and
+        search just returns the first one.
+    \Expl}
+    \Note{ We could have a lookup operation = search + insert if not found.
+        Or maybe move this explanation to the overview.
+    \Note}
+        \In{
+        i <- (i + Increment) mod TableSize
+        \Expl{ T[i] is occupied so we jump ahead Increment steps.
+            We use modulo TableSize to "wrap around" if we reach the end.
+        \Expl}
+        \In}
+    T[i] <- k // Empty slot found so we put k in it
+    \In}
+\Code}
+
+\Code{
+HashSearch(T, k)  // Search for key k in table T
+\In{
+    i <- hash(k) \Ref Hash1
+    Choose Increment value for stepping through T \Ref SetIncrement
+    while not (T[i] = k or T[i] = Empty) // search for T or Empty
+        \In{
+        i <- (i + Increment) mod TableSize
+        \Expl{ T[i] is not k or Empty so we jump ahead Increment
+            steps and "wrapping around" if we reach the end, mirroring
+            the insertion code.
+        \Expl}
+        \Note{ Probes <- Probes + 1
+            Having the animation display the number of probes in some
+            way is a good idea (we could highlight the slots probed)
+            but dont need code here?
+        \Note}
+        \In}
+    if T[i] = key
+        \In{
+        return i // return the table index where the key has been found
+        \In}
+    else
+        \In{
+        return NOTFOUND
+        \In}
+\In}
+\Code}
+
+\Note{ This is used for both Insert and Search - the implementation may
+need to copy it for animation purposes
+\Note}
+\Code{
+Hash1    
+    i <- (k * BIGPRIME) mod TableSize
+    \Expl{ XXX blah blah Want BIGPRIME much bigger than TableSize
+        Here we use BIGPRIME = 3457
+    \Expl}
+\Code}
+
+\Note{ Linear probing version
+Pick this OR the double hashing version below
+Need to separate these into two files at some point most likely - the
+overview will be a bit different also
+\Note}
+\Note{ This is used for both Insert and Search - the implementation may
+need to copy it for animation purposes
+\Note}
+\Code{
+SetIncrement
+    Increment <- 1
+    \Expl{ For linear probing, if we have a collision we just look at the
+        next table entry. This tends to form "clusters" of full table
+        entries, reducing performance.  Offset linear probing adds some
+        fixed number n to the table index for collisions. It's harder to
+        see the clusters in the table but effectively they are still there
+        and performance is not improved.
+    \Expl}
+    \Note{ A bit long? Move offset linear probing to overview or ignore it?
+        Increment and table size must be relatively prime.
+    \Note}
+\Code}
+
+\Note{ Double hashing version - see above
+\Note}
+\Note{ This is used for both Insert and Search - the implementation may
+need to copy it for animation purposes
+\Note}
+\Code{
+SetIncrement
+    Increment <- k mod SMALLISHPRIME + 1
+    \Expl{ For double hashing, the increment we use for the table index
+        to resolve collisions depends on the key k. We apply a secondary
+        hash function to k but must also ensure the increment is non-zero.
+        This reduces clustering in the table. Here we use
+        SMALLISHPRIME=23
+    \Expl}
+\Code}
+
+
