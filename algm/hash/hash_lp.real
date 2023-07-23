@@ -19,6 +19,7 @@ as possible.  To achieve this, the hash function should use as much
 of the key as possible, and the hashed key and the table size should
 be be relatively prime.  This last can be achieved by making the table
 size prime.
+XXX Here we use 97.
 
 Additionally, even in sparse tables, sometimes two keys will hash to the
 same value. Provision must be taken to resolve collisions, as there is
@@ -65,13 +66,16 @@ Load factor stuff separate from Real but we should have a quick way for
 students to set various load factors to see what happens, maybe 0, 50%,
 80%, 95%?
 
+Should say array index starts at zero
+
 \Overview}
 
 
 
 \Note{
-This module is open addressing only, and will have to be split into two modules -- 
-linear probing and double hashing, see Code block hash2 (duplicated here). 
+This module is open addressing only, and will have to be split into
+two modules -- linear probing and double hashing, see Code block hash2
+(duplicated here).
 \Note}
 
 
@@ -80,7 +84,6 @@ linear probing and double hashing, see Code block hash2 (duplicated here).
 Lee: Not sure we need separate init function. Could just say somewhere that
 unused table entries are Null/Empty? Animation would have empty box so
 maybe Empty is better?
-\Note}
 \Code{
 HashInit
 HashInit(T)    // TableSize is prime
@@ -89,10 +92,10 @@ HashInit(T)    // TableSize is prime
     Insertions <- 0    // Keep track of how full table is
     \In}
 \Code}
+\Note}
 
 \Note{
 Lee: Not sure we need to spell this out - probably delete
-\Note}
 \Code{
 NullTable
     i <- 0            
@@ -102,7 +105,7 @@ NullTable
         i <- i+1
     \In}
 \Code}
-
+\Note}
 
 \Code{
 Insert
@@ -162,7 +165,7 @@ HashSearch(T, k)  // Search for key k in table T
         \Note{ Probes <- Probes + 1
             Having the animation display the number of probes in some
             way is a good idea (we could highlight the slots probed)
-            but dont need code here?
+            but dont need code here? Needs Probes <- 0 above.
         \Note}
         \In}
     if T[i] = key
@@ -217,12 +220,12 @@ need to copy it for animation purposes
 \Note}
 \Code{
 SetIncrement
-    Increment <- k mod SMALLISHPRIME + 1
+    Increment <- (k * BIGPRIME2) mod SMALLISHPRIME + 1
     \Expl{ For double hashing, the increment we use for the table index
         to resolve collisions depends on the key k. We apply a secondary
         hash function to k but must also ensure the increment is non-zero.
         This reduces clustering in the table. Here we use
-        SMALLISHPRIME=23
+        BIGPRIME2=1429, SMALLISHPRIME=23
     \Expl}
 \Code}
 
