@@ -93,13 +93,13 @@ BFS(G, s) // Given a graph G find a path from start node s to an
         if task_completed(n) \Ref Completed
         \Expl{ If there are no end nodes the whole connected component
                of G will be explored and we can skip this "if".
-        \Expl} 
+        \Expl}
         \In{
             return
             \Expl{ If there may be several end nodes we may want to
                    return which one is found as well as the Parent array.
-            \Expl} 
-        \In} 
+            \Expl}
+        \In}
         for each node m neighbouring n // G has edge from n to m
         \In{
             update Nodes, Parent etc with n & m \Ref UpdateNodes
@@ -142,7 +142,7 @@ UpdateNodes
         Seen[m] <- True
         Parent[m] <- n
         enqueue(Nodes, m) // add m to back of Nodes queue
-    \In} 
+    \In}
 \Code}
 
 \Note{

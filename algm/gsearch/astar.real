@@ -176,7 +176,7 @@ Completed
 
 \Code{
 UpdateNodes
-    if n is in PQ and Length[n] + weight(n,m) < Length[m] 
+    if n is in Nodes PQ and Length[n] + weight(n,m) < Length[m] 
     \Expl{ The path from s to n to m is shorter than the current
         shortest known path from s to m. If Length[m] == infinity
         it will be replaced with a finite weight, implicitly moving

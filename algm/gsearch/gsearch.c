@@ -7,6 +7,7 @@ Graph search algorithms:
 Plus
     Prims MST algorithm
 
+Code is very messy and probably should be tested more...
 Based on code for Prim's Algorithm that had input of edge/cost matrix
 and it was insensitive to graph layout.  Some the the other algorithms
 at least (and probably Prims) are much more easily visualised with a
@@ -69,7 +70,7 @@ int xpos[MAXSIZE]; // x coordinate of vertex
 int ypos[MAXSIZE]; // y coordinate of vertex
 int weight[MAXSIZE][MAXSIZE]; // edge weights computed from from xpos,ypos
 int cost[MAXSIZE];         /* Keeps track of current cost for each vertex */
-int pending[MAXSIZE];      /* pending = 1 iff vertex not yet included in MST */
+int finalised[MAXSIZE];  // flag - final parent has been determined
 int seen[MAXSIZE];      // vertex seen for BFS...
 vertex parent[MAXSIZE];    /* Specifies spanning tree or paths */
 vertex end[MAXSIZE];  // defines end node(s), if any
@@ -180,7 +181,7 @@ update_nodes(vertex n, vertex m) {
     int w;
 #if ALGORITHM==PRIM
     w = weight[n][m];
-    if (pending[m] && w < cost[m]) {
+    if (!finalised[m] && w < cost[m]) {
         cost[m] = w;
         f_sort();
         parent[m] = n;
@@ -188,7 +189,7 @@ update_nodes(vertex n, vertex m) {
 #elif ALGORITHM==DIJK || ALGORITHM==ASTAR
     w = cost[n] + weight[n][m];
     // printf("w %d %d %d %d %d %d\n", n, m, w, cost[n], weight[n][m], cost[m]);
-    if (pending[m] && w < cost[m]) {
+    if (!finalised[m] && w < cost[m]) {
         cost[m] = w;
         f_sort();
         parent[m] = n;
@@ -199,10 +200,20 @@ update_nodes(vertex n, vertex m) {
         parent[m] = n;
         nodes[++f_end] = m;  // enqueue(Nodes, m)
     }
+#elif ALGORITHM==DFS
+    if (!finalised[m]) {
+        parent[m] = n;
+        nodes[--f_start] = m;  // push(Nodes, m)
+    }
 //#else
 #endif
 }
 
+// initialise data structures - Fontier just has just start node
+// For Prim's algorithm we can use any start node (eg 1) but might be
+// good for animation to allow different start nodes to show the same
+// tree is computed (if there is a unique MST) and there can be more
+// than one minimal MST.
 void
 init(void) {
     int i;
@@ -217,7 +228,7 @@ init(void) {
         nodes[i] = i;
         cost[i] = infty;
         parent[i] = 0;
-        pending[i] = 1;
+        finalised[i] = 0;
     }
     // add/update start node with cost 0
     cost[startnode] = 0;
@@ -230,10 +241,18 @@ init(void) {
         parent[i] = 0;
         seen[i] = 0;
     }
-    seen[1] = 1;
+    seen[startnode] = 1;
     nodes[1] = startnode;
     f_start = 1;
     f_end = 1;
+#elif ALGORITHM==DFS
+    for (i=1; i<=graphsize; i++) {
+        parent[i] = 0;
+        finalised[i] = 0;
+    }
+    nodes[graphsize] = startnode;
+    f_start = graphsize;
+    f_end = graphsize;
 #endif
 }
 
@@ -247,7 +266,7 @@ task_completed(int n) {
     #else // return forest for whole graph
         return 0;
     #endif
-#elif ALGORITHM==DIJK // single end node
+#elif ALGORITHM==DIJK
     if (cost[n] == infty)
         printf("Search failed:(\n");
     return end[n] || cost[n] == infty;
@@ -255,17 +274,12 @@ task_completed(int n) {
     if (cost[n] == infty)
         printf("Search failed:(\n");
     return n == endnode || cost[n] == infty;
-#else // other search algorithms can have any number of end nodes
+#else // other search algorithms (BFS, DFS) can have any number of end nodes
     return end[n];
 #endif
 }
 
 
-// initialise data structures - Fontier just has just start node
-// For Prim's algorithm we can use any start node (eg 1) but might be
-// good for animation to allow different start nodes to show the same
-// tree is computed (if there is a unique MST) and there can be more
-// than one minimal MST.
 void
 alg(void) {
     vertex n, m;
@@ -279,10 +293,19 @@ alg(void) {
     // nodes that had been seen in the PQ, we would just build a MST
     // containing the start node.
     while (f_start <= f_end) {
-        n = nodes[f_start]; /* Select node i with minimal cost */
+        n = nodes[f_start]; /* Select node i with minimal cost/... */
+        f_start++;       /* Remove i from (priority) queue/stack */
+#if ALGORITHM==DFS
+        while (finalised[n]) {
+            if (f_start > f_end) {
+                printf("Search failed:(\n");
+                return;
+            }
+            n = nodes[f_start++];
+        }
+#endif
 printf("Finalised %d with parent %d, cost %d heur %d\n", n, parent[n], cost[n], heur(n));
-        pending[n] = 0;   /* Add i to spanning tree */
-        f_start++;       /* Remove i from priority queue */
+        finalised[n] = 1;   /* Add i to spanning tree */
         // if cost = infinity we have built the MST that includes startnode; we
         // could stop here if we don't want to build MSTs for other
         // connected components of the graph
