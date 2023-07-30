@@ -1,17 +1,16 @@
 Current status:
-Prim's, BFS, Dijkstra's, A* Real specs ready for review.
-gsearch.c is messy but does Prims, BFS, Dijkstra, A* - should add DFS
-
+Prim's, BFS, Dijkstra's, A*, DFS Real specs ready for review.
+gsearch.c is messy but does all of the above
 
 Various graph search algorithms with similar structure emphasised.
 DFS presentation is less natural than the recursive version but the
-latter doesn't emphasise similarity.
+latter doesn't emphasise similarity. Prims is a MST algorithm rther than
+search but has the same structure.
 
-BFS is the "base" version. Once that is in good shape we can migrate
-details to the others.
-
-We have one C implementation with options for the different algorithms
-to avoid code duplication.
+bfs.real was the "base" version. Once that was in good shape we migrated
+details to the others. Prims was the base version for C code.  We now
+have one C implementation with options for the different algorithms to
+avoid code duplication.
 
 Graph representation may not be the best - initially we migrated code
 from other graph algorithms.
@@ -42,7 +41,7 @@ each node not yet visited/put into a MST).
 
 Should add in overview/explanations than "Seen" array/check can be
 avoided if we set cost to "infinity" for unseen nodes (in algorithms
-other than BSF/DFS)
+other than BFS/DFS)
 
 
 

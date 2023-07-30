@@ -24,7 +24,7 @@ XXX Here we use 97.
 Additionally, even in sparse tables, sometimes two keys will hash to the
 same value. Provision must be taken to resolve collisions, as there is
 always the chance resolve these collisions. Three commonly used methods
-for collision resolution common and are shown in this module: linear
+for collision resolution common and are shown in this XXX module: linear
 probing, double hashing, and chaining.
 
 While the average case for search is quite fast for hash, performance
@@ -52,7 +52,17 @@ see Sedgewick p592 for heuristic O() for double and linear.
 This module uses open addressing methods for collision resolution -
 linear probing and double hashing.
 
-Deletion from hash tables can be complex, and is not covered in this
+XXX
+Deletion from hash tables is a bit subtle - we cannot just remove an
+element and make the slot empty as the slot may have been skipped over
+to resolve a collision in a previous insertion. The simplest solution is
+to just mark slots as deleted. Here our pseudocode assumes table slots
+can be occupied by a key or have one of two special values: Empty or
+Deleted. Insertion can fill Empty and Deleted slots but searching must
+continue if a Deleted slot is encountered. Deleted slots can slow down
+searching, so if the number of Deleted slots reaches some threshold is
+may be worth reconstructing the whole table to eliminate them.
+
 module.  XXX not too hard if you just mark things as deleted - could
 include it perhaps?
 
@@ -132,7 +142,7 @@ HashInsert(T, k)  // Insert key k into table T
     \Note}
     i <- hash(k) \Ref Hash1
     Choose Increment value in case of collisions \Ref SetIncrement
-    while T[i] is not Empty // search for Empty slot to insert k
+    while T[i] is occupied by another element // search for unoccupied slot
     \Expl{ If T[i] = k then k already exists in the table. Ideally,
         duplicates should be avoided as they decrease performance and
         search just returns the first one.
@@ -146,7 +156,7 @@ HashInsert(T, k)  // Insert key k into table T
             We use modulo TableSize to "wrap around" if we reach the end.
         \Expl}
         \In}
-    T[i] <- k // Empty slot found so we put k in it
+    T[i] <- k // unoccupied slot found so we put k in it
     \In}
 \Code}
 
@@ -177,6 +187,23 @@ HashSearch(T, k)  // Search for key k in table T
         return NOTFOUND
         \In}
 \In}
+\Code}
+
+\Code{
+HashDelete(T, i)    // mark T[i] as Deleted
+                    // To delete a key we need to search for it first
+    T[i] <- Deleted
+    \Expl{ T[i] is no longer considered occupied, so a key may be
+            inserted here, but searching does not stop at Deleted slots,
+            only Empty ones (or if we find the key).
+    \Expl}
+    Check how many Deleted slots there are in the table
+    \Expl{ Deleted slots slow down searching and limit table capacity as
+            there must be at least one Empty slot for searching. If
+            some threshold is reached a new table can be allocated with
+            all slots Empty then all keys in the old table can be
+            inserted into the new table and the old table discarded.
+    \Expl}
 \Code}
 
 \Note{ This is used for both Insert and Search - the implementation may

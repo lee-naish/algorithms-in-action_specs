@@ -33,5 +33,5 @@ gcc -DALGORITHM=4 -DWEIGHT=2 -DHEURISTIC=2 gsearch.c -lm
 (actually, *rounded* Euclidean/HEURISTIC=2 is not admissible either due
 to rounding): 45 degree line with nodes at each point has weight one
 per edge (1.41 is rounded down) but if we skip a node the weight is 3
-(2.82 is rounded up). Really need two Euclidean measures for
-admissibility - heuristic rounds down always, weight???
+(2.82 is rounded up). Now using ceiling for Euclid - thats avoids this
+problem.
