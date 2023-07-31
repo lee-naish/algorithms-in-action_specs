@@ -1,6 +1,10 @@
 \Note{  REAL specification of breadth first search for graphs
 \Note}
 
+
+\Note{Linda testing July 31
+\Note}
+
 \Note{ There are several graph search algorithms that lead up to A*
 and we present them in a consistent way to show their similarities.
 Prim's MST tree is also similar.
