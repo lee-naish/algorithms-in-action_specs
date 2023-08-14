@@ -2,25 +2,34 @@
 \Note}
 
 
-\Note{Linda testing July 31
-\Note}
+
 
 \Note{ There are several graph search algorithms that lead up to A*
 and we present them in a consistent way to show their similarities.
 Prim's MST tree is also similar.
 \Note}
 
+\Note{ At present, this overview is a bit long, but not overly verbose.  We
+might want to see how it shows up on an AIA screen (we don't really want it to 
+require a lot of scrolling), and also what the possibilities are for widening the 
+Overview screen temporarily while reading, then reseting for the animation.
+\Note}
+
 \Note{
 Suggested visualisation:
 
-For consistency with the other search algorithms the graph could be
-layed out on a grid (not visible), used for determining edge cost and
-heuristic values for other algorithms. Colours/... can distinguish
-finished, frontier and other nodes. Edges in chosen paths highlighted.
 
-Could possibly have multiple graph displays - the one above plus the
-previously implemented one. The one above is probably preferred as it's
-visually clearer.
+For consistency with the other search algorithms the graph could be
+laid out on a grid (not visible), used for determining edge cost and
+heuristic values for other algorithms. Colours or hue saturation... can distinguish
+finished, frontier and other nodes. Edges in chosen paths highlighted. (n.b.
+A previous group looked into color differentiation for people with aberrant
+color vision -- consult that for appropriate contrast if using colors.)
+
+During development it might be desirable to have multiple graph displays - the display suggested
+above plus the previously implemented display. Once development of the module has been completed, the
+visualization above would be preferred, as it is probably clearer. 
+
 
 We also need to display the array "Parent" and the queue.
 The array should be shown as a table:
@@ -40,38 +49,61 @@ algorithms). Eg:
 
 \Overview{
 
-Breadth first search (BFS) for graphs can be used to find a path from
-a single start node to either a single end node, one of several end
-nodes, or all nodes that are connected (depending on the termination
-condition).
-It is one of several algorithms that can be viewed as having a similar
-structure. Some of these work with weighted graphs (with positive weights
-for all edges), where the aim is to find the shortest path(s) (or the
-minimum spanning tree in the case of Prim's algorithm) but BFS ignores
-weights. These graph search algorithms can be used for both directed
-and undirected graphs; here we use undirected graphs for simplicity.
-The way paths are represented is for each node to point to the previous
-node in the path, so paths are actually reversed in this representation
-and we have a tree with "parent" pointers and the start node at the
-root. This allows multiple nodes to each have a single path returned
-(or we can return a spanning tree).
-BFS will find paths with
-the minimum number of edges, so the paths are shortest for unweighted
-graphs, or if all the weights/costs/lengths are the same.
+\Note{XXX Lee: I've changed the order here, to put the specific (BFS)
+before the general (related algorithms), as a hook for student attention. 
+See what you think.
+\Note}
 
-As all these algorithms execute, we can classify nodes into three sets.
-They are the nodes for which the final parent node has been found (this
-is a region of the graph around the start node), "frontier" nodes that
-are not finalised but are connected to a finalised node by a single edge,
-and the rest of the nodes, which have not been seen yet. The frontier
-nodes are stored explicitly in some data structure and some algorithms
-also need some way to check if a node has been seen and/or finalised. The
-frontier initially contains just the start node. The algorithms repeatedly
-pick a frontier node, finalises the node (its current parent becomes
-its final parent) and updates information about neighbours of the node.
-BFS uses a queue for the frontier nodes.  At each stage the front node
-is removed from the queue and neighbours that have not yet been seen
-are added at the end.
+Breadth first search (BFS) for graphs can be used to find a path from
+a single start node to either a single end node; to one of several end
+nodes; or to all nodes that are connected to the start node, depending on the termination
+condition. BFS returns the path to this (these) node(s) 
+that can be reached with the minimum number of edges traversed, regardless of 
+edge weights.
+
+BFS is one of a related group of algorithms that traverse a graph, visiting every 
+node no more than once, and can be viewed as having a similar
+structure.  Others of these algorithms work with weighted graphs (with positive weights
+for all edges), where the aim is to find the least cost path(s), while Prim's
+and Kruskal's algorithms find a minumum spanning tree of the graph (the least cost 
+path that connects all edges).  
+
+\Note{XXX Lee How could we include DFS in the above description of other algorithms?
+\Note}
+
+These graph search algorithms can be used for both directed
+and undirected graphs; in AIA we use undirected graphs for simplicity.
+Paths are represented by having each node point to the previous
+"parent" node in the path, so 
+we have a tree with "parent" pointers and the start node at the
+root, that is a tree of reversed paths. This allows these algorithms to return
+multiple end nodes that each have a single path from the start node. 
+BFS will find paths with
+the minimum number of edges. 
+
+As these algorithms execute, we can classify nodes into three sets.
+These are:
+
+ 
+-- "Finalised" nodes, for which the shortest or least costly path back to the start node has already
+been finalised, that is the final parent node has been determined and is recorded;
+
+--"Frontier" nodes, that are not finalised but are connected to a finalised node by a single edge; and
+
+-- The rest of the nodes, which have not been seen yet. 
+
+The frontier nodes are stored explicitly in a data structure.
+Some of the algorithms also need a way to check if a node has already been seen and/or finalised.
+
+The frontier initially contains just the start node. The algorithms repeatedly
+pick a frontier node, finalise the node (its current parent becomes
+its final parent) and update information about the neighbours of the node.
+BFS uses a queue for the frontier nodes.  At each stage the node at the front of the
+queue is removed for processing, and its neighbors that have not yet been seen
+are added to the end of the queue. Other algorithms use other data structures to keep track 
+of the frontier nodes.
+
+
 
 Here we number all nodes for simplicity so we can use arrays for the
 graph representation, the parent pointers, etc.  For many important
