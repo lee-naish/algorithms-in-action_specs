@@ -13,8 +13,8 @@ and it was insensitive to graph layout.  Some the the other algorithms
 at least (and probably Prims) are much more easily visualised with a
 (preferably planar) graph where costs are sensitive to layout, based on
 distance between nodes, so here we input a graph based on layout and
-compute the cost matrix based on that.  The matrix representation is
-probably not the best for practical implementations and its a bit of a
+optionally compute the cost matrix based on that.  The matrix representation
+is probably not the best for practical implementations and its a bit of a
 pain for input of sparse graphs but is ok for the animations and testing
 the code.
 
@@ -23,6 +23,20 @@ these are input and used to compute weights and heuristic values (for the
 algorithms that use them) (the weights in the input matrix are ignored,
 except zero means no edge) - either Manhattan distance or straight line
 (Euclidean) distance, rounded to an integer.
+
+Some bash aliases for the different compile options (Prims for whole graph,
+Prims for one connected component, BFS, DFS, shortest paths (Dijkstra), A*
+(with different weight and heuristic combinations):
+alias gcp='gcc -DALGORITHM=0 gsearch.c -lm'
+alias gcp1='gcc -DALGORITHM=0 -DoneMST gsearch.c -lm'
+alias gcb='gcc -DALGORITHM=1 gsearch.c -lm'
+alias gcd='gcc -DALGORITHM=2 gsearch.c -lm'
+alias gcs='gcc -DALGORITHM=3 gsearch.c -lm'
+alias gca='gcc -DALGORITHM=4 gsearch.c -lm'
+alias gca11='gcc -DALGORITHM=4 -DWEIGHT=1 -DHEURISTIC=1 gsearch.c -lm'
+alias gca22='gcc -DALGORITHM=4 -DWEIGHT=2 -DHEURISTIC=2 gsearch.c -lm'
+alias gca21='gcc -DALGORITHM=4 -DWEIGHT=2 -DHEURISTIC=1 gsearch.c -lm'
+alias gca12='gcc -DALGORITHM=4 -DWEIGHT=1 -DHEURISTIC=2 gsearch.c -lm'
 
 */
 
@@ -109,13 +123,14 @@ manhattan(int i, int j) {
     return abs(xpos[i] - xpos[j]) + abs(ypos[i] - ypos[j]);
 }
 
-// Euclidean (straight line) distance between nodes (converted to int)
+// Euclidean (straight line) distance between nodes (converted to int),
+// rounded to next highest int
 int
 euclid(int i, int j) {
     int dx = xpos[i]-xpos[j];
     int dy = ypos[i]-ypos[j];
-    // rounding down may cause inadmissibility
-    //return (int)floor(0.5 + sqrt((double)(dx*dx + dy*dy)));
+    // rounding down may cause inadmissibility where we don't want it
+    // return (int)floor(0.5 + sqrt((double)(dx*dx + dy*dy)));
     return (int)ceil(sqrt((double)(dx*dx + dy*dy)));
 }
 
@@ -145,6 +160,7 @@ weight_fn(int i, int j) {
 // to represent infinity and hope costs don't get that big)
 int
 infplus(int i, int j) {
+    // XXX OK with imprecision of floats?
     if ((float)i + (float)j >= (float)infty)
         return infty;
     else
@@ -390,20 +406,41 @@ main() {
 0  2  6  0  0
 2  0  6  5  7
 6  6  0  1  4
-0  5  1  0  3
-0  7  4  3  0
+0  5  1  0  8
+0  7  4  8  0
 1
 4
 0
 
+Format is
+number of nodes
+position of each node - (x, y) coordinates
+edge matrix with costs (the costs are ignored and recomputed using
+distance metrics between coordinated; might be better to have a
+zero-terminated list of edges)
+start node
+end nodes, if any
+zero (to terminate list of end nodes)
+The rest of the file is ignored, allowing comments such as this.
 
-This yields the following output:
-
-Spanning tree:
-0  2  0  0  0
-2  0  0  5  0
-0  0  0  1  0
-0  5  1  0  3
-0  0  0  3  0
+Output for Prim's (with default recomputation of weights; heuristic values
+are irrelevant for this algorithm) is:
+Weighted graph:
+  0   4   7   0   0 
+  4   0   5   1   3 
+  7   5   0   4   4 
+  0   1   4   0   3 
+  0   3   4   3   0 
+Finalised 1 with parent 0, cost 0 heur 5
+Finalised 2 with parent 1, cost 4 heur 1
+Finalised 4 with parent 2, cost 1 heur 0
+Finalised 5 with parent 2, cost 3 heur 3
+Finalised 3 with parent 4, cost 4 heur 4
+Result:
+  0   4   0   0   0 
+  4   0   0   1   3 
+  0   0   0   4   0 
+  0   1   4   0   0 
+  0   3   0   0   0 
 
 */

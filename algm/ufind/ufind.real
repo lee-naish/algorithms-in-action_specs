@@ -11,12 +11,13 @@ simple coding + its easy to separate path compression
 Could be good to provide button/... to eliminate path compression so
 students can explore what can happen without it
 
-Tentative idea for visualisation is to have array view, with rows
-for n, parent[n] and rank[n] plus forest view
-The forest could have fixed width columns with one number+rank per
-column, the numbers sorted within each tree and the trees sorted
-according to their roots. Rank information could be elided for some
-levels of abstraction.
+Tentative idea for visualisation is to have array view, with rows for
+n, parent[n] and rank[n] (rank[n] can be blank for non-roots) plus
+forest view.  The forest could have fixed width columns with one number
+per column (plus rank for root nodes?). Union operation could shuffle
+rightmost tree to the left until its next to the tree to be merged with,
+then one tree could be moved downwards one row and new edge added.
+Rank information could be elided for some levels of abstraction.
 \Note}
 
 \Overview{

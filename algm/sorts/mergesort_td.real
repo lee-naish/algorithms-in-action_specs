@@ -38,11 +38,15 @@ Mergesort(A, left, right)
 \Code{
 MergesortL
     Mergesort(A, left, mid)
+    \Note{ Recursive call should be animated if this is expanded
+    \Note}
 \Code}
 
 \Code{
 MergesortR
     Mergesort(A, mid + 1, right)
+    \Note{ Recursive call should be animated if this is expanded
+    \Note}
 \Code}
 
 \Code{
