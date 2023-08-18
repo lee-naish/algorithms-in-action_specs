@@ -20,17 +20,25 @@ There may well be some junk branches etc - clueless github user here
 - algm/\
     sub directories for different algorithms (some several related
 algorithms); these contain Real specs + C code for testing etc typically
+- algm/bst\
+    binary search tree
 - algm/gsearch\
     graph search (BFS, DFS, Dijkstra's shortest path, A*) and also Prim's
 MST algorithm - these all have a similar structure
-- algm/mergesort\
-    merge sort
-- algm/ufind\
-    union find
 - algm/hash\
     hashing
+- algm/kruskal\
+    Kruskal's MST algorithm
+- algm/sorts\
+    top-down merge sort, heap sort, quicksort (simple + median of 3)
+- algm/strings\
+    string searching: Horspool's
 - algm/tree234\
     234 trees
+- algm/ufind\
+    union find
+- algm/warshall\
+    Warshall's transitive closure algorithm
 - src/\
     source code, not specific to algorithms being animated (eg script for
 cleaning Real specs)
