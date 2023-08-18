@@ -1,0 +1,218 @@
+\Note{  REAL specification of Prim's algorithm
+\Note}
+
+\Note{  The visualisation should show the weighted input graph G and also the 
+        priority queue. The minimum spanning tree should be visualised by
+        colouring the relevant edges of G as they are discovered.
+\Note}
+
+\Note{  The algorithm also needs to display the arrays "Prev" and "Cost".
+        The arrays can be shown as a table:
+
+            i         1      2      3      ...
+            Prev[i]
+            Cost[i]
+
+        When changes are made to the array values, probably a box showing 
+        the table entry in the array should light up, and also the value.
+\Note}
+
+\Overview{ A minimum spanning tree of a weighted connected graph G is
+           a connected acyclic subgraph of the tree of lowest weight.
+           Each edge (i,j) in a weighted graph has a weight (or distance)
+           associated with it, and the weight of the tree is the sum of 
+           the weights of the edges between the nodes in the tree. 
+           Graph G is not directed, and there may be more than one 
+           minimum spanning trees (equal minimum weight).
+
+           Prim's algorithm is a greedy algorithm for finding a minimum
+           spanning tree in a graph G specified by edges E. Starting with
+           a tree of one node, Prim's algorithm builds up the spanning 
+           tree in a "greedy" fashion, adding more nodes one at a time 
+           into the tree.
+
+           The next new node is chosen by finding the node with the least
+           cost. The cost of a node i, not yet in the spanning tree, 
+           captures information about the edges from any node in the 
+           spanning tree to this node, i.e., it is the least value for the
+           weight of (k,i), where k is any node in the spanning tree, and
+           can be thought of as the cost of adding i to the spanning tree.
+             
+           Costs are stored in a priority queue, so that the next node to 
+           add (least cost edge to the tree) can be found efficiently. 
+           As the spanning tree grows, costs need to be updated, since
+           there may now be a lower cost associated with including a node
+           in the tree (since an edge of lower weight might be usable now).
+\Overview}
+
+\Code{
+Main
+Prim(E, n) // Given a weighted connected graph G with nodes 1..n and edges E, 
+           // find a minimum spanning tree for G.
+\In{
+    for i <- 1 to n                                             
+    \In{
+        Cost[i] <- Infinity                                     
+        Prev[i] <- Null
+        \Expl{  The array Prev will be used to track how nodes are 
+                connected into the resulting spanning tree. 
+                Whenever an edge (j,i) is added to the tree, this 
+                is captured by setting Prev[i] to j.
+        \Expl}
+    \In}
+    Cost[1] <- 0
+    \Expl{  We arrange for the tree construction to start with
+            node 1; this is achieved by setting the cost of node
+            1 to 0 (to get from node 1 to itself costs nothing).
+            Other nodes initially assigned the largest possible 
+            cost, Infinity, as they have not been considered yet.
+    \Expl}
+    Q <- InitPriorityQueue(n)                                   
+    \Expl{  Nodes are arranged in the priority queue Q according 
+            to cost. Smaller cost means higher priority.
+    \Expl}
+    while Q not Empty 
+    \In{
+        i <- RemoveMin(Q)  // i is now part of the spanning tree
+        \Expl{  Node i is closest to the tree constructed so far.
+                More precisely, for every node k inside the current 
+                tree, and every node j outside of it, the weight of
+                (k,i) is smaller than (or possibly equal to) the weight
+                of (k,j) for all outside nodes j. So i is picked as 
+                the next node to add to the tree. Note that, unless 
+                i = 1, prev[i] has already been determined.
+        \Expl}
+        update priority queue Q    \Ref Update
+    \In}
+\In}
+\Code}
+
+\Code{
+Update
+for each (i,j) in E 
+\Expl{  Now that i gets included in the tree, we need to check the edge 
+        to each of its neighbours j.
+\Expl}
+\In{
+    if j is in Q and weight(i,j) < Cost[j] 
+    \Expl{  The inclusion of i may have brought i's neighbour j closer 
+            to the tree; if so, update the information we have about j.
+    \Expl}
+    \In{
+        Cost[j] <- weight(i,j)                                  
+        \Expl{  The new cost for j is its distance to i.
+        \Expl}
+        Update(Q, j, Cost[j])                                   
+        \Expl{  Rearrange Q so the priority queue reflects j's new cost.
+        \Expl}
+        Prev[j] <- i                                            
+        \Expl{  Record the fact that j's closest neighbour in the 
+                spanning tree (so far) was i.
+        \Expl}
+    \In}
+\In}
+\Code}
+
+\Note{  The following is an implementation in C:
+#include<stdio.h>
+#include<stdlib.h>
+#include<limits.h>
+
+#define infty INT_MAX
+#define SIZE 10         /* Allow for graphs with up to 9 vertices */
+typedef int vertex;
+
+int weight[SIZE][SIZE]; /* The input: a weighted graph */
+int cost[SIZE];         /* Keeps track of current cost for each vertex */
+int pending[SIZE];      /* pending = 1 iff vertex not yet included in tree */
+vertex prev[SIZE];      /* Specifies the spanning tree */
+vertex pq[SIZE];        /* The priority queue */
+int pq_start;           /* The start of the priority queue */
+int n;                  /* The actual number of vertices */
+ 
+void pq_sort() {
+    int i, j, v;
+    for (i = pq_start + 1; i<=n; i++) {
+        v = pq[i];
+        for (j = i-1; j >= pq_start && cost[v] < cost[pq[j]]; j--)
+            pq[j+1] = pq[j];
+        pq[j+1] = v;
+    }
+} 
+
+void pq_update(int i) {
+    int j, w;
+    for (j=1; j<=n; j++) {
+        w = weight[i][j];
+        if (w > 0 && pending[j] && w < cost[j]) {
+            cost[j] = w;
+            pq_sort();
+            prev[j] = i;
+        }
+    }
+}
+         
+void prim() {
+    int i;
+
+    for (i=1; i<=n; i++) {
+        cost[i] = infty;
+        prev[i] = 0;
+        pending[i] = 1;
+    }
+    cost[1] = 0;
+    
+    for (i=1; i<=n; i++)  /* Initialise the priority queue */
+        pq[i] = i;
+    pq_start = 1;
+    while (pq_start <= n) {
+        i = pq[pq_start]; /* Select node i with minimal cost */
+        pending[i] = 0;   /* Add i to spanning tree */
+        pq_start++;       /* Remove i from priority queue */
+        pq_update(i);     /* Update costs of i's neighbours in priority queue */
+    }
+}
+
+int main() {
+    int i, j;
+    scanf("%d",&n);
+    for (i=1; i<=n; i++)
+        for (j=1; j<=n; j++)
+            scanf("%d", &weight[i][j]);
+    
+    prim();
+    
+    printf("Spanning tree:\n");
+    for (i=1; i<=n; i++) {
+        for (j=1; j<=n; j++)
+            if (i == prev[j] || j == prev[i])
+                printf("%d  ", weight[i][j]);
+            else
+                printf("0  ");
+        printf("\n");
+    }
+
+    return 0;
+}
+ 
+/* Example of test input with 5 vertices (must be less than 10):
+
+5
+0  2  6  0  0
+2  0  6  5  7
+6  6  0  1  4
+0  5  1  0  3
+0  7  4  3  0
+
+This yields the following output:
+
+Spanning tree:
+0  2  0  0  0
+2  0  0  5  0
+0  0  0  1  0
+0  5  1  0  3
+0  0  0  3  0
+
+*/
+\Note}
+

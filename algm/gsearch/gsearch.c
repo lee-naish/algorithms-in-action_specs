@@ -129,8 +129,11 @@ int
 euclid(int i, int j) {
     int dx = xpos[i]-xpos[j];
     int dy = ypos[i]-ypos[j];
-    // rounding down may cause inadmissibility where we don't want it
-    // return (int)floor(0.5 + sqrt((double)(dx*dx + dy*dy)));
+    // Note: rounding to closest int may cause inadmissibility for A* even if
+    // this is used for weights and heuristic. Eg, 45 degree line with
+    // nodes at each point has weight one per edge (1.41 is rounded
+    // down) but if we skip a node the weight is 3 (2.82 is rounded up).
+    // Always rounding up solves this problem.
     return (int)ceil(sqrt((double)(dx*dx + dy*dy)));
 }
 

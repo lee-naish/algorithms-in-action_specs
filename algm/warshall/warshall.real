@@ -1,0 +1,175 @@
+\Note{  REAL specification of Warshall's algorithm
+\Note}
+
+\Note{  Provide two different visualisation views concurrently: 
+        the directed graph G, as well as the adjacency matrix A that 
+        represents G.
+\Note}
+
+\Overview{
+    Warshall's algorithm computes the transitive closure of a directed 
+    graph, that is, what nodes can be reached from other nodes. The 
+    algorithm starts with an adjacency matrix A for a directed graph G
+    with n nodes. In the adjacency matrix, A[i,j] = 1 indicates that 
+    there is an edge, i.e., a one-step path, from node i to node j, and 
+    0 indicates that there is not an edge. The algorithm ends with a 
+    reachability matrix where A[i,j] = 1 means that there is a path from
+    i to j, possibly with several intermediate steps between i and j,
+    possibly with several intermediate steps between i and j. The 
+    algorithm uses three nested loops that iterate over all the nodes
+    but the order of the nesting is crucial for correctness. The logic is
+    as follows. We start with the matrix describing direct reachability
+    (using a single edge and no intermediate nodes). We first compute
+    reachability that may include node 1 as an intermediate node (as well 
+    as direct reachability), then compute reachability that may include 
+    nodes 1 and/or 2, and so on, up to n. Thus the outer loop iterates 
+    over potential intermediate nodes k, at each stage relying on the 
+    fact that all paths using intermediate nodes 1 up to k-1 have been 
+    computed. The inner two loops iterate over nodes i (that may have a 
+    path to k) and nodes j (that may have a path from k), respectively. 
+    If there is a path from i to k and from k to j, then there is a path 
+    from i to j, so A[i,j] is set to 1 at this point. Correctness of the 
+    algorithm relies on the fact that there is a path from i to j using 
+    only intermediate nodes 1 to k if and only if there is a path from 
+    i to k and from k to j using only intermediate nodes 1 to k-1.
+
+    For reachability in graphs, we assume each node is trivially reachable
+    from itself, hence A[i, i] = 1 for all i. Graphs can be used to represent
+    binary relations and the term transitive closure comes from this
+    area. Assuming self-reachability is equivalent to assuming a "reflexive"
+    relation.  For example, the "less than or equal to" relation is reflexive
+    (x <= x for all x). If we know a <= b and b <= c, this can be represented
+    using a graph with three nodes (a, b and c) and edges from a to
+    b and from b to c. Transitive closure can be used to deduce that a <=
+    c (c is reachable from a; <= is a "transitive" relation). Although
+    Warshall's algorithm is presented here using only reflexive relations,
+    it works for all relations.  For example, the "less than" relation would
+    correspond to a graph where A[i, i] = 0 for all i, and from a < b and b <
+    c, Warshall's algorithm could be used to conclude a < c.
+\Overview}
+
+\Code{
+Main
+Warshall(A, n) 
+\Expl{ Compute the transitive closure of a directed graph G 
+       with nodes 1..n, represented by n x n adjacency matrix A 
+\Expl}   
+\In{
+    for k <- 1 to n                                          
+    \Expl{  Consider all possible nodes k that might be
+            used as stepping stones on the way from i to j.
+    \Expl}
+    \In{
+        for i <- 1 to n
+        \Expl{  Explore and try to add new paths from each source node i.
+        \Expl}
+        \In{
+            find all nodes reachable from i via k     \Ref Reachable
+            \Expl{  Identify target nodes j that are reachable from 
+                    source node i, whether they were already reachable 
+                    before now, or whether they are now reachable using 
+                    node k as a stepping stone.
+            \Expl}
+        \In}
+    \In}
+\In}
+\Code}
+
+\Code{
+Reachable
+// Consider all paths from i to j, either already reachable (using 
+// nodes 1 to k-1 as intermediates), or now reachable using k as an 
+// intermediate.
+if A[i,k]   
+\Expl{  When A[i,k] is 0 (that is, even using nodes 1 to k-1 as
+        intermediaries, there is no path from i to k), k cannot 
+        possibly be a stepping stone in the path from i to j.
+        So then we do not explore whether there is a path from k to j.
+\Expl}
+\In{
+    for j <- 1 to n              
+    \Expl{  Consider paths to all possible target nodes j.
+            The effect of this innermost loop is to update row i
+            to become its binary "or" with row k.
+    \Expl}
+    \In{
+        if A[k,j]                
+        \Expl{  Check if there is a path from this intermediate 
+                node k to target node j.
+        \Expl}
+        \In{
+            A[i,j] <- 1
+            \Expl{  Record the new path from i to j (through k) in the 
+                    reachability matrix by setting A[i,j] to 1 (if there
+                    was already a path from i to j in the reachability
+                    matrix, then it remains there, whether or not that
+                    path goes through k.
+            \Expl}
+        \In}
+    \In}
+\In}
+\Code}
+
+\Note{  The following is an implementation in C:
+#include<stdio.h>
+#include<stdlib.h>
+
+#define SIZE 10         /* Allow for graphs with up to 9 vertices */
+typedef int vertex;
+
+int a[SIZE][SIZE];      /* The input: an adjacency matrix */
+int n;                  /* Actual size of a is nxn */
+ 
+void warshall() {
+    int i, j, k;
+    for (k = 1; k <= n; k++) 
+        for (i = 1; i <= n; i++)
+            if (a[i][k])
+                for (j = 1; j <= n; j++)
+                    if (a[k][j])
+                        a[i][j] = 1;
+} 
+
+int main() {
+    int i, j;
+    scanf("%d",&n);
+    for (i=1; i<=n; i++)
+        for (j=1; j<=n; j++)
+            scanf("%d", &a[i][j]);
+    
+    warshall();
+    
+    printf("Transitive closure:\n");
+    for (i=1; i<=n; i++) {
+        for (j=1; j<=n; j++)
+            printf("%d  ", a[i][j]);
+        printf("\n");
+    }
+
+    return 0;
+}
+ 
+/* Example of test input with 7 vertices (must be less than 10):
+
+7
+0  1  0  0  1  0  0
+0  0  1  0  0  0  0
+0  0  0  0  0  1  1
+0  0  1  0  0  0  0
+0  1  0  0  0  1  0
+0  0  0  1  0  0  1
+0  0  0  1  0  0  0
+
+This yields the following output:
+
+Transitive closure:
+0  1  1  1  1  1  1
+0  0  1  1  0  1  1
+0  0  1  1  0  1  1
+0  0  1  1  0  1  1
+0  1  1  1  0  1  1
+0  0  1  1  0  1  1
+0  0  1  1  0  1  1
+
+*/
+\Note}

@@ -1,7 +1,4 @@
 \Note{  REAL specification of 234 tree insertion and search
-In development
-Lee Naish
-Tue May 11 10:35:58 AEST 2021
 \Note}
 
 \Note{  We would like the AIA representation of data structures for 
@@ -195,8 +192,8 @@ Traverse // Traverse down to a leaf where k gets inserted, splitting four-nodes
 The code here stops when c becomes Empty.  This results in more
 comparisons but slightly simpler code structure. We could break out of
 the loop when c is a leaf instead. The low level details of the code and
-its efficiency are not so important to I have gone for simple structure.
-Its also more similar to the BST code to iterate until we fall off the
+its efficiency are not so important so I have gone for simple structure.
+It's also more similar to the BST code to iterate until we fall off the
 tree then repeat some comparison.
 \Note}
 p <- Empty        // We keep track of the parent node, initially Empty

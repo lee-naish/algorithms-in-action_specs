@@ -1,0 +1,264 @@
+\Note{  REAL specification of BST insertion and search
+\Note}
+
+\Note{  We would like the AIA representation of data structures for
+        search applications to share a certain format, allowing the 
+        student to develop and use a structure (such as a BST) 
+        through these operations: create a structure, search, insert,
+        and remove elements. This specification only covers construction
+        (using insertion) and search.
+\Note}
+
+\Overview{  A binary tree is either is either empty (Empty) or else it
+        it has a root node and two subtrees (which are binary trees).
+        The root node t has a key, t.key. Ordinarily it would also
+        hold other data (t.data), which the user would like to find by
+        searching for the key.  Since this attribute has no impact on 
+        how insertion and search take place, we disregard it here. 
+        Note that a newly inserted node will always appear as a leaf
+        in the tree. The BST invariant is always maintained: for each 
+        subtree t, with root key t.key, the left subtree, t.left, 
+        contains no node with key greater than k, and the right subtree,
+        t.right, contains no node with key smaller than k.
+\Overview}
+
+\Note{  For both insertion and search, the animation should highlight the 
+        search path. Successful search could be indicated by highlighting
+        the identified node (in green, say); failure by a red cross in the
+        position where the sought-after key would have been, if present.
+\Note}
+
+\Code{
+BST_Search(t, k)  // return subtree whose root has key k; or
+                  // NotFound is no such node is present
+\In{
+    while t not Empty
+    \In{
+        if t.key = k 
+        \In{
+            return t
+            \Expl{  We have found a node with the desired key k.
+            \Expl}
+        \In}
+        if t.key > k 
+        \Expl{  The BST condition is that nodes with keys less than the 
+                current node's key are to be found in the left subtree, and
+                nodes whose keys are greater are to be in the right subtree.
+        \Expl}
+        \In{
+            t <- t.left
+        \In}
+        else
+        \In{
+            t <- t.right
+        \In}
+    return NotFound
+    \In}
+\In}
+\Code}
+
+\Code{
+BST_Insert(t, k) // Insert key k in BST t, maintaining the BST invariant
+\In{
+    n <- new Node     // create a new node to hold key k
+    n.key <- k
+    n.left <- Empty   // it will be a leaf, that is,
+    n.right <- Empty  // it has empty subtrees
+    
+    if t = Empty
+    \In{
+        return n      // in this case, the result is a tree with just one node
+        \Expl{  If the tree is initially empty, the resulting BST is just
+                the new node, which has key k, and empty sub-trees.
+        \Expl}
+    \In}
+    Locate the node p that should be the parent of the new node n. \Ref Locate
+    if k < p.key 
+    \Expl{  The new node n (whose key is k) will be a child of p. We just 
+            need to decide whether it should be a left or a right child of p.
+    \Expl}
+    \In{
+        p.left <- n       // insert n as p's left child         
+    \In}
+    else
+    \In{
+        p.right <- n      // insert n as p's right child        
+    \In}
+    return t                                                    
+\In}
+\Code}
+
+\Code{
+Locate
+c <- t            // c traverses the path from the root to the insertion point
+
+\Expl{  c is going to follow a path down to where the new node is to 
+        be inserted. We start from the root (t).
+\Expl}
+repeat
+\In{
+    p <- c        // when the loop exits, p will be c's parent
+    \Expl{  Parent p and child c will move in lockstep, with p always 
+            trailing one step behind c.
+    \Expl}
+    if k < c.key
+    \Expl{  The BST condition is that nodes with keys less than the current
+            node's key are to be found in the left subtree, and nodes whose
+            keys are greater (or the same) are to be in the right subtree.
+    \Expl}
+    \In{
+        c <- c.left
+    \In}
+    else
+    \In{
+        c <- c.right
+    \In}
+\In}
+until c = Empty
+\Expl{  At the end of this loop, c has located the empty subtree where new
+        node n should be located, and p will be the parent of the new node.
+\Expl}
+\Code}
+
+\Code{
+BST_Build(keys)  // return the BST that results from inserting nodes
+                 // with keys 'keys', in the given order, into an
+                 // initially empty BST
+t <- Empty
+for each k in keys
+\In{
+    t <- BST_Insert(t, k)
+\In}
+\Code}
+
+\Note{  This is an implementation in C:
+#include<stdio.h>
+#include<stdlib.h>
+
+#define NEW(type) (type *) malloc(sizeof(type))
+#define demand(fact, remark)\
+    {   if (!(fact))\
+        {   fprintf(stderr, "%s\n", remark); exit(1);   }\
+    }
+
+#define SIZE 20      /* Allow for a BST with up to 20 keys */
+
+typedef struct tnode {
+    int key;
+    struct tnode *left, *right;
+} NODE;
+
+typedef struct lnode {
+    int elt;
+    struct lnode *next;
+} ELT;
+ 
+NODE *bst_insert(NODE *t, int k) {
+    NODE *c;               /* c will traverse a path */
+    NODE *p;               /* p remains c's parent through the traversal */
+    NODE *n = NEW(NODE);
+    n->key = k;
+    n->left = NULL;
+    n->right = NULL;
+    if (!t)
+        return n;
+    c = t;
+    do {
+        p = c;
+        if (k < c->key)
+            c = c->left;
+        else
+            c = c->right;
+    } while (c);
+    if (k < p->key)
+        p->left = n;
+    else
+        p->right = n;
+    return t;
+}
+         
+NODE *build_bst(ELT *lst) {
+    NODE *t;
+    while (lst) { 
+        t = bst_insert(t, lst->elt);
+        lst = lst->next;
+    }
+    return t;
+} 
+
+void search_bst(NODE *t, int k) {
+    while (t) {
+        if (k == t->key) {
+            printf("Found  %d\n", k);
+            return;
+        }
+        if (k < t->key)
+            t = t->left;
+        else
+            t = t->right;
+    }
+    printf("Missed %d\n", k);
+    return;
+}
+
+void inorder(NODE *t) {
+    if (t) {
+        inorder(t->left);
+        printf("%d ", t->key);
+        inorder(t->right);
+    }
+}
+
+int main() {
+    int i, n, x;
+    ELT *e;
+    ELT *first;
+    ELT *last;
+    scanf("%d", &n);
+    demand(n>0, "n must be positive");
+    first = NEW(ELT);
+    first->next = NULL;
+    scanf("%d", &(first->elt));
+    last = first;
+    
+    for (i=1; i<n; i++) {
+        e = NEW(ELT);
+        e->next = NULL;
+        scanf("%d", &(e->elt));
+        last->next = e;
+        last = e;
+    }
+    
+    NODE *t = build_bst(first);
+
+ /* For testing only :
+    printf("\nInorder traversal yields:\n");
+    inorder(t);   
+    printf("\n");                         
+ */
+    scanf("%d", &x);
+    while (x > 0) {
+        search_bst(t, x);
+        scanf("%d", &x);
+    } 
+
+    return 0;
+}
+ 
+/* Example of test input with 15 keys (must be no more than 20):
+
+15
+77  13  10  46  94  49  91  88  25  62  54  59  19  44  16
+62
+63
+94
+0
+
+This yields the following output:
+
+Found  62
+Missed 63
+Found  94
+
+*/
+\Note}

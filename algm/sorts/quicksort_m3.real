@@ -1,0 +1,314 @@
+\Note{ REAL specification of quicksort (median of 3 version) for animation
+
+\Note}
+
+\Code{
+main
+// Sort array A[left]..A[right] in ascending order
+Quicksort(A, left, right)
+\Expl{  We need left and right indices because the code is recursive
+        and both may be different for recursive calls.
+\Expl}
+    if left < right
+    \Expl{  Terminating condition (if there are less than two
+            elements in the array segment do nothing).
+    \Expl}
+    \In{
+        Choose pivot    \Ref ChoosePivot 
+        \Expl{  There are various ways to choose the "pivot", which is
+                used to distinguish (relatively) small elements and
+                (relatively) large elements in the partitioning process.
+        \Expl}
+        Partition array segment    \Ref Partition 
+        \Expl{  This is where most of the work of Quicksort gets done.
+                We start with an unordered array segment, and finish
+                with an array segment containing the pivot in its final
+                place, A[i], and two partitions, one containing only
+                elements smaller than or equal to the pivot, and the other
+                containing only elements larger than or equal to the pivot.
+                There are various ways this can be coded, often with
+                some subtle points.
+        \Expl}
+        Quicksort FirstHalf    \Ref QuicksortFirstHalf 
+        \Expl{  Sort elements left of (smaller or equal to) the pivot,
+                which is in A[i].
+        \Expl}
+        Quicksort SecondHalf    \Ref QuicksortSecondHalf
+        \Expl{  Sort elements right of (greater or equal to) the pivot,
+                which is in A[i].
+        \Expl}
+    \In}
+\Code}
+
+\Code{
+QuicksortFirstHalf
+Quicksort(A, left, i - 1)
+\Code}
+
+\Code{
+QuicksortSecondHalf
+Quicksort(A, i + 1, right)
+\Code}
+
+\Code{
+ChoosePivot
+Put the left, right and middle elements in increasing order    \Ref SortLMR
+\Expl{  This method of choosing a pivot uses the median of the left,
+        right and middle elements of the array segment. Sorting the left,
+        middle and and right elements ensures the median is in the middle
+        plus A[left] and A[right] are in their correct partitions, so 
+        they can be skipped in the rest of the partitioning.
+\Expl}
+Swap(A[mid], A[right-1]) // put median in A[right-1]
+pivot <- A[right-1]
+\Expl{  Using the median of the left, right and middle elements for the
+        pivot leads to very good performance for sorted and reverse sorted
+        inputs, and the theoretical worse case is rarely encountered.
+\Expl}
+\Code}
+
+\Code{
+SortLMR
+mid <- (left+right)/2 // index of middle element
+if A[left] > A[mid]
+\In{
+    Swap(A[left], A[mid])
+\In}
+if A[mid] > A[right]
+\In{
+    Swap(A[right], A[mid])
+    if A[left] > A[mid]
+    \In{
+        Swap(A[left], A[mid])
+    \In}
+    // now A[left] <= A[mid] <= A[right]
+\In}
+\Code}
+
+\Code{
+Partition
+Set index i at left the of array segment and j at the right    \Ref init_iAndj 
+\Expl{  i scans from left to right stopping at large elements and
+        j scans from right to left stopping at small elements.
+\Expl}
+while i < j
+\Expl{  When the indices cross, all the large elements at the left of
+        the array segment have been swapped with small elements from the
+        right of the array segment. The coding here can be simplified 
+        if we use "break" or similar to exit from this loop.
+\Expl}
+\In{
+    Repeatedly increment i until A[i] >= pivot
+    \Expl{  Stopping at elements equal to the pivot results in better
+            performance when there are many equal elements and because
+            the pivot is in A[right] this also acts as a sentinel so we 
+            don't increment beyond the right of the array segment.
+    \Expl}
+    Repeatedly decrement j until A[j] <= pivot or j < i
+    \Expl{  Stopping at elements equal to the pivot results in better
+            performance when there are many equal elements. If the 
+            indices cross we exit the outer loop; this also stops us 
+            decrementing beyond the left of the array segment.
+    \Expl}
+    if j > i
+    \Expl{  If the indices cross, we exit the loop.
+    \Expl}
+    \In{
+        swap(A[i], A[j])
+        \Expl{  Swap the larger element (A[i]) with the smaller 
+                element (A[j]).
+        \Expl}
+    \In}
+\In}
+Put the pivot in its final place    \Ref SwapP 
+\Code}
+
+\Code{
+init_iAndj
+i <- left
+\Expl{  i is incremented before use, so A[left+1] is the first
+        element in the left to right scan (A[left] <= pivot already).
+\Expl}
+j <- right - 1
+\Expl{  j is decremented before use, so A[right-2] is the first
+        element in the right to left scan (A[right-1] is the pivot).
+\Expl}
+\Code}
+
+\Code{
+SwapP
+swap(A[i], A[right])
+\Expl{  The pivot element, in A[right], is swapped with A[i]. All
+        elements to the left of A[i] must be less then or equal to
+        the pivot and A[i] plus all elements to its right must be
+        greater than or equal to the pivot.
+\Expl}
+\Code}
+
+\Note{
+// heapsort/quicksort/...
+// C code pretty much equivalent to pseudocode version for testing purposes
+
+// pick ONE of the following:
+// #define HEAPSORT
+#define QUICKSORT // some version of quicksort
+
+#ifdef QUICKSORT
+// pick ONE of the following:
+// #define QUICKSORT_S // simple version of quicksort
+#define QUICKSORT_M3 // median of 3 version of quicksort
+#endif // QUICKSORT
+
+#include <stdlib.h>
+#include <stdio.h>
+
+#define False 0
+#define True 1
+#define Swap(a,b) {int tmp; tmp=a; a=b; b=tmp;}
+
+#define Size 10
+int A[Size];
+// int i1; // for debugging
+// for (i1=1; i1 < Size; i1++) printf("%d ", A[i1]); printf("\n");
+
+#ifdef HEAPSORT
+int IndexOfLargestChild(int *A, int i, int n);
+void heapsort(int A[], int n);
+#endif // HEAPSORT
+
+#ifdef QUICKSORT
+int partition(int *A, int left, int right);
+void quicksort(int A[], int left, int right);
+#endif // QUICKSORT
+
+
+void
+main() {
+        int i = 1;
+        // read A[1]..A[Size-1] from stdin
+        while (i < Size)
+                scanf("%d", &A[i++]);
+#ifdef HEAPSORT
+        heapsort(A, Size-1);
+#endif // HEAPSORT
+#ifdef QUICKSORT
+        quicksort(A, 1, Size-1);
+#endif // QUICKSORT
+        for (i=1; i < Size; i++) printf("%d ", A[i]); printf("\n");
+}
+
+#ifdef HEAPSORT
+void
+heapsort(int A[], int n) { // sort A[1]..A[n]
+        int i, j, k, heap;
+
+        // BuildHeap
+        for (k = n/2; k>=1; k--) {
+                // DownHeap(A,k,n)
+                i = k;
+                heap = False;
+                while (i<=n/2 && !heap) {
+                        j = IndexOfLargestChild(A,i,n);
+                        if (A[i] >= A[j])
+                                heap = True;
+                        else {
+                                Swap(A[i], A[j])
+                                i = j;
+                        }
+                }
+        }
+        // SortHeap
+        while (n>1) {
+                Swap(A[n], A[1])
+                n = n-1;
+                // DownHeap(A,1,n)
+                i = 1;
+                heap = False;
+                while (i<=n/2 && !heap) {
+                        j = IndexOfLargestChild(A,i,n);
+                        if (A[i] >= A[j])
+                                heap = True;
+                        else {
+                                Swap(A[i], A[j])
+                                i = j;
+                        }
+                }
+        }
+}
+
+int
+IndexOfLargestChild(int *A, int i, int n) {
+        if ((2*i+1 <= n) && (A[2*i+1] > A[2*i]))
+                return 2*i+1;
+        else
+                return 2*i;
+}
+#endif // HEAPSORT
+
+#ifdef QUICKSORT
+// Sort array A[left]..A[right] in ascending order
+void
+quicksort(int A[], int left, int right) {
+        int i;
+
+        if (left < right) {
+                i = partition(A, left, right);
+printf("after partition %d %d returned %d:", left, right, i);
+{int i; for (i=1; i < Size; i++) printf("%d ", A[i]); printf("\n");}
+                quicksort(A, left, i-1);
+                quicksort(A, i+1, right);
+        }
+}
+
+int
+partition(int A[], int left, int right) {
+        int i, j;
+        int pivot;
+
+#ifdef QUICKSORT_S
+        pivot = A[right]; // choose pivot (simple version)
+        i = left-1;
+        j = right;
+#endif // QUICKSORT_S
+#ifdef QUICKSORT_M3
+    {int mid = (left+right)/2;
+    if (A[left] > A[mid])
+        Swap(A[left], A[mid]);
+    if (A[mid] > A[right]) {
+        Swap(A[right], A[mid]);
+        if (A[left] > A[mid])
+            Swap(A[left], A[mid]);
+    }
+    // now A[left] <= A[mid] <= A[right]
+    Swap(A[mid], A[right-1]);
+        pivot = A[right-1];
+        i = left;
+        j = right-1;
+printf("partition %d %d with mid %d:", left, right, mid);
+{int i; for (i=1; i < Size; i++) printf("%d ", A[i]); printf("\n");}
+    }
+#endif // QUICKSORT_M3
+        // invariant:
+        // A[left]..A[i] are all <= pivot
+        // A[j]..A[right-1] are all >= pivot
+        while (i < j) {
+                do {
+                        i++;
+                } while (A[i] < pivot); // note A[right] acts as a sentinel
+                do {
+                        j--;
+                } while (A[j] > pivot && j > i);
+                if (j > i) {
+                        Swap(A[i], A[j]);
+                }
+        }
+#ifdef QUICKSORT_S
+        Swap(A[i], A[right]);
+#endif // QUICKSORT_S
+#ifdef QUICKSORT_M3
+        Swap(A[i], A[right-1]);
+#endif // QUICKSORT_M3
+        return i;
+}
+#endif // QUICKSORT
+\Note}

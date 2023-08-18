@@ -1,0 +1,413 @@
+\Note{ REAL specification of Kruskal's algorithm
+\Note}
+
+\Note{ We also have Prim's algorithm which solves the same problem but
+is grouped with the graph search algorithms due to their similar
+structure. Kruskal's algorithm uses union-find, which we also have
+elsewhere.
+\Note}
+
+\Note{
+Suggested visualisation:
+
+For consistency with Prim's the graph could be layed out on a grid (not
+visible), used for determining edge cost.  Colours/... can distinguish
+edges selected for inclusion in the tree/forest (nodes that are conected
+by selected edges are implicitly in the same set). Could possibly change
+colour etc of nodes/edges at the point we check if an edge connects two
+different trees to highlight the tree each node is in. This may
+require some extra coding, eg, call find() for each node of the graph.
+
+Could possibly have multiple graph displays - the one above plus the
+previously implemented one for Prim's. The one above is probably
+preferred as it's visually clearer.
+
+Best also display the sorted list of edges (maybe we don't need to
+display all edges if there are lots - just the front few elements of the
+list with pairs of nodes plus cost, then "..." for the rest.
+
+  Edges:   (4,7) (1,3) (4,6) ...
+   cost      2     5     5
+\Note}
+
+\Overview{
+A minimal spanning tree of a weighted connected graph G is a connected
+subgraph of G that includes all the nodes but minimises the total
+weight of all the edges. It is guaranteed to be acyclic, so it is a
+tree, and there may be more that one (with the same minimal weight).
+
+Kruskal's algorithm can find a minimal spanning tree for a connected
+graph. If the graph is not connected, a minimum spanning tree is found
+for each connected component (a minimum spanning forest).  At each step
+there is a forest. Initially each node in the graph forms its own separate
+tree. Trees are joined/combined together to form larger trees by adding
+one edge at a time. Edges are considered in order of increasing weight or
+cost (thus it can be classified as a "greedy" algorithm). The algorithm
+checks if the edge is between two nodes that are in the same tree. If so,
+it is ignored, otherwise it is selected to combine the two trees into one.
+
+The forest representation is designed so the checking and combining is
+an instance of the "union-find" problem, for which there are efficient
+algorithms (we don't give details in this animation but present them
+elsewhere). As well as the set of selected edges (which is returned
+at the end), there is a set of sets of nodes that are connected by
+selected edges (the inner sets are the sets of nodes in each tree of
+the forest).  Selecting a new edge combines two trees and this is a
+union operation. Checkin if two nodes are in the same tree can be done
+by using the find operation for each node, returning a representative
+node for each tree, and seeing if they are the same.
+\Overview}
+
+\Code{
+Main
+Kruskal(G)  // Given a weighted graph G, return Selected, a set of edges
+            // representing a minimal spanning forest
+\In{
+    gsize <- number of nodes in G
+    Edges <- all edges in G // may involve sorting the edges
+    \Expl{ We display Edges as a list, sorted on weight. Other data
+        structures could be used but at each stage the edge with the
+        next lowest weight is removed and this should be efficient.
+    \Expl}
+    Selected <- empty set of edges
+    nselected <- 0
+    NodeSets <- set of singleton sets with each node in G
+    \Expl{ NodeSets is a set of sets of nodes that are connected by
+        selected edges (like a forest but without information about
+        which edges are used to connect the nodes of each tree)
+    \Expl}
+    while Edges is not empty and not all nodes are in the same tree \Ref While
+    \In{
+        e <- RemoveMin(Edges) // remove edge with minimum weight
+        (n1, n2) <- the nodes edge e connects
+        if n1 and n2 are in different trees \Ref DifferentTrees
+        \In{
+            Add e to Selected
+            nselected <- nselected + 1
+            union(NodeSets, n1, n2) // update NodeSets, combining n1&n2
+            \Expl{ This is a union-find operation that takes the union
+                of the sets containing n1 and n2, respectively, since
+                they are now connected by a selected edge.
+            \Expl}
+        \In}
+    \In}
+    return Selected
+\In}
+\Code}
+
+\Code{
+While
+    while Edges is not empty and nselected < gsize - 1
+    \Expl{ A tree with n nodes has n-1 edges, so if nselected = gsize-1,
+        all nodes are in the same tree. It's not necessary to perform
+        this check but it's easy and can save time in graphs with many
+        edges.
+    \Expl}
+\Code}
+
+\Code{
+DifferentTrees
+    if find(NodeSets, n1) != find(NodeSets, n2)
+    \Expl{ Find is a union-find operation that returns a representative
+        element of a set containing a given element. If the elements
+        returned for n1 and n2 are not equal, it means they are not
+        in the same set, so they are not connected by selected edges.
+    \Expl}
+\Code}
+
+
+\Note{
+/*
+Kruskal's MST algorithm
+
+Code is very messy and probably should be tested more...  Based on very
+messy graph search code (for graph input and other bits) with a bunch
+of stuff deleted and union-find code added.  The graph search code was
+based in Prim's code that was insensitive to graph layout.  Some the
+the other algorithms at least (and probably Prims) are much more easily
+visualised with a (preferably planar) graph where costs are sensitive
+to layout, based on distance between nodes, so here we input a graph
+based on layout and compute the cost matrix based on that.  The matrix
+representation is probably not the best for practical implementations
+(particularly Kruskal's) and its a bit of a pain for input of sparse
+graphs but is ok for the animations and testing the code.
+
+Each node n has a position on a 2D grid given by xpos[n] and ypos[n];
+these are input and used to compute weights and heuristic values (for the
+algorithms that use them) (the weights in the input matrix are ignored,
+except zero means no edge) - either Manhattan distance or straight line
+(Euclidean) distance, rounded to an integer.
+
+LAZY coding - see below
+*/
+
+// Currently uses LAZY coding so we can simply output the graph with
+// just selected nodes at the end.  This means we can't use the quick
+// test to see if all nodes are in the same set - we need to examine
+// each edge in the main loop. AIA version should include the quick
+// check, not the LAZY version!
+#define LAZY
+
+////////////////////////////////////////
+// union-find (from ufind.c)
+////////////////////////////////////////
+
+#include<stdio.h>
+#include<stdlib.h>
+
+#define demand(fact, remark)\
+    {   if (!(fact))\
+        {   fprintf(stderr, "%s\n", remark); exit(1);   }\
+    }
+
+#define SIZE 20    // (max) size of set we are partitioning
+int parent[SIZE];  // parent for each node
+int rank[SIZE];    // rank for each node
+#ifdef NOCOMPRESS       
+int compresspaths = 0;
+#else
+int compresspaths = 1;
+#endif
+
+// add operation; here we add all the elements in the array
+// at the start, don't keep track whats in the set and don't
+// expand the array
+// Might be better to store max, and have int add(void)
+void
+add(int n) {
+    demand(n < SIZE, "too big!");
+    parent[n] = n;
+    rank[n] = 0;
+}
+
+// find operation
+int
+find(int n) {
+    while (parent[n] != n){
+        // we want to compress paths in some way, eg path halving as
+        // done here but might want the option of avoiding it so
+        // students can see what happens without it
+        if (compresspaths)
+                parent[n] = parent[parent[n]];
+        n = parent[n];
+    }
+    return n;
+}
+
+// union operation, called merge since union is a C keyword
+void
+merge(int n, int m) {
+    n = find(n);
+    m = find(m);
+    if (n == m) // in same set - nothing to do
+        return;
+    if (rank[n] > rank[m]) { // if n a larger tree, swap n and m
+        int tmp = m;
+        m = n;
+        n = tmp;
+    }
+    parent[n] = m; // make smaller tree (n) a subtree of larger (m)
+    if (rank[n] == rank[m]) // adjust size (rank) of new root
+        rank[m]++;
+    return;
+}
+ 
+////////////////////////////////////////
+// from gsearch.c, mangled further
+////////////////////////////////////////
+
+// WEIGHT is #defined for different versions of edge weights:
+// 0 - weights as in input
+// 1 - Manhattan
+// 2 - Euclidean
+#define W_IN 0
+#define MANHATTAN 1
+#define EUCLID 2
+#ifndef WEIGHT
+    #define WEIGHT EUCLID // default is Euclidean
+#endif
+
+#include<math.h>
+
+#define MAXSIZE 21  // max number of vertices + 1 (0 unused for nodes)
+typedef int vertex;
+
+int graphsize;     // The number of vertices (<= MAXSIZE)
+int xpos[MAXSIZE]; // x coordinate of vertex
+int ypos[MAXSIZE]; // y coordinate of vertex
+int weight[MAXSIZE][MAXSIZE]; // edge weights computed from from xpos,ypos
+
+#define MAXEDGES 200 // max number of edges allowed
+
+// list of edges represented by two arrays of nodes plus
+// indices of first and last edge in list
+int edgesn1[MAXEDGES], edgesn2[MAXEDGES];
+int firstedge, lastedge;
+
+// set of selected edges represented by a flag for each edge in list
+int selected[MAXEDGES], nselected;
+
+// Manhattan distance between nodes
+int
+manhattan(int i, int j) {
+    return abs(xpos[i] - xpos[j]) + abs(ypos[i] - ypos[j]);
+}
+
+// Euclidean (straight line) distance between nodes (converted to int)
+int
+euclid(int i, int j) {
+    int dx = xpos[i]-xpos[j];
+    int dy = ypos[i]-ypos[j];
+    // rounding down may cause inadmissibility in A*
+    //return (int)floor(0.5 + sqrt((double)(dx*dx + dy*dy)));
+    return (int)ceil(sqrt((double)(dx*dx + dy*dy)));
+}
+
+// (possibly) recompute edge weight weight[i][j]
+int
+weight_fn(int i, int j) {
+#if WEIGHT==W_IN // use weights from input
+    return weight[i][j];
+#elif WEIGHT==MANHATTAN // use manhattan distance
+    return manhattan(i, j);
+#else // default to EUCLID
+    return euclid(i, j);
+#endif
+}
+
+// sort edge list
+void
+e_sort() {
+    int i, j, n1, n2, c;
+    for (i = 1; i<=lastedge; i++) {
+        n1 = edgesn1[i];
+        n2 = edgesn2[i];
+        c = weight[n1][n2];
+        for (j = i-1; j >= 0 &&
+                    c < weight[edgesn1[j]][edgesn2[j]]; j--) {
+            edgesn1[j+1] = edgesn1[j];
+            edgesn2[j+1] = edgesn2[j];
+        }
+        edgesn1[j+1] = n1;
+        edgesn2[j+1] = n2;
+    }
+} 
+
+void
+alg(void) {
+    vertex n, n1, n2;
+    int i, j, e;
+
+    firstedge = 0;
+    lastedge = -1;
+    // scan through upper triangle of matrix, inserting edges into list
+    for (i=1; i <= graphsize; i++) {
+        for (j=i+1; j <= graphsize; j++) {
+            if (weight[i][j]) {
+                lastedge++;
+                edgesn1[lastedge] = i;
+                edgesn2[lastedge] = j;
+            }
+        }
+    }
+    e_sort(); // sort edges
+    for (n=0; n<=lastedge; n++) {
+        selected[n] = 0;
+    }
+    nselected = 0;
+#ifdef LAZY
+    while (firstedge <= lastedge) {
+#else
+    while (firstedge <= lastedge && nselected < graphsize-1) { // AIA version
+#endif // LAZY
+        e = firstedge++;
+        n1 = edgesn1[e];
+        n2 = edgesn2[e];
+        if (find(n1) != find(n2)) {
+            // printf("Edge %d,%d selected\n", n1, n2);
+            selected[e] = 1;
+            nselected++;
+            merge(n1, n2);
+        } else {
+            // LAZY: main prints graph at end for other algorithms so
+            // we do the same here.  Easier to smash the graph than
+            // use selected[]
+            weight[n2][n1] =
+            weight[n1][n2] = 0; // smash graph for consistent output
+        }
+    }
+}
+
+int
+main() {
+    int i, j, w;
+    // read number of nodes
+    scanf("%d",&graphsize);
+    // read x-y coordinates of nodes
+    for (i=1; i<=graphsize; i++)
+        scanf("%d %d", &xpos[i], &ypos[i]);
+    // read edge matrix (replace non-zero weights by computed ones)
+    // XXX might be better to have edge list
+    for (i=1; i<=graphsize; i++)
+        for (j=1; j<=graphsize; j++) {
+            scanf("%d", &w);
+            if (w != 0) {
+                weight[i][j] = w;
+                weight[j][i] =                  // make matrix symmetric
+                weight[i][j] = weight_fn(i, j); // recompute weight
+            }
+        }
+
+    printf("Weighted graph:\n");
+    for (i=1; i<=graphsize; i++) {
+        for (j=1; j<=graphsize; j++)
+            printf("%3d ", weight[i][j]);
+        printf("\n");
+    }
+
+    // init union-find array
+    for (i = 0; i <= graphsize; i++)
+        add(i);
+    alg();
+    printf("Result:\n");
+    for (i=1; i<=graphsize; i++) {
+        for (j=1; j<=graphsize; j++)
+            // could scan through selected[] but we smash the graph
+            printf("%3d ", weight[i][j]);
+        printf("\n");
+    }
+
+    return 0;
+}
+ 
+/* Example of test input with 5 vertices (must be less than MAXSIZE):
+
+5
+1 1
+1 5
+6 5
+2 5
+3 3
+0  2  6  0  0
+2  0  6  5  7
+6  6  0  1  4
+0  5  1  0  3
+0  7  4  3  0
+
+This yields the following output:
+
+Weighted graph:
+  0   4   7   0   0 
+  4   0   5   1   3 
+  7   5   0   4   4 
+  0   1   4   0   3 
+  0   3   4   3   0 
+Result:
+  0   4   0   0   0 
+  4   0   0   1   3 
+  0   0   0   4   0 
+  0   1   4   0   0 
+  0   3   0   0   0
+*/
+\Note}
+
