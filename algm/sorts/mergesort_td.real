@@ -2,8 +2,50 @@
 
 \Note}
 
+\Note{ Overview edited Linda 31 Aug 2023
+\Note}
+
 \Overview{
-XXX
+Mergesort is a sorting algorithm that comes in a few different "flavours".
+The version of mergesort shown in this module is "top-down" mergesort, 
+a recursive sorting algorithm.
+
+In top-down mergesort, the unsorted records are recursively divided into left-half 
+and right-half, without regard to the value of the items. The division continues recursively 
+until each half contains only one record. Rewinding the recursion, 
+we merge the subfiles on the left, starting with the two leftmost
+one-record files (left- and right-side of the subfile of two records) into
+a single file in which the records are in order. This merge requires  
+one key comparison. We then merge the right-hand side one-record files, with one key comparison. 
+Then we merge the two two-record files to form one four-record file, requiring three key comparisons, 
+and continue this merge until the left-half of the original file is in sorted order.  
+We then follow the same recursive procedure on the right-hand side of the file.
+
+Because the splitting of files doesn't require any key comparisons,
+but the merging does require key comparison and is therefore more costly, 
+this strategy can be thought of as "easy split-hard merge", in contrast to Quicksort, 
+which is "hard split-easy merge".
+
+Because there are log n splits of the file, and a maximum of n key comparisons at each 
+level of recursion, the time complexity of mergesort is O(n log n).  The vanilla-flavored version
+of top-down mergesort
+shown in this module does not adapt to sortedness in the file, so it is  θ(n log  n), that is, 
+it is bounded on both the top of the bottom by n log n. 
+Natural mergesort is a variant of mergesort that 
+takes advantage of the initial "sortedness" of a collection of 
+records to form initial sorted "runs" that may be larger than the single-record starting point in
+vanilla top-down mergesort. 
+
+
+There is also a "bottom-up" version of mergesort, in which the first pass through the file
+is to mergesort the first two data items, by comparing keys, then the next two, etc.  
+At the end of this first pass the next round of merging merges these files of two 
+data items into files of four data items, using three or fewer key comparisons, and so on.
+The time complexity of "bottom-up" mergesort is also O(n log n).  
+
+Both "top-down" and "bottom-up" mergesort are stable, that is, equal keys end up in the same order
+in the output that they were in in the input.  One drawback of mergesort is that it requires
+O(n) extra space.    
 \Overview}
 
 
