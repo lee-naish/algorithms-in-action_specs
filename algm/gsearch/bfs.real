@@ -49,11 +49,6 @@ algorithms). Eg:
 
 \Overview{
 
-\Note{XXX Lee: I've changed the order here, to put the specific (BFS)
-before the general (related algorithms), as a hook for student attention. 
-See what you think.
-\Note}
-
 Breadth first search (BFS) for graphs can be used to find a path from
 a single start node to either a single end node; to one of several end
 nodes; or to all nodes that are connected to the start node, depending on the termination
@@ -67,9 +62,6 @@ structure.  Others of these algorithms work with weighted graphs (with positive 
 for all edges), where the aim is to find the least cost path(s), while Prim's
 and Kruskal's algorithms find a minumum spanning tree of the graph (the least cost 
 path that connects all edges).  
-
-\Note{XXX Lee How could we include DFS in the above description of other algorithms?
-\Note}
 
 These graph search algorithms can be used for both directed
 and undirected graphs; in AIA we use undirected graphs for simplicity.
