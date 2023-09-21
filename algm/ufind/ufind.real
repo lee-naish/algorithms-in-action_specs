@@ -67,7 +67,7 @@ how much this aspect of the algorithm reduces tree height.
 Find
 Find(n) // return root of tree containing n
 \In{
-    while parent[n] != n // while we are not at the root
+    while n != parent[n]  // while we are not at the root
     \Note{ Could keep tree representation more abstract but I think its
             best to be up-front with array representation and how roots
             are distinguished
@@ -107,7 +107,9 @@ Union(n, m) // merge/union the subsets containing n and m, respectively
     n <- Find(n)
     m <- Find(m)
     if n == m // in same subset already - nothing to do
+        \In{
         return
+        \In}
     swap n and m if needed to ensure m is the "taller" subtree \Ref Maybe_swap
     parent[n] = m // add the shorter subtree (n) to the taller one (m)
     \Expl{ This sometimes increases the height of the resulting tree but
@@ -128,7 +130,9 @@ Maybe_swap
                 bound on the height. The actual height may be less due
                 to paths being shortened in Find.
         \Expl} 
+        \In{
         swap(n, m)
+        \In}
 \Code}
 
 \Code{
@@ -138,9 +142,11 @@ Adjust_rank
                 doesn't change, but if the heights were equal the new height
                 of m increases by one.
         \Expl}
+        \In{
         rank[m] <- rank[m] + 1
         \Note{ Should we use ++ or "increment"???
         \Note}
+        \In}
 \Code}
 
 \Code{
