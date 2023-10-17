@@ -28,7 +28,11 @@ Draft, \today
 
 The main purpose of this document is to define a language for
 specifying how an algorithm is to be displayed in Algorithms in Action
-(AIA). Those with expertise in algorithms and teaching can use this
+(AIA).
+Note: this content has been moved to the AIA wiki,
+\texttt{https://github.com/algorithms-in-action/algorithms-in-action.github.io.wiki.git}
+which is more up to date.
+Those with expertise in algorithms and teaching can use this
 language to communicate requirements to AIA developers.  We have named
 the language Real, for {\it Refinement Explanation Animation Language}.
 The language shows pseudocode, explanations, and the desired breakdown of
@@ -116,7 +120,7 @@ End of an explanation. All text between the start and the
 end of the explanation (plus any trailing newline) is not 
 included in the displayed pseudocode
 (but is accessible {\it via} the mechanism chosen for showing explanations).
- Any trailing newline character is also ignored in the display.
+Any trailing newline character is also ignored in the display.
 
 \item{\verb~\In{~:}
 Used within code blocks to specify deeper indentation.
@@ -148,7 +152,7 @@ Similarly, indentations outside of a segment between {\verb~\In{~} and
 
 Additional signals and identifiers for linking in animation code will
 almost certainly be necessary, but are not part of Real. For example,
-the current AIA code uses \verb@\B@ followed by a number to indicate a
+the current AIA code uses \verb@\B@ followed by a string to indicate a
 ``bookmark'' used in the animation code.
 
 \section{Tips for writing Real specifications}
