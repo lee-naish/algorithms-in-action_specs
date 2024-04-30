@@ -48,6 +48,13 @@ in the output that they were in in the input.  One drawback of mergesort is that
 O(n) extra space.    
 \Overview}
 
+\Note{
+Animation should be similar to quicksort, showing stack, segment we are
+working on etc.  Need extra B array for merge, with index vars for A and
+B: left, mid, right, ap1, ap2, bp.  Maybe color element as they are
+moved from A to B.
+\Note} 
+
 
 \Code{
 Main
@@ -62,12 +69,12 @@ Mergesort(A, left, right)
     \Expl}
     \In{
         mid <- (left + right)/2
-        Mergesort first half, A[left]..A[mid]    \Ref MergesortL
+        sort first half, A[left]..A[mid]    \Ref MergesortL
         \Expl{ Sort elements in the first half of the array segment
         \Expl}
         \Note{ This should be animated in one step if not expanded
         \Note}
-        Mergesort second half, A[mid+1]..A[right]    \Ref MergesortR
+        sort second half, A[mid+1]..A[right]    \Ref MergesortR
         \Expl{ Sort elements in the second half of the array segment
         \Expl}
         \Note{ This should be animated in one step if not expanded
@@ -75,20 +82,29 @@ Mergesort(A, left, right)
         Merge the two sorted halves, with the result in A \Ref MergeCopy
         \Expl}
     \In}
+    // Done
+    \Note{ Good to have this as a step in animation to clarify recursion
+           (especially the base case), plus clean up stack display at end
+    \Note}
 \Code}
 
 \Code{
 MergesortL
-    Mergesort(A, left, mid)
-    \Note{ Recursive call should be animated if this is expanded
+    \Note{ Recursive call should be animated if this is expanded, like
+      quicksort.  We add the comment below to pause the animation,
+      making recursion clearer, and the animation also needs an extra
+      "chunk" at the right recursion level if we hit the "back" button.
     \Note}
+    // *recursively* sort the first half
+    Mergesort(A, left, mid)
 \Code}
 
 \Code{
 MergesortR
-    Mergesort(A, mid + 1, right)
-    \Note{ Recursive call should be animated if this is expanded
+    \Note{ See MergesortL note
     \Note}
+    // *recursively* sort the second half
+    Mergesort(A, mid + 1, right)
 \Code}
 
 \Code{

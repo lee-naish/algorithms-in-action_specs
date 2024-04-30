@@ -221,6 +221,10 @@ Hash1
 Pick this OR the double hashing version below
 Need to separate these into two files at some point most likely - the
 overview will be a bit different also
+Alternatively, have a single version with radio buttons to select, like
+union-find path compression (doesn't fit so well if we have other
+hashing methods such as chaining, quadratic residue), though we could
+have "hashing (open addressing)" and "hashing (chaining)"
 \Note}
 \Note{ This is used for both Insert and Search - the implementation may
 need to copy it for animation purposes

@@ -1,30 +1,54 @@
 
-234 trees (Real ready to go)
+Prim's to new graph layout + common structure (Real done, might need
+minor fixes)
+
+Warshall to new graph layout
+
+Kruskal's (Real done)
+
+Recursive DFS (Real done)
+
+Hashing (Real mostly done for LP and double hashing)
+
+mergesort for arrays TD, BUP (Real need overview for BUP)
+
+Real needed for the following:
+
+other balanced trees?
+
+mergesort for lists?
+
+minimax, alpha-beta? 
+
+
+pre 2023s2 ---------------------------------------------------------------
+
+DONE: 234 trees (Real ready to go)
 then...?
 
-Union-find (Real ready to go)
+UF DONE: Union-find (Real ready to go)
 then Kruscal's? or same group does Union-find and 234 trees and another does
 Kruscal's (eg graph layout group)?
 
 Hashing (Real status?)
 
-Quicksort recursion
+QS DONE: Quicksort recursion
 then mergesort TD/BUP... (Real needs to be done)
 (idea is to start with ~working code and get the recursive stuff working
 better because a very similar structure is used for TD mergesort)
 
-Graph layout - can start with current version of Prim's
+LAYOUT DONE: Graph layout - can start with current version of Prim's
 then...? New version of Prim's perhaps and document interface/conversion
 well??? New version of Prim's should be like Dijkstra etc
 
-Graph search etc: Prim's, BFS, DFS?, Dijkstra, A*
+DONE (not Prims): Graph search etc: Prim's, BFS, DFS?, Dijkstra, A*
 (could possibly start with current graph layout from Prim's then later
 convert; leave Prim's for graph layout group; if so, maybe start with
 Dijkstra)
 
 
 For intern:
-Bug fixing etc: forward then back == noop, visibility of vars etc that are not
+DONE: Bug fixing etc: forward then back == noop, visibility of vars etc that are not
 visible in pseudocode, ...? (may need more data structures/methods/guidelines)
 
 

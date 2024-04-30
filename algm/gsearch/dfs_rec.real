@@ -1,0 +1,135 @@
+\Note{  REAL specification of depth first search of graphs, recursive
+version
+\Note}
+
+\Note{ There are several graph search algorithms that lead up to A*
+and we present them in a consistent way to show their similarities.
+It includes an iterative DFS coding; this recursive coding is somewhat
+simpler but visualisation should emphasise similarities with the
+iterative version as much as possible.
+\Note}
+
+\Note{
+Visualisation: same as iterative version without Finalised + call stack
+made explicit
+
+    i            1      2      3      ...
+    Parent[i]
+
+    Call stack (n,p):
+
+
+Use (variable length) array for stack, next to be selected at the left?
+It probably shouldn't align with the table above and should be
+differentiated somehow as the Nodes stack elements are not related to
+the i indices above (unlike the way we display priority queues in other
+algorithms). Eg:
+
+       Nodes stack:                         4   3  5  8
+\Note}
+
+\Overview{
+
+Depth first search (DFS) for graphs can be used to find a path from a
+single start node to either a single end node, one of several end nodes,
+or all nodes that are connected (depending on the termination condition;
+this animation does not support multiple end nodes).  Elsewhere we
+have an iterative algorithm, coded with an explicit stack in a way that
+emphasises common structure with several other algorithms.  Here we use
+a recursive coding which is more concise and the animation shows the
+(implicit) call stack.  The coding can be even similer if we are not
+interested in returning the path(s) but just want to check the existence
+of a path or "visit" every node in the raph component.  These graph search
+algorithms can be used for both directed and undirected graphs; here we
+use undirected graphs for simplicity.  The way paths are represented
+is for each node to point to the previous node in the path, so paths
+are actually reversed in this representation and we have a tree with
+"parent" pointers and the start node at the root. This allows multiple
+nodes to each have a single path returned.  Here we number all nodes
+for simplicity so we can use arrays for the graph representation, the
+parent pointers, etc.
+
+The recursive part of DFS is called with a node n and a parent node
+(initially the start node and zero, to indicate no parent). If
+the parent of n has already been assigned we do nothing.  Otherwise,
+we assign the parent of n and recursively call DFS on all neighbouring
+nodes, with n as the parent.
+\Overview}
+
+\Code{
+Main
+DFS(G, s) // Given a graph G find a path from start node s to an
+        // end node.  It is assumed the end node(s) are defined
+        // separately; if there are no end nodes, paths to all connected
+        // nodes are found. Nodes are numbered 1..nmax. Returns the Parent
+        // array, which gives the previous node in the path from s to the
+        // node i. Parent[s] = 0 and parents of unvisited nodes are null.
+\In{
+    initialise all parents to null
+    \Expl{ We initialise to some special value so we can later check if a
+        parent has been assigned (we display null as an empty cell).
+    \Expl}
+    result <- DFS1(G, s, 0) // recursive DFS with zero as parent node
+    return result
+    \Expl{ If there can be several end nodes we may want to
+        return which one is found as well as the Parent array for
+        successful searches.  Here we highlight the path found in
+        the Parent array.
+    \Expl}
+\In}
+//======================================================================
+\Note{
+    Whenever DFS1 is called, we should push (n,p) onto the stack displayed
+    in the animation; pop stack on return.
+\Note}
+DFS1(G, n, p) // Search from node n using parent node p. This visits all
+        // nodes connected to n, ignoring nodes with parents already
+        // assigned (as if these nodes have been removed from G).
+\In{
+    if Parent[n] == null // Ignore n if Parent[n] has been assigned
+    \In{
+        Parent[n] <- p
+        if is_end_node(n)
+        \In{
+            return FOUND // Success!
+            \Expl{ If there can be several end nodes we may want to
+                return which one is found as well as the Parent array.
+            \Expl}
+        \In}
+        for each node m neighbouring n // G has edge from n to m
+        \Note{ When this is first reached, all neighbouring nodes
+            should change to the "frontier" colour (see iterative DFS)
+            unless they are already finalised (have parent assigned)
+            and whenever this line is reached the n-m edge should be
+            highlighted. For iterative DFS, the m nodes are all pushed onto
+            the stack then the last one is popped off and visited if
+            required. For this recursive version we don't have an
+            explicit stack but have an implicit stack that has a
+            "continuation" that will look at the subsequent m nodes.
+        \Note}
+        \Expl{ Any order of considering the nodes is ok.  Here we
+            consider the largest node numbers first, which gives the
+            same traversal order as the iterative coding.
+        \Expl}
+        \In{
+            search G starting from m, with n as the parent \Ref RECDFS
+        \In}
+    \In}
+    return NOTFOUND  // no end node found
+\In}
+\Code}
+
+\Code{
+RECDFS
+    // *recursively* call DFS1 and return if successful
+    if DFS1(G, m, n) = FOUND
+    \In{
+        return FOUND // return if end node found, otherwise keep searching
+    \In}
+\Code}
+
+\Note{
+We have C code that implements Prim's plus several graph search
+algorithms, depending on compilation flags.
+\Note}
+

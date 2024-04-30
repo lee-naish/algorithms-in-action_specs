@@ -18,23 +18,23 @@ colour etc of nodes/edges at the point we check if an edge connects two
 different trees to highlight the tree each node is in. This may
 require some extra coding, eg, call find() for each node of the graph.
 
-Could possibly have multiple graph displays - the one above plus the
-previously implemented one for Prim's. The one above is probably
-preferred as it's visually clearer.
-
 Best also display the sorted list of edges (maybe we don't need to
 display all edges if there are lots - just the front few elements of the
 list with pairs of nodes plus cost, then "..." for the rest.
 
-  Edges:   (4,7) (1,3) (4,6) ...
+   Edge    (4,7) (1,3) (4,6) ...
    cost      2     5     5
+
+Best(?) also display find(n) for each node:
+     Node    1 2 3 4 5
+   NodeSets  1 4 4 4 5
 \Note}
 
 \Overview{
 A minimal spanning tree of a weighted connected graph G is a connected
 subgraph of G that includes all the nodes but minimises the total
 weight of all the edges. It is guaranteed to be acyclic, so it is a
-tree, and there may be more that one (with the same minimal weight).
+tree, and there may be more than one (with the same minimal weight).
 
 Kruskal's algorithm can find a minimal spanning tree for a connected
 graph. If the graph is not connected, a minimum spanning tree is found
@@ -53,7 +53,7 @@ elsewhere). As well as the set of selected edges (which is returned
 at the end), there is a set of sets of nodes that are connected by
 selected edges (the inner sets are the sets of nodes in each tree of
 the forest).  Selecting a new edge combines two trees and this is a
-union operation. Checkin if two nodes are in the same tree can be done
+union operation. Checking if two nodes are in the same tree can be done
 by using the find operation for each node, returning a representative
 node for each tree, and seeing if they are the same.
 \Overview}

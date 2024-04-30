@@ -4,6 +4,7 @@ Graph search algorithms:
     BFS
     Dijkstra's shortest path
     A*
+    DFS - recursive
 Plus
     Prims MST algorithm
 
@@ -37,6 +38,7 @@ alias gca11='gcc -DALGORITHM=4 -DWEIGHT=1 -DHEURISTIC=1 gsearch.c -lm'
 alias gca22='gcc -DALGORITHM=4 -DWEIGHT=2 -DHEURISTIC=2 gsearch.c -lm'
 alias gca21='gcc -DALGORITHM=4 -DWEIGHT=2 -DHEURISTIC=1 gsearch.c -lm'
 alias gca12='gcc -DALGORITHM=4 -DWEIGHT=1 -DHEURISTIC=2 gsearch.c -lm'
+alias gcdr='gcc -DALGORITHM=5 gsearch.c -lm'
 
 */
 
@@ -46,11 +48,13 @@ alias gca12='gcc -DALGORITHM=4 -DWEIGHT=1 -DHEURISTIC=2 gsearch.c -lm'
 // 2 - DFS
 // 3 - Dijkstra's shortest path
 // 4 - A*
+// 5 - DFS - recursive
 #define PRIM 0
 #define BFS 1
 #define DFS 2
 #define DIJK 3
 #define ASTAR 4
+#define DFSR 5
 #ifndef ALGORITHM
     #define ALGORITHM PRIM // default is Prim's MST
 #endif
@@ -298,6 +302,41 @@ task_completed(int n) {
 #endif
 }
 
+// recursive dfs coded separately from others - just driver code is the
+// same
+int
+dfs1(vertex n, vertex p) {
+    int m, w;
+    if (parent[n] == -1) {
+       parent[n] = p;
+printf("Finalised %d with parent %d, cost %d heur %d\n", n, parent[n], cost[n], heur(n));
+       if (end[n])
+            return 1;
+        for (m=graphsize; m>=1; m--) {  // for each node m ...
+            w = weight[n][m];
+            if (w > 0) {                // that is a neighbour of n
+                if (dfs1(m, n))
+                    return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+// top level recursive dfs call
+void
+dfs(void) {
+    int i;
+    for (i=1; i<=graphsize; i++) {
+        parent[i] = -1;
+    }
+    if (dfs1(startnode, 0))
+        printf("success\n");
+    else
+        printf("failure\n");
+}
+
+
 
 void
 alg(void) {
@@ -383,7 +422,11 @@ main() {
         printf("\n");
     }
 
+#ifdef DFSR // recursive DFS has different structure
+    dfs();
+#else
     alg();
+#endif
     // printf("MST:\n");
     printf("Result:\n");
     for (i=1; i<=graphsize; i++) {
