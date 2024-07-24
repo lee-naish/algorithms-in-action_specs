@@ -18,14 +18,6 @@ made explicit
 
     Call stack (n,p):
 
-
-Use (variable length) array for stack, next to be selected at the left?
-It probably shouldn't align with the table above and should be
-differentiated somehow as the Nodes stack elements are not related to
-the i indices above (unlike the way we display priority queues in other
-algorithms). Eg:
-
-       Nodes stack:                         4   3  5  8
 \Note}
 
 \Overview{
@@ -100,6 +92,7 @@ DFS1(G, n, p) // Search from node n using parent node p. This visits all
         \Note{ When this is first reached, all neighbouring nodes
             should change to the "frontier" colour (see iterative DFS)
             unless they are already finalised (have parent assigned)
+            (might be best to have an extra data structure to support this)
             and whenever this line is reached the n-m edge should be
             highlighted. For iterative DFS, the m nodes are all pushed onto
             the stack then the last one is popped off and visited if

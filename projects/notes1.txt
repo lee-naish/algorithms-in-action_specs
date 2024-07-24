@@ -1,25 +1,43 @@
-
-Prim's to new graph layout + common structure (Real done, might need
-minor fixes)
-
-Warshall to new graph layout
-
-Kruskal's (Real done)
-
-Recursive DFS (Real done)
+Warshall to new graph layout (may also be issues with directed graphs
+since they haven't been tested)
 
 Hashing (Real mostly done for LP and double hashing)
 
-mergesort for arrays TD, BUP (Real need overview for BUP)
+mergesort for arrays BUP (Real + overview done + bookmarks for merge) -
+lots of overlap with mergesort
+
+Polish off current string searching algs
+
+Linked list support
+
+General stuff: colors, screen real-estate (eg, drop-down menu on
+left,...), flesh out "More" (links etc), slider for progress and/or back
+to start button.
 
 Real needed for the following:
 
 other balanced trees?
+AVL trees
+Splay trees
 
 mergesort for lists?
 
 minimax, alpha-beta? 
 
+Radix exchange sort (very similar to quicksort, might want to adjust
+stack a bit due to lack of gaps for pivot elements; can add same stack
+code for mergesort perhaps, depending on screen space)
+
+Distribution counting, Straight radix sort???
+
+
+Tries?
+
+Maxflow (naive/Ford-Fulkerson; relies on BFS/DFS)?
+
+---------------------------------------------------------------
+DONE: Kruskal's, Recursive DFS, mergesort for arrays TD,
+Prim's with new graph layout and common structure
 
 pre 2023s2 ---------------------------------------------------------------
 
