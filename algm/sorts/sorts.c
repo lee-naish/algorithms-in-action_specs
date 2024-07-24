@@ -5,8 +5,9 @@
 // XXX redo so we can compile with -D to select algorithm
 // #define HEAPSORT
 // #define QUICKSORT // some version of quicksort
-//#define MERGE_TD // top-down merge sort
-#define MERGE_BUP // bottom-up merge sort
+// #define MERGE_TD // top-down merge sort
+// #define MERGE_BUP // bottom-up merge sort
+#define MSD_RADIX // radix exchange sort
 
 #ifdef QUICKSORT
 // pick ONE of the following:
@@ -44,6 +45,11 @@ void mergesort_td(int A[], int left, int right);
 void mergesort_bup(int A[], int size);
 #endif // MERGE_BUP
 
+#ifdef MSD_RADIX
+int radix_partition(int *A, int left, int right, int mask);
+void msd_radix_sort(int A[], int left, int right, int mask);
+#endif // MSD_RADIX
+
 
 void
 main() {
@@ -57,6 +63,14 @@ main() {
 #ifdef QUICKSORT
         quicksort(A, 1, Size-1);
 #endif // QUICKSORT
+#ifdef MSD_RADIX
+        // XXX Generally we want a mask with just the top-most possible bit
+        // set; for testing we just something small.  For animation (and here)
+        // we could do a scan through the data and pick the largest used
+        // bit.
+        int mask = 32;
+        msd_radix_sort(A, 1, Size-1, mask);
+#endif // MSD_RADIX
 #ifdef MERGE_TD
         mergesort_td(A, 1, Size-1);
 #endif // MERGE_TD
@@ -114,6 +128,51 @@ IndexOfLargestChild(int *A, int i, int n) {
 }
 #endif // HEAPSORT
 
+#ifdef MSD_RADIX
+// Sort array A[left]..A[right] in ascending order
+void
+msd_radix_sort(int A[], int left, int right, int mask) {
+        int i;
+
+        if (left < right && mask > 0) {
+                i = radix_partition(A, left, right, mask);
+printf("after radix partition %4d %4d %4d %4d: ", mask, left, right, i);
+{int i; for (i=1; i < Size; i++) printf("%d ", A[i]); printf("\n");}
+                mask = mask>>1;
+                msd_radix_sort(A, left, i-1, mask);
+                msd_radix_sort(A, i, right, mask);
+        }
+}
+
+// partition A[left..right] into elements with 0 as mask bit and those
+// with 1 as mask bit; return index of first element with 1 as mask bit
+// (or right+1 if there are none)
+int
+radix_partition(int A[], int left, int right, int mask) {
+        int i, j;
+
+        // can we re-code to avoid out of bounds start?
+        // note we don't have sentinel at right
+        i = left-1;
+        j = right+1;
+        while (i < j) {
+                // scan right until a "big" element or we reach j
+                do {
+                        i++;
+                } while (j > i && !(A[i] & mask));
+                // scan left until a "small" element or we reach i
+                do {
+                        j--;
+                } while ((A[j] & mask) && j > i);
+                // we avoid using "break"
+                if (j > i) {
+                        Swap(A[i], A[j]);
+                }
+        }
+        return i;
+}
+#endif // MSD_RADIX
+
 #ifdef QUICKSORT
 // Sort array A[left]..A[right] in ascending order
 void
@@ -125,7 +184,7 @@ quicksort(int A[], int left, int right) {
 printf("after partition %d %d returned %d:", left, right, i);
 {int i; for (i=1; i < Size; i++) printf("%d ", A[i]); printf("\n");}
                 quicksort(A, left, i-1);
-                quicksort(A, i+1, right);
+                quicksort(A, i, right);
         }
 }
 
