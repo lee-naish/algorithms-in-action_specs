@@ -1,14 +1,27 @@
 Student project ideas for Sem 2 2025
 
-AVL tree polishing + maybe BST
-AVL: show recursion with boxes, change other highlighting, tree
-redrawing smoother, iterative???,...
-Recursive BST (same as AVL minus last two lines of code).
+----------------------------------
+AVL
+=AVL tree polishing: 
+===show recursion with boxes, 
+===change other highlighting, 
+===tree redrawing smoother, iterative???,...
+=Recursive BST (same as AVL minus last two lines of code).
+=Consistency between BST-AVL (iterative and recursive)
 ...
+
+
+----------------------------------
 
 "UI": main menu, list(s) of algorithms, colors
 
+----------------------------------
+
+
 Simple algorithms, eg, demo recursion, bad complexity
 
+
+
+----------------------------------
 World peace
 
