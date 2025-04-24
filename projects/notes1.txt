@@ -1,3 +1,42 @@
+Sem2 2024:
+
+--------------------------------------------------------------
+
+Team 6: AVL Trees
+
+AIA currently has algorithms animations of simple binary search trees
+and 234-trees (a more complex form of tree that remains balanced).
+AVL trees are a slightly modified version of binary search trees,
+with more information in each node.  The search code is identical to
+BST search but insertion code ensures trees stay (mostly) balanced,
+thus improving performance, particularly in the worst case.
+
+The clients would like this team to implement animation AVL trees, with
+search identical to the BST search and insertion having a similar look
+to BST insertion.  Optional further work may include other forms of
+trees such as splay trees.
+
+--------------------------------------------------------------
+
+Team 4: Bottom up merge sort 
+
+AIA currently has a reasonable animation of top down merge sort for
+arrays. This is a recursive algorithm.
+
+The clients would like this team to implement animation of bottom up
+merge sort, an algorithm that is iterative but uses the identical
+merge operation, so there is substantial common code.
+
+If this is completed successfully, the team could move on to other
+similar algorithms, such as natural merge sort (a variant of
+bottom up merge sort), and top down merge sort for lists (where lists
+are represented using arrays; this may be used by another team that is
+implementing animation of lists represented using pointers).
+
+--------------------------------------------------------------
+
+
+
 Warshall to new graph layout (may also be issues with directed graphs
 since they haven't been tested)
 

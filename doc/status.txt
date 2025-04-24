@@ -1,0 +1,42 @@
+================================================================
+
+AVL trees
+
+Last Reviewed
+Lee Thu 24 Apr 2025 14:03:25 AEST
+
+Pseudocode
+101%
+
+Inline Explanations
+Linda to review Thu 24 Apr 2025 14:15:28 AEST
+
+Animation
+70%
+Project candidate
+Recursion visualisation, tree animation,...
+Linda to add to Thu 24 Apr 2025 14:15:28 AEST
+
+Background
+101%
+
+Extra
+101%
+
+Instructions
+101%
+
+Misc
+Project candidate
+
+================================================================
+Algorithm_name
+Last Reviewed
+Pseudocode
+Inline Explanations
+Animation
+Background
+Extra
+Instructions
+Misc
+
