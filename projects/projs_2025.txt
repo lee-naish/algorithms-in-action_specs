@@ -2,23 +2,26 @@ Student project ideas for Sem 2 2025
 
 ----------------------------------
 AVL
-=AVL tree polishing: 
-===show recursion with boxes, 
-===change other highlighting, 
-===tree redrawing smoother, iterative???,...
-=Recursive BST (same as AVL minus last two lines of code).
-=Consistency between BST-AVL (iterative and recursive)
+==AVL tree polishing: 
+====show recursion with boxes, 
+====change other highlighting, 
+====tree redrawing smoother, iterative???,...
+==Recursive BST (same as AVL minus last two lines of code).
+==Consistency between BST-AVL (iterative and recursive)
 ...
 
 
 ----------------------------------
-
-"UI": main menu, list(s) of algorithms, colors
+"UI": 
+==main menu:
+====format
+====ability to hide algorithms in progress 
+==colors consistent (1) graph algorithms (2) throughout AIA
 
 ----------------------------------
-
-
-Simple algorithms, eg, demo recursion, bad complexity
+Simple algorithms
+==demonstrate recursion
+==demonstrate bad complexity, e.g. linear sorts, pre-prepared data input sets
 
 
 
