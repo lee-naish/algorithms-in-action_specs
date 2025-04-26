@@ -1,0 +1,896 @@
+Lee's To Do list - the place for quick notes etc
+Link: algorithms-in-action_specs/doc/Lee_TODO.txt
+See also algorithms-in-action_specs/doc/status.txt
+==================================================
+
+
+Select for showcase algms
+
+Think about projects: see algorithms-in-action_specs/projects/projs_2025.txt
+UI: start page, colours,...
+AVL: show recursion with boxes, change other highlighting, iterative???,...
+Recursive BST (same as AVL minus last two lines of code).
+Simpler algorithms?
+
+DONE Graph axes - to crowded for smallish graphs (max < 20)
+
+DONE (latter choice) MSD REX partition:
+Either keep current code and animate each step of i+j movement like QS (some
+work on branch REXpartition including passing in bookmark to where context
+is needed) OR change code so partition is more like quicksort: start i+j
+outside array segment and use pre- increment/decrement.
+
+Quicksort "ideal" input changes input data, others don't.  Maybe delete or
+re-code?
+
+Horspool (+BF) best remove i (etc) display at end? Done in
+GraphRendererRect/index.js???
+
+Horspool display m-j, i-j in more contexts, but not line i <- i + Shift[T[i]]?
+(see GraphRendererRect/index.js):
+
+DONE FOR NOW String search colors blue->green (uses graph -> fix graph node colors
+first or hack...) These use GraphTracerRect/GraphRendererRect - the only
+algorithms that do. Hacked GraphRendererRect/GraphRenderer.module.scss for
+now.
+DONE Horspool setZoom, setSize, Pattern+String label
+DONE Horspool (+BF) Success/failure message position
+DONE Horspool adjust m-j display position
+
+AVL bug: node 28 still highlighted when 56 insert starts:
+http://localhost:3000/?alg=AVLTree&mode=insertion&list=61,95,78,2,28,56,63,57,31,53&value=2
+
+UF 1 remains highlighted after it should(?) be for
+http://localhost:3000/?alg=unionFind&mode=union&union=1-2,3-4,2-4,1-5,6-8,3-6&value=2
+actually just confusing(?): parent[k] <- parent[parent[k]] (if enabled)
+takes three steps in aninamtion (maybe collapse last two?) maybe highlight
+edges?? Don't change highlight for node k?
+Maybe for while k != parent[k] line, if true, highlight k (apple)
+(ie last animation for that line; could highlight parent also)
+and if false just highlight
+node/parent (leaf?) (ie last animation for that line)
+
+DONE UF for find, first step should be Find(n) line, not if
+
+DONE UF background - need to spell out rank + path compression
+
+DONE (some) UF exercises
+
+DONE UF bug with find 1 if node is deep:
+http://localhost:3000/?alg=unionFind&mode=union&union=1-2,3-4,2-4,5-6,7-8,5-7,3-7,7-9,7-10&value=1
+
+
+DONE UF: zoom for trees display, instructions
+
+Colors:
+DONE (for now) Fix up named colors in global files
+DONE (for now) Fix colors in 1D arrays, 2D arrays, make consistent
+DONE Fix colors in TwoArray, make consistent (OK)
+DONE (could be brighter red/...) Fix colors in Mask, make consistent
+Fix colors in Graph, make consistent - uses apple etc but colorNode ,
+visitedN not consistent with selectedN colors for arrays - see
+GraphRenderer/GraphRenderer.module.scss etc
+Delete/Fix colors in arrayGraph, make consistent (not used???)
+
+Mergsort(s): use multiple assignments at start of merge?
+
+"SORT" -> "RESET" in various sorting algs (+ others?) + fix instructions
+
+DONE Add sorted increasing etc to all sorting algs
+
+Add sorted increasing etc to insert/search algs
+
+DONE Kruskal's + Warshalls: remove start node?
+
+DONE Mergesort BUP remove lower runlength display + size?
+
+DONE Mergesort BUP reconsider colours? Second run = blue, merged=green?
+
+DONE Revisit mergesort colors
+
+DONE Sorting instructions (+ others): slider bar, pause, step
+forwards/backwards, expand/contract, explanations, ...
+
+Get rid of "Instructions" heading(?), add stuff on navigating to other
+algorithms, share/URL input, ...
+
+DONE REXsort crash with
+89,31,66,98,74,88,74,34,76,27
+Expanded ok, collapsed not
+
+DONE msort_bup crash with expand all and last of odd numbered runs:
+http://localhost:3000/?alg=msort_arr_bup&mode=sort&list=1,42,16,1,10,4,19,5,3,9,17,37
+while ((left + runlength) <= size) { XXX should be <, like pseudocode!
+
+DONE msort_bup best add extra chunk for while left + runlength < size  before loop
+exit
+
+REX stuff
+
+DONE (kind of) Nice to display binary if we hover over A elements
+
+DONE Add sorted/reverse option (also for LSD/straight)?
+
+DONE Add more info: https://www.geeksforgeeks.org/msd-most-significant-digit-radix-sort/
+
+DONE Polish background
+
+DONE Good to display decimal as well as binary
+
+DONE mask <- maximum bit used doesn't display binary of max key
+
+DONE Stop at line 5?
+
+Quicksort: Show left+right at "if (left < right)"?
+
+DONE Revisit sorting colors: mergesort quite colorful now; quicksort + others less
+so.
+
+DONE Mergesort(s) final -> grey
+
+DONE Use color(?) to distinguish 2 partitions - like merge sort: peach for
+left-right initially, blank before partition (show left+right), as i,j
+scan turn elements peach and sky (blank elements between). Apple for
+where i,j stop then swap -> peach and sky. Avoid apple when pointers
+overlap - apple means out of (possibly) place (includes initial value
+before any tests). Better avoid apple; just use peach+sky?
+
+DONE For rex, similar (no grey pivot element but partition all grey after
+recursive sort).
+
+
+DONE Use color for straight radix sort - need 4 colors for the four digit values
+(+ apple for highlights?), add plum/...
+quite a few little changes as well
+
+DONE BUG with graph input: try to construct complete graph for DFS...
+OOPS... input 0,1 graph size not reset for edge matrix row length!
+
+DONE on return from left recursive call, active stack section not made red if
+right partition is empty - a bit confusing; not sure of best solution
+
+DONE Stack colours/...: hard to reconstruct recursion at end
+- maybe non-active lines should be grey for 0 elements and black? for 1
+  elements. Red with nothing below means heading down recursion. Red
+  with (grey) lines below means returning back to do second part. ?
+
+DONE if i not incremented, binary not updated
+DONE mask never updated
+DONE binary display not updated when left element highlighted, eg 4% at
+http://localhost:3000/?alg=radixSortMSD&mode=sort&list=30,20,78,51,12,2,49,43,33,12
+DONE highlights i-1 element/swaps i+1 element?/... highlight+i+j+swap not
+coordinated; some highlighting left, big values and not
+small(?) - confusing!
+DONE increment i line not highlighted (i increment with j line highlighted
+instead)
+DONE if j > i line never highlighted 
+DONE similarly inc i, dec j lines if not done
+DONE lines 8,9,10 -> line 8
+DONE Stack not visible initially (use more space for array+stack part)
+DONE Stack not visible until partition
+DONE // *Recursively* sort... needs i displayed
+DONE Return from recursive call should display left+right + mask
+DONE "// *Recursively* sort first part:" first-> second (or use right/...)
+barf with i out of range
+
+
+
+-----------------------------------------------
+BUP Merge sort (probably overlap with Nat MS)
+
+Make "right" vanish when no longer relevant
+
+DONE Number 1-n, not 2-n-1
+
+-----------------------------------------------
+Nat Merge sort
+
+DONE "it could be empty" -> add ";" or () etc "(possibly empty)"?
+
+-----------------------------------------------
+Hashing
+
+Change from larger size to smaller size should reset animation
+
+Larger tables with indices everywhere still a bit messy (IMHO)?
+
+Table too full for bulk inserts - extra chunk attempting insert should be
+removed - see "XXX better check enough space here and say too full"
+
+Display "Table expanded" rather than insert message at last reinsert
+
+deletions - put in stats?
+
+setZoom?, setSize only works at init...?  see
+render() in common/Renderer/index.js (newZoom stuff, size)
+setZoom in DataStructures/common/Tracer.jsx (this.newZoom, setTimeout)
+
+spaces between rows for second smallest table size, see
+Array/Array2DTracer.js set(), splitArray.rowHeader?
+
+Should we expand hash lines or just put in explanation?
+Similarly Choose increment?
+
+Add table size,dynamic to URL for hashing
+
+add [...] to chains for hover?
+
+Table expansion for chaining
+
+Dont show increment if not yet defined, etc
+
+DONE table.length <= PRIMES[POINTER_CUT_OFF] (< vs <= ??)
+DONE table.length is max index of occupied slot, not really the table length!
+DONE table is null barf http://localhost:3000/?alg=HashingLP&mode=insertion&list=1,46,37,20,2,48,44,31,43,5,13&value=2
+DONE i display wrong at increment line
+DONE Expansion with bulk insert
+DONE Check how full the table is should be displayed for bulk
+DONE Check deletions - put in stats, use in expansion/stop condition (currently
+doesn't count deletions in stop condition)?
+DONE "Table is quite full 8/23" (need to pass old table size to chunker!)
+DONE "Table is too full 10/10" http://localhost:3000/?alg=HashingLP&mode=insertion&list=1-6,46,37,20,2,48,44,31,43,5,13&value=2
+(total wrong with duplicates!)
+DONE A bit weird control flow if we resize empty table; maybe go to For each key
+k1 in OldT as last step of loop
+DONE bulk insertions and deletes+repeated keys
+DONE too big bulk insert without expansion -> breaks
+DONE Explain bulk insertion table resize assumes no duplicate keys and all done
+at once
+DONE hash function should display correct key in array and graph (doesn't after expansion)
+DONE Avoid extra chunk(s) at start
+DONE "Table is has enough space 0/0"
+DONE Reduce space used for hash functions: side by side for double hashing, etc
+DONE back again! DONE remove "1" labels on graph nodes
+DONE bulk insertions, large size DH -> _newData[row] is undefined:
+http://localhost:3000/?alg=HashingDH&mode=insertion&list=1-20,50,37,48,30,9,40,42,20,5,31&value=2
+DONE total count not reset on expansion
+DONE open addressing:
+"Check how full the table is" - both lines are highlighted at once
+DONE use [], [42], [42..], "Chain" instead of "Value", hover -> 42,45,3
+old idea: maybe use -> or + instead of .. and enable hover for all slots.
+For non-empty have ->2->5->3<> or some such; Empty <> for empty slots.
+Or square     &#9633; &#x25A1; &squ;
+Nice to have proper arrow symbol (eg, U+2192 (8594) &#8594; &#x2192;
+&rightarrow;) and some symbol for <> (maybe |_| - U+2294)
+DONE Chaining search code: don't expand list search, need found/not found displayed
+similarly for delete; add explanation for keys not found?
+OK? Ignore duplicates?? (see explanation in code)
+DONE Table expansion (implemented if params.expand===true!):
+- check expansion/contraction conditions
+- Should be recursive - insert called within insert
+- have pseudocode animated
+- put back expansion code:( and modify a bit: keys <- all keys in T; T <- empty table of
+  new size; insert keys >>> for each k in keys:
+                              insert k into T >>>  // recursive! ; HashInsert(T, k)
+DONE Stop at start and display insert key(s) (like delete)
+DONE Delete Expanding table msg
+DONE collapse loop in delete code (like insert)? Search for k or empty slot
+DONE pseudocode BUG to stop at Deleted for search and delete?
+DONE Background for chaining needs rework...
+DONE Instructions: table size/dynamic...
+
+
+-----------------------------------------------
+Merge linked list stuff.  Worth keeping???
+
+fork in my github for now + local broken merge
+
+-----------------------------------------------
+Straight radix sort
+
+Fix lots of console errors, eg Unknown property ‘-moz-border-radius’.  Declaration dropped.
+
+Possibly have a line of pseudocode that can be expanded to change to base 4
+display??? Better would be radio button on animation but not clear how to
+hook that into animation system - need to re-execute from first chunk in
+general, which is handled with expand/contract already. Would mean more
+digits in numbers but probably ok.
+
+DONE Highlight max again at "Find maximum number of "digits" used in the data"
+(consistent with SRS)
+DONE SRS background and->any, "show values in binary" -> ... "This leave the
+array sorted" -> ... "3. Counting Sort" -> + There are four phases...
+" requires O(n), "
+"the number of digits is limited " -> max... fixed/...?
+DONE emphasise base4 (plus binary for REX)
+DONE More explanation for Find maximum number of "digits" used in the data
+DONE Fix number of bits used etc
+DONE Nice to display binary if we hover over A elements
+(adapt code from MSD radix sort)
+DONE Zoom in a bit for last three arrays (if not too long)?
+DONE Good to display Decimal, Base 4 (with highlight), Binary + Mask?
+DONE Add more info: https://www.geeksforgeeks.org/radix-sort/
+https://www.geeksforgeeks.org/counting-sort/
+DONE Polish background (talk more about digits)
+DONE Sort array A[1]..A[n]  -> A[0]..A[n-1] + explain
+DONE Array C & B confusion
+DONE? Explain better:
+...we use radix 4 for illustration (the digits are 0-3 and use two bits).
+DONE animate following (and others?):
+initialise array C to all zeros
+B[digit] = B[digit]-1
+digit <- kth digit value in num - could highlight bits here, not before?
+DONE delete (most?) comments at start of expanded blocks + dont stop animation there
+DONE fill temp array with ' ', not 0
+
+-----------------------------------------------
+AVL stuff (see .docx file from Linda also)
+
+DONE AVL rotaiton -> rotation
+
+AVL Rotation RR etc display one step earlier?
+
+AVL background+more
+
+Maybe use boxes to visualise recursion, other highlighting for rotation etc?
+
+Background (Linda...)
+Background needs fixing! Need to say AVL tree is a BST + height stored in
+each node, used to re-balance, link cases with description of insertion
+
+Node+balance text display should be current node, not root node!  Needs to
+change as we recurse down and return up tree (omit for Empty).
+
+Add more test cases (for this and other algorithms, like Graph examples)?
+Possibly just use URL mechanism somewhere, eg in Background? Done by Linda in
+background (not URL stuff)
+
+The last two lines of rotation code (eg "recompute heights of t6 and t2" and
+"return (pointer to) t2") a missed opportunity to gradually redraw tree.
+Could potentially change all node positions to 1/3 then 2/3 the way to the
+final positions. Maybe add a tweeningWeight to the object, used by the
+redraw function: if x,y defined given them tweeningWeight and computed
+x,y a weight of 1 and interpolate. For rotation use tweeningWeight=2
+then tweeningWeight=1.  Could potentially use in other situations.
+
+Also AVLTSearch best delete n <- root(t) ???
+Could also remove heights of nodes - make it identical to BST code and add
+to explanation re remove heights of nodes 
+
+Sometimes after AVLT_Insert(right(t), k) returns, the current call gets
+updated but tree highlighting isn't (sometimes it is, which is better).
+Maybe use Red just for the current node (and perhaps ancestors) but
+perhaps the path down to the inserted node highlighted.  Currently Red goes
+at returnline (get green outline), better is from caller?
+Find example...
+
+DONE(ish) more room for tree, shrink array
+
+DONE keys numbered from 2???
+
+Linda to check if following + explanation is ok:
+return new node containing k
+AVLT_Insert(right(t), k)
+
+NOTE: OK more complex example for recursion etc:
+http://localhost:3000/?alg=AVLTree&mode=insertion&list=75,45,71,89,2,38,44,14,63,65&value=2
+
+OK?? AVLTSearch broken - can't find node 2 in
+http://localhost:3000/?alg=AVLTree&mode=insertion&list=67,88,17,7,9,1,9,90,21,87&value=2
+
+DONE? Editing input when URL specified (plus some other cases?) - broken!(?)
+Type "9," and the comma comes before the 9... Maybe reload fixes it, or
+other URL fixes?
+
+DONE URL not saved/restored for more recent additions:
+msort_arr_nat, msort_arr_bup, HashingCH, StraightRadixSort
+
+DONE "t4 is null" persists when it shouldn't, best delete earlier
+
+DONE return leftRotate(t) (etc) is followed by return t
+
+?confusing insert call/balance shown at return from recursive call, see 11% of
+http://localhost:3000/?alg=AVLTree&mode=insertion&list=10,29,13,81,40,57,41,66,57,63&value=2
+
+DONE Improve node positions when rotating - rotate edge
+
+DONE "Rotaiton: "
+XXX rename it to balanceCase????
+
+DONE Base case - collapse (+fix height):
+
+DONE (left as is with explanation???) Recursive cases need <-:
+    left(t) <- AVLT_Insert(left(t), k)
+
+AVL (Double?) rotation -> redraw box at end of first rotation (earlier than
+current). eg:
+http://localhost:3000/?alg=AVLTree&mode=insertion&list=60,30,40,20,10,25,5&value=2
+
+DONE Line before "recompute heights of t6 and t2" has no animation pause
+(when subtree is null - OK??)
+
+DONE "return (pointer to) t6  // new root" should show t6 again (same with t2)?
+
+DONE // Perform "Left-Right Case" rotation
+->
+// Rotate to lift "Left-Right" subtree
+perform leftRotate(left(t));
+// Rotate t to restore balance
+(similar for other cases)
+https://dev-aia.vercel.app/?alg=AVLTree&mode=insertion&list=80,15,80,44,26,1,44,24,67,47&value=2
+
+DONE AVL Fewer expansion levels (Linda's note re update height+balance, "Perform
+rotations.." enough - don't need calls to leftRotate etc hidden at next level)
+
+DONE Linda: "Overall, I think we have made it overly complicated by trying to follow  programming too closely.
+For example:
+Line 15 Update the height of t expands to simply the operations: (height = 1 + max(…)
+I think we might be better off just leaving the pseudocode as Update height, not expanding it to the actual arithmetic.  The arithmetic could be put in a pop-up info box. “The height of t may have increased. The height is 1 + the max of (left … + right…”
+Same with the next line."
+
+DONE Maybe use code below (avoiding if chain) with explanations such as
+"t is unbalanced due to insertion in the Left-Left subtree:
+balance > 1 and k < left(t).key"
+and control stopping at switch then first line of correct case (or the
+Balanced case; could move comment to next line but uses more vertical space
+
+switch rotationCase of
+case Left-Left
+    // Perform "right rotation" to re-balance t
+    return rightRotate(t) 
+case Right-Right
+    ...
+case Left-Right
+    // Perform "left rotation" on the left subtree
+    perform leftRotate(left(t)); 
+    // Return "right rotation" on t
+    return rightRotate(t) 
+case Right-Left
+    ...
+case Balanced // no rotation needed
+    return t
+
+Extra compact version (control stops at case):
+
+switch rotationCase of
+case Left-Left // Return "right rotation" of t
+    return rightRotate(t) 
+case Right-Right // Return "left rotation" of t
+    return leftRotate(t) 
+case Left-Right // Double rotation
+    perform leftRotate(left(t)); // raise Left-Right subtree
+    return rightRotate(t) // Return "right rotation" of t
+case Right-Left // ...
+    ...
+case Balanced // no rotation needed
+    return t
+
+DONE node positions during rotation could be better
+
+DONE Use fn from hashing(?) group to make tree area bigger and array area
+smaller (maybe adjust other algorithms also).
+
+-----------------------------------------------
+
+Two blank lines at end of psuedocode
+
+Main menu(s) plus drop-down menu should be generated automatically from
+algorithm list (allalgs/algorithms in algorithms/index.js),
+not have multiple menu edits to add
+an algorithm See components/AlgorithmMenu.js, components/mainmenu/*.js
+
+IMPROVED FOR NOW Main menu looks crappy with new algorithms added
+Maybe just have categories as headings and algorithms listed across without
+all the fancy crap that breaks if the font size is increased
+
+mainmenu also too wide on some browser windows if font size is larger than
+default (plus its all done in a rather hideous way - surely it shouldn't be
+this bad????).
+
+
+Mergesort Grey when finally done, rethink colours (red to do now, green done
+for now, blue done some but now needs more work?)
+
+Prim_old colors same as Prim's (if we keep it; could just hide)
+
+DONE BFS (+maybe others) URL input -> can't initially increase start (can decrease
+then increase)
+
+DONE mainmenu algorithm in action (missing s) + missing AVLTree
+
+BFS (+maybe others) has Heuristic shown + URL has spaces after Euclidean
+
+DONE Colors in Heapsort (tree versus array not coordinated)
+
+DONE graphEgs={graph_egs || GRAPH_EGS} in DFSParam.js etc - kills Graph 1,
+Graph 2 etc. Ideally insert URL as element 1 (default) *if defined*
+Set graph_egs to GRAPH_EGS then, if xyCoords, edgeWeights, size are
+not "" prepend graph_egs with current version.
+
+DONE Radix sorts, hashing???? list merge sort?????
+
+BUP msort ??
+DONE colours
+runlength with rev video,...
+
+DONE MSD radix sort in repo (at least in part) but not linked
+
+OK? Straight radix sort
+zero count array, 0 1 2 3 -> 00 01 10 11?,
+DONE cumulative sum highlights 0
+element first (-> 1), for each num in A in reverse order - animate each
+line?
+
+BST
+A bunch of issues  - look at pseudocode, colours of array versus tree
+nodes, etc, etc
+
+More algorithms: network flow, other graph algorithms, other sorting,
+other balanced trees, functional data structures,...
+
+Graph stuff
+Change reliance on title being 'Graph view' (partly DONE)
+
+Fix magic numbers for scaling and moving X-Y
+
+DONE Support mouse moving graph nodes for Euclidean Graphs
+
+DONE Convert Warshall's to Euclidean graphs.
+
+DONE Retain circular(ish) layout default for Warshalls?, support this
++ current layout function for Euclidean graphs + reduce number of edges
+in default (could have button for other algorithms - not much point
+with current algorithms though?)
+
+DONE Warshall's: think of a couple of good examples?
+ 
+
+STUDENTS Look up color perception work and see how it should be integrated for
+all algorithms + make color code more consistent and flexible (more
+colors for 2D arrays,...).
+
+String search (BF especially): array sizes, i position on termination, success
+message position, inconsistent return value for BF and Horspool...
+
+Horspool instructions wrong (check BF also)
+
+Mergesort: 1DArray <table> whitespace warning (thought this was done but
+reappeared) similarly div inside tbody warning.  Giving up on this for now:(
+
+Fix other warnings at startup, eg keys not unique,...
+
+Fix sorting explanations/input: RESET versus SORT
+
+DONE (could be better): Why don't explanations show up in BST/234/UF
+search mode????
+
+BST search - "play" when not found doesn't terminate properly, display
+of NOT FOUND broken, tree looks a bit crappy for search (zoomed rather than
+re-build), going from search back to insert maybe shouldn't destroy
+tree??? (STUDENTS may have fixed this??)
+
+???Warshalls: editing input dies sometimes (espacially when size is
+increased??) - no error message and animation can continue but input
+editing doesn't work any more. Maybe I was just confused: only backspace
+zeroes entry (maybe one should also??), 1 sets to one
+
+DONE: Wiki: parameter return top level ListParam with name="XYZZY" must
+match key for allalgs list of algorithms!
+
+DONE: Heapsort: k, j, i, highlight shown when build collapsed (maybe try to code
+generic plugin used for all the algorithms?)
+Generic code works for msort - rest still to do.
+
+DONE: Quicksort: expand just partition, step through: after second recursive call
+stack isn't right and we then go to left<right line...
+"Quicksort gets confused with expansion and collapse of second
+qs call - hard to reproduce...?" maybe same as above
+
+DONE ?Quicksort color the bars for i,j - was this done previously? not done now
+(now redone colors)
+
+DONE (could improve a bit): Merge sort TD, array
+Merge sort: collapse some of the multiple assignments?
+Merge sort: delete array indices from arrayB?
+Merge sort: Linda feedback
+
+DONE: Mergesort: explaination in A-B/B-A copy - animation blanks out copied-from
+element - value is still there but won't be used
+
+DONE: Merge sort: stack - maybe just simple one like DFS would do?
+
+DONE: Mergesort: arrayB too much green on left when merging to it - not just
+current bit
+
+DONE: Mergesort: collapse all but merge stuff, run through some of that then collapse
+everything -> Uncaught TypeError: vis.arrayB is undefined
+    assignVarToB
+
+
+DONE: QS - looks like animation does if left <= right, not if left < right
+no - problem is jumping to wrong QS call at end - best just jump to "Done" to
+avoid bug and confusion
+
+DONE: QS med3: input 4,7,9,6 leaves things green after second partition
+
+Kruskal queue: use something like vis.array.swapElements to move queue
+elements to the left with tweening?
+
+Look at tweening (stack, queue, ...) Hmm, doesn't seem to work for
+these?
+
+Simpler Prim's - Final Cost array + total cost at end
+(also other issues with init - see XXX in code - worthwhile?).
+Also hangs with non-connected graphs. Worthwhile fixing all this when we have
+the other version?
+
+DONE: Add "(iterative)" to DFS background title
+
+OK: DFS change n to s at top level?? Problem with top level call.
+Could have n<-s or change to n throughout. Not worth it??
+
+Meeting with linda 14/6/24:
+DONE: Look at Backgrounds (coordinate with Linda)
+DONE: "Priority Queue" at right of Dijkstra+ A*
+DONE: Prim's "Old" -> Simpler
+DONE: Add Project: Warshalls to use Euclidean graphs
+DONE: Default data for BF string search
+
+DONE: Table format at end of Heapsort+BST background
+
+DONE: T234_Insert comment
+
+DONE: Warshall add top comment
+
+From recursive DFS comments from Linda:
+
+DONE: emphasise successful termination better: changed colors so successful path
+is red - stands out better (also done for Prim's still could do more but node
+color range limits things)
+DONE: Shorten comments at start
+
+DONE: If these shorter comments are ok we should do similar for the
+other graph algorithms. Now each has a one line comment + separate explanation.
+
+DONE: Minor fix for backround: actually made some other changes as well to try
+to make it easier for students to understand recursive DFS without reference to
+the other algorithms; also did the minor fix for BFS.
+
+NOT DONE: emphasise m better (having a better color range for graph nodes would
+be nice but currently we just highlight the edges to)
+
+NOT DONE: Line 7 (shows initial array; comment explains blank=null, I chose
+this so I could talk about the parent being (un)assigned, which I find natural)
+
+DONE: Line 8 comment mentioning frontier (combined with init line and attached
+explanation)
+
+NOT DONE: is_end_node emphasis - not sure how best to do this (note there may
+not be any end node)
+
+NOT DONE: Real estate - agreed. The best I managed was for ASTAR, where I zoomed
+out a bit but somehow we should be able to do better. It's pretty much unusable
+on my phone. We should test other browers/platforms also.
+
+DONE: order of algms; I've put recursive DFS first then iterative DFS then BFS;
+BFS is a bit simpler than iterative DFS but its an OK compromise I think and BFS
+behaves more like Dijkstra's etc.
+
+DONE: merge branch back to dev
+
+
+DONE (by me): Linda: Explanations/background for graph algorithms
+
+More frontier edges in DFS (+others???), or less in DFSrec???  Want
+consistency if possible.
+
+DONE: Merge dev-2023S2 to dev
+
+Try to fix github hosting again (maybe use different branch)
+
+DONE (could do more): wiki: instructions, "Add the new algorithm in the const
+‘algorithms’", graph stuff
+
+DONE: replace float etc with style sheets for DFS stack in
+src/components/DataStructures/Array/Array2DRenderer/index.js
+
+DONE (can always do more)
+Exercises (good to have ones that use AIA, not just "generic" ones - ability
+to run cases and look at visualisation, pseudocode comparison):
+Stack for MSD radix independent of input order (cf quicksort).
+QS different cases, versus MSD radix(?)
+
+BUP merge sort for external sorting + mag tapes??
+
+MOSTLY DONE: Graph alg common structure, rewrite to simplify?
+DFS recursive versus iterative: end result + order of assigning parents vs
+finalising. Relationship between explicit stack + finalised and recursive
+version data structures etc (Implicit stack has continuation; made explicit
+with multiple explicit stack entries. The "for each node m neighbouring n"
+line is independent of graph representation but continuation will be
+representation-specific, eg edge list will have remaining list, edge matrix
+will have index, both representing set of neighbours yet to visit).
+DFS versus BFS stack vs queue but also seen (set before enqueue) vs finalised
+(set after pop).  Stack in DFS can have repeated elements - why are they not
+avoided like in BFS (using seen)?  What differences would it make if BFS
+used finalised (like DFS) instead of seen.
+
+Exercises etc for students (put in "More", can always others here):
+DONE A*: optimality with heuristic/weight choice in Graph 1,
+choose start and end to get longest path with no "mistakes"
+DONE DFS: successful path that visits all nodes in Graph 2, iterative vs
+recursive comparisons
+DONE Prim's: compare Kruskall's and Prim's with different start nodes
+Graph1, weights as input: 2 MSTs, other weights 1 MST (can you convince
+yourself of this?). Delete 11-12 edge from graph 2 - Kruskal's MSF vs
+Prim's MST for one component
+Kruskall's: similar to above
+
+??? NaN bug with end node (can't reproduce - run DFS to end then delete
+13-14 edge and change end node???)
+
+??? A* bug exploring too much - seemed to get end node array update
+confused - can't reproduce
+
+DONE: Add "Empty" or some such for start of 234 tree animation
+
+DONE (hack): BUG with order of loading new txt XY coords/weights???
+
+DONE (check): Bug with Dijkstra
+13-9,13-15,23-10,41-16,35-8
+1-2-4,1-3-3,2-3-7,2-4-5,3-4-2
+start 5, end 0 (ie single node in component)
+Also start 3 end 0?
+
+DONE: check above with AStar (undefined -> null) fixes bug?
+
+DONE: Make BFS, DFS termination display like Dijkstra etc 
+
+DONE: Prim's: add total cost at end
+
+DONE: A*: "Explanation
+Nodes is the data structure where we store the nodes that are in the
+frontier. In the A* algorithm, Nodes is a Priority Queue."
+Missing N, overlap with prev line, should add similar to other
+algorithms so top level code is identical.
+
+DONE A*: delete heuristics when finalised
+
+DONE: Add frontier node + edge coloring for all graph algorithms, add m,
+fix multiple returns.  Also, highlight path in Parent if found + start + end
+DONE: BFS
+DONE: DFS
+DONE: Dijkstra - all
+DONE: A* - all
+
+DONE (kind of): Node size in graphs versus trees (not too bad now but
+best fix properly)
+
+DONE: Quicksort: when code is expanded/collapsed, refresh
+display so i,j,pivot are (not) displayed
+
+DONE: Heapsort, BST: increase size of tree nodes
+
+DONE Change Warshall's to new graph layout?
+
+DONE: UF: undo find leaves node in wrong position
+Play union to end, change find to 6 & play to end, go back 5 steps.
+Works ok if path shortening is expanded when stepping back
+
+DONE: UF: for Union, add blank/... line before Find, change n to k in Find
+
+
+
+DONE: BASIC BUG WITH COLLAPSE OF PSEUDOCODE:
+With expanded code, the line of code is highlighted *after* execution
+(not sure if this is best but it's what we have; possibly could have
+"highlight" between lines rather than on a line to avoid confusion).
+However, for collapsed code, when the line is highlighted, the animation
+corresponds to the *first* step of that abstraction, not after the whole
+abstraction has been executed (that is, the *last* step).  This explains
+a few of the "glitches" we have noticed.
+
+
+
+DONE: Add to default 234 tree input so it grows an extra level?
+
+
+DONE: Fix Warshalls bug - run to conclusion then "EXPAND ALL" -> runtime error
+
+
+Sat 02 Mar 2024 16:51:09 AEDT
+
+DONE: Graph algs:
+Dijkstra+A* are missing return plus explanation at end
+Best colour frontier in all the related graph algorithms
+(DFS has it)
+
+DONE: BFS/DFS improve stack/queue display
+DONE: order of DFS stack
+
+DONE Add end nodes, heuristic
+
+More compact screen real-estate
+
+DONE: redo Prims in same style
+
+DONE change categorisation of algorithms so these are all together
+(not in search)
+
+Graph display:
+See XXX in code
+DONE?: Fix problem with XY editing changing the number of nodes
+DONE (could be better): Reduce degree for larger random graphs
+
+
+
+Old stuff:
+
+DONE: 234tree insertion misses second element in list of things to insert
+
+
+Document README naming:
+README.md conflicts merging dev to dev-2023S2
+(dev had updated README.md, dev-2023S2 had different one from
+multiwaytree group)
+
+Used dev branch version and renamed dev-2023S2 version to
+README-multiwaytree.md
+
+Should do this kind of thing in the future to avoid conflicts.
+Extra README files can be deleted from main (currently dev)
+branch when no longer needed.
+
+New graph layout
+================
+DONE (pretty much)
+
+Initially graph XY+edges doesn't correspond to graph display -
+need to press START to sync WHY????
+DONE (still has code for random graph generation that is never
+seen)
+
+Needs to be incorporated into graph algorithms properly
+DONE
+
+Axes 0-50? (need to fix size) so weights are 1-99 generally
+Scaling/size etc is a mystery
+src/components/DataStructures/Graph/GraphRenderer/GraphRenderer.module.scss
+has a font size for the axis at the end
+src/components/DataStructures/Graph/GraphTracer.js has some
+stuff
+DONE
+
+Fix coordinates
+Need different fns for random coordinates & random weights
+DONE
+
+Maybe force a reasonably even spread on X axis with smaller
+numbers on left - basically spread them with some
+randomization. Y values can be random (could try to spread
+them a bit also but don't want to correlate with X
+coordinates).
+DONE mostly - could be better
+
+
+Fix weights
+Could use size to make average degree 2 or 3, ensure
+connected by linking node n to n+1 (have connected flag?)
+CURRENT HACK: Just using 0-2 random weights
+Could also generate a bunch of edges and use Euclidean
+distance to delete longer ones until degrees etc are
+reasonable (maybe while ensuring connectivity).
+DONE
+
+Use three alternatives for weights: Euclid, Manhattan,
+edge Matrix (as input/randomly generated)
+DONE
+
+Allow random + example graphs (use button like weight measure)
+DONE (could have better/more sample graphs)
+
+Rethink screen-space usage
+Move/rename/rejig some buttons etc
+Allow text input for node positions and edge list?
+Positions 3-8,5-36,9-22,15-8,...
+Edges 1-2,1-4,3-4,...
+(maybe get rid of matrix etc for most algorithms; Warshalls
+being an exception)
+DONE mostly, need style sheets etc
+
+
+"START" -> "RESTART"/"LOAD DATA"/???
+col->row for buttons etc (WHY DOESN'T THIS WORK??????)
+src/styles/EuclideanMatrix.scss
+src/algorithms/parameters/helpers/EuclideanMatrixParams.js
+DONE

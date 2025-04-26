@@ -8,6 +8,7 @@ AVL
 ====tree redrawing smoother, iterative???,...
 ==Recursive BST (same as AVL minus last two lines of code).
 ==Consistency between BST-AVL (iterative and recursive)
+==Improve iterative BST (maximise consistency with recursive).
 ...
 
 
@@ -16,13 +17,21 @@ AVL
 ==main menu:
 ====format
 ====ability to hide algorithms in progress 
+====have *single* list of algorithms in code
 ==colors consistent (1) graph algorithms (2) throughout AIA
+==update wiki re colors, adding new algorithm,...
 
 ----------------------------------
 Simple algorithms
 ==demonstrate recursion
 ==demonstrate bad complexity, e.g. linear sorts, pre-prepared data input sets
 
+----------------------------------
+Linked lists (again)?
+
+
+----------------------------------
+Maxflow, minimax, alpha-beta (Lee had list of ideas *somewhere*)
 
 
 ----------------------------------
