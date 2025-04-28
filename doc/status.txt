@@ -1,6 +1,6 @@
 ================================================================
 
-AVL trees
+AVL TREES
 
 Last Reviewed
 Lee Thu 24 Apr 2025 14:03:25 AEST
@@ -30,7 +30,7 @@ Misc
 Project candidate
 
 ================================================================
-Hashing
+HASHING
 
 Last Reviewed
 
@@ -40,8 +40,14 @@ There have been some iterations, but there are some notes
 Inline Explanations
 
 Animation
+There are separate versions for open addressing, linear  probing and double hashing.  I have
+a note that "we probably need two versions for open addressing, linear probing and double hashing" -
+is this for small data sets and large data sets?  or for the dynamic sizing option?
+
+
 
 Background
+
 
 Extra
 
