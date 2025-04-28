@@ -48,6 +48,7 @@ Hash function is opaque, makes it hard for student to construct data with lots o
 Should we either make hash function more transparent or provide options for input data "random" and
 "bad data"?
 
+Is delete hooked in?
 
 
 Background
