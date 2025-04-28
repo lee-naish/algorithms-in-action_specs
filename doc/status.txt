@@ -44,6 +44,10 @@ There are separate versions for open addressing, linear  probing and double hash
 a note that "we probably need two versions for open addressing, linear probing and double hashing" -
 is this for small data sets and large data sets?  or for the dynamic sizing option?
 
+Hash function is opaque, makes it hard for student to construct data with lots of collisions.
+Should we either make hash function more transparent or provide options for input data "random" and
+"bad data"?
+
 
 
 Background
