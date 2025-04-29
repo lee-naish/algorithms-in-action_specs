@@ -33,6 +33,7 @@ Project candidate
 HASHING
 
 Last Reviewed
+29 April 2025 small tables reviewed LKS
 
 Pseudocode   
 There have been some iterations, but there are some notes.
@@ -63,12 +64,24 @@ Is delete hooked in?  How to initiate? Put this in instructions?
 Misc
 
 ================================================================
-Algorithm_name
+HEAPSORT
+
 Last Reviewed
+
 Pseudocode
+
 Inline Explanations
+
 Animation
+99%
+
 Background
+I think we were going to put in something about downheap and upheap. I think the
+inline explanation of DownHeap is fine. Do we then 
+want to put in something about upheap and complexity calculation? Maybe in the 
+More section? 
+
+
 Extra
 Instructions
 Misc
