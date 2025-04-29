@@ -65,8 +65,10 @@ Misc
 
 ================================================================
 HEAPSORT
+98%  I think this is overall very nice.
 
 Last Reviewed
+29 April 2025
 
 Pseudocode
 
