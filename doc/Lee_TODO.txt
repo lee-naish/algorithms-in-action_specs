@@ -6,11 +6,20 @@ See also algorithms-in-action_specs/doc/status.txt
 
 Select for showcase algms
 
+Graph algs look pretty good:
+Delete simpler Prims?
+DONE Kruskal's: refine explanation: set of sets stuff? Tree = set of edges, start
+with set of trees with no edges (set of N empty sets)
+Kruskal's exercise: use heap for edges
+
 Think about projects: see algorithms-in-action_specs/projects/projs_2025.txt
 UI: start page, colours,...
 AVL: show recursion with boxes, change other highlighting, iterative???,...
 Recursive BST (same as AVL minus last two lines of code).
 Simpler algorithms?
+
+Hashing: sample input with lots of collisions? Or hints (use multiple of
+table size)
 
 DONE Graph axes - to crowded for smallish graphs (max < 20)
 
