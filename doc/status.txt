@@ -40,6 +40,9 @@ There have been some iterations, but there are some notes.
 
 Inline Explanations
 
+LKS hashInsert for Dynamic Table Size -- rethink the comment (recursive!) and inline explanation to be
+a bit more easily understood. 
+
 Animation
 80% 
 Large table -- get rid of indices, make it 0-19 and on the sides 0-19,20-39, etc.
