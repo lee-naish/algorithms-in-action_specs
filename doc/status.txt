@@ -50,6 +50,7 @@ Should we either make hash function more transparent or provide options for inpu
 
 Delete -- ?denote as DELETE (-)
 
+Dynamic Table size not available for Double hashing -- is t here for linear probing.
 
 Background
 
