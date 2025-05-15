@@ -3,6 +3,11 @@
 Wiki out-of-date    30 April 2025
 
 
+Showcase
+Heapsort
+Graph Algorithms
+Quicksort
+Mergesort
 
 
 
