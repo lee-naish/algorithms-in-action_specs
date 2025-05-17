@@ -17,7 +17,10 @@ AVL
 ==main menu:
 ====format
 ====ability to hide algorithms in progress 
-====have *single* list of algorithms in code
+====have *single* list of algorithms in code (currently
+components/mainmenu/index.js components/mainmenu/GraphAlgorithms.js
+components/AlgorithmMenu.js algorithms/index.js)
+====add keywords for search
 ==colors consistent (1) graph algorithms (2) throughout AIA
 ==update wiki re colors, adding new algorithm,...
 
@@ -28,10 +31,18 @@ Simple algorithms
 
 ----------------------------------
 Linked lists (again)?
+== aim for nice animation of list mergesort but try to make it general
+enough to be easily used/adapted for other algorithms
 
 
 ----------------------------------
-Maxflow, minimax, alpha-beta (Lee had list of ideas *somewhere*)
+Ideas from notes.txt etc:
+Maxflow (naive/Ford-Fulkerson; relies on BFS/DFS)?
+Minimax, alpha-beta
+Tries?
+Splay trees
+Polish off current string searching algs
+
 
 
 ----------------------------------

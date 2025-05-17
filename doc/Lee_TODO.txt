@@ -3,20 +3,39 @@ Link: algorithms-in-action_specs/doc/Lee_TODO.txt
 See also algorithms-in-action_specs/doc/status.txt
 ==================================================
 
+Heapsort background (LINDA), exercises
+
+DONE Delete/hide simpler Prims
+
+OK Warshall's, Krukcal's: remove Start (appeared once - some weird glitch?)
+
+DONE Search in main menu: doesn't work for hashing
+
+Search in main menu: nice to add keywords for each algorithm somehow
+(students)
+
+Merge Sort (lists): redo colors like other msort
 
 Select for showcase algms
-
 Graph algs look pretty good:
-Delete simpler Prims?
+
+DONE Kruskal's: change i and find(i) to n and find(n)
+DONE Kruskal's: union+find have extra arguments in the code - best delete NodeSets
+argument (hmm, may have been added by students)???
+DONE Kruskal's: mention find() in init of NodeSets + other explanation bits
 DONE Kruskal's: refine explanation: set of sets stuff? Tree = set of edges, start
 with set of trees with no edges (set of N empty sets)
-Kruskal's exercise: use heap for edges
+DONE Kruskal's exercise: use heap for edges
 
 Think about projects: see algorithms-in-action_specs/projects/projs_2025.txt
 UI: start page, colours,...
 AVL: show recursion with boxes, change other highlighting, iterative???,...
 Recursive BST (same as AVL minus last two lines of code).
-Simpler algorithms?
+Simpler algorithms?:
+selection sort - abstract find smallest, swap
+insertion sort - abstract insert, shuffle right
+search array/list?
+search sorted array/list?
 
 Hashing: sample input with lots of collisions? Or hints (use multiple of
 table size)
@@ -329,18 +348,18 @@ DONE AVL rotaiton -> rotation
 
 AVL Rotation RR etc display one step earlier?
 
-AVL background+more
+DONE AVL background+more
 
 Maybe use boxes to visualise recursion, other highlighting for rotation etc?
 
-Background (Linda...)
+DONE Background (Linda...)
 Background needs fixing! Need to say AVL tree is a BST + height stored in
 each node, used to re-balance, link cases with description of insertion
 
 Node+balance text display should be current node, not root node!  Needs to
 change as we recurse down and return up tree (omit for Empty).
 
-Add more test cases (for this and other algorithms, like Graph examples)?
+DONE Add more test cases (for this and other algorithms, like Graph examples)?
 Possibly just use URL mechanism somewhere, eg in Background? Done by Linda in
 background (not URL stuff)
 
@@ -367,7 +386,7 @@ DONE(ish) more room for tree, shrink array
 
 DONE keys numbered from 2???
 
-Linda to check if following + explanation is ok:
+DONE Linda to check if following + explanation is ok:
 return new node containing k
 AVLT_Insert(right(t), k)
 
@@ -487,7 +506,7 @@ default (plus its all done in a rather hideous way - surely it shouldn't be
 this bad????).
 
 
-Mergesort Grey when finally done, rethink colours (red to do now, green done
+DONE Mergesort Grey when finally done, rethink colours (red to do now, green done
 for now, blue done some but now needs more work?)
 
 Prim_old colors same as Prim's (if we keep it; could just hide)
@@ -680,7 +699,7 @@ DONE: merge branch back to dev
 
 DONE (by me): Linda: Explanations/background for graph algorithms
 
-More frontier edges in DFS (+others???), or less in DFSrec???  Want
+DONE More frontier edges in DFS (+others???), or less in DFSrec???  Want
 consistency if possible.
 
 DONE: Merge dev-2023S2 to dev
@@ -696,8 +715,8 @@ src/components/DataStructures/Array/Array2DRenderer/index.js
 DONE (can always do more)
 Exercises (good to have ones that use AIA, not just "generic" ones - ability
 to run cases and look at visualisation, pseudocode comparison):
-Stack for MSD radix independent of input order (cf quicksort).
-QS different cases, versus MSD radix(?)
+DONE Stack for MSD radix independent of input order (cf quicksort).
+DONE QS different cases, versus MSD radix(?)
 
 BUP merge sort for external sorting + mag tapes??
 
