@@ -7,14 +7,15 @@ Heapsort background (LINDA), exercises
 
 DONE Delete/hide simpler Prims
 
-OK Warshall's, Krukcal's: remove Start (appeared once - some weird glitch?)
+OK Warshall's, Kruskcal's: remove Start (appeared once - some weird glitch?)
 
 DONE Search in main menu: doesn't work for hashing
 
-Search in main menu: nice to add keywords for each algorithm somehow
-(students)
-
-Merge Sort (lists): redo colors like other msort
+DONE Merge Sort (lists): redo colors like other msort
+DONE need sortColor at end (extra chunk)
+DONE after split should color all of lists
+DONE best use apColor during merge - could just use starting at head comparison
+lines (previously not animated)
 
 Select for showcase algms
 Graph algs look pretty good:
@@ -29,8 +30,11 @@ DONE Kruskal's exercise: use heap for edges
 
 Think about projects: see algorithms-in-action_specs/projects/projs_2025.txt
 UI: start page, colours,...
+Search in main menu: nice to add keywords for each algorithm somehow
+(students)
 AVL: show recursion with boxes, change other highlighting, iterative???,...
 Recursive BST (same as AVL minus last two lines of code).
+Fix up irerative BST code.
 Simpler algorithms?:
 selection sort - abstract find smallest, swap
 insertion sort - abstract insert, shuffle right
@@ -363,24 +367,63 @@ DONE Add more test cases (for this and other algorithms, like Graph examples)?
 Possibly just use URL mechanism somewhere, eg in Background? Done by Linda in
 background (not URL stuff)
 
+DONE Below NQR - can't figure out final node positions until tree
+edges are all fixed up, including pointer from parent. Have implemented a
+couple of node moves to get things closer to final positions.
 The last two lines of rotation code (eg "recompute heights of t6 and t2" and
 "return (pointer to) t2") a missed opportunity to gradually redraw tree.
 Could potentially change all node positions to 1/3 then 2/3 the way to the
-final positions. Maybe add a tweeningWeight to the object, used by the
-redraw function: if x,y defined given them tweeningWeight and computed
-x,y a weight of 1 and interpolate. For rotation use tweeningWeight=2
-then tweeningWeight=1.  Could potentially use in other situations.
+final positions. Maybe add a moveRatio to the object, used by the
+redraw function: move object moveRatio towards new computed x,y coordinates
+(or all the way if current x,y undefined). For rotation use moveRatio=2/3
+then moveRatio=1/2 (0 means no weight to current pos, 1 means no weight
+to new computed pos). Could even move a bit in previous two chunks.
+Could potentially use in other situations.
 
-Also AVLTSearch best delete n <- root(t) ???
+DONE AVL console errors:
+ Unexpected value translate(-221,NaN) parsing transform attribute.
+ Error in parsing value for ‘transform’.  Declaration dropped.
+ node_y = NaN early on (likely cause), in layoutBST
+
+AVL Search (+ insert + BST): best delete n <- root(t) - avoid n,
+just use t. AVL Insert uses t.left, left(t) and root(t).key - best be
+consistent. Could use t.key/key(t) (with explanation saying its the
+key in the root) and t.left/left(t). Problems stem in part from BST
+(we should be consistent but BST is currently crappy). BST uses
+n <- new Node; n.key <- k; n.left <- Empty for insert but for search uses
+while t not Empty... if t.key = k ... t <- t.left.
+BST should be fixed anyway.
+XXXXXX Actually, we can probably just use "." but in the same way as "->" in
+C. The only time we need to refer to nodes is when a new one is created and
+the details can be glossed over (no need to spell out separate allocation and
+assignments as is now done with BST).  For AVL we have:
+return new node containing k
+(Return a single-node tree with key k (the height is 1). This is the base
+case of the recursion.)
+->
+return new tree containing just k
+(Return a single-node tree with key k and empty subtrees (the height is 1).
+This is the base case of the recursion.)
+The use of left(t) can change to t.left, etc
+
+DONE AVL Change pseudocode for new notation (avoid root(t), etc)
+DONE AVL Double rotation explanation fix: raise Right-Left-Left subtree etc
+DONE AVL+BST search: if n.key > k  ---> if k < t.key
+
+BST Search: make it same as AVL search (with minor fixes)
+
+AVL Search
 Could also remove heights of nodes - make it identical to BST code and add
 to explanation re remove heights of nodes 
+Should indicate where t is
+DONE t <- n.right etc not currently animated, only n <- root(t)
 
 Sometimes after AVLT_Insert(right(t), k) returns, the current call gets
 updated but tree highlighting isn't (sometimes it is, which is better).
 Maybe use Red just for the current node (and perhaps ancestors) but
 perhaps the path down to the inserted node highlighted.  Currently Red goes
-at returnline (get green outline), better is from caller?
-Find example...
+at return line (get green outline), better is from caller?
+Find example...  Also reconsider all the highlighting etc.
 
 DONE(ish) more room for tree, shrink array
 
@@ -420,7 +463,7 @@ DONE Base case - collapse (+fix height):
 DONE (left as is with explanation???) Recursive cases need <-:
     left(t) <- AVLT_Insert(left(t), k)
 
-AVL (Double?) rotation -> redraw box at end of first rotation (earlier than
+DONE AVL (Double?) rotation -> redraw box at end of first rotation (earlier than
 current). eg:
 http://localhost:3000/?alg=AVLTree&mode=insertion&list=60,30,40,20,10,25,5&value=2
 

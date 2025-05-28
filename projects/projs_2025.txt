@@ -3,12 +3,14 @@ Student project ideas for Sem 2 2025
 ----------------------------------
 AVL
 ==AVL tree polishing: 
-====show recursion with boxes, 
-====change other highlighting, 
-====tree redrawing smoother, iterative???,...
+====try showing recursion with boxes, 
+====change/review other highlighting, 
+====see ../doc/Lee_TODO.txt for possible bug + other stuff
+====tree redrawing smoother (DONE), iterative (probably not)???,...
+====Polish search mode (partly DONE)
 ==Recursive BST (same as AVL minus last two lines of code).
+==Improve iterative BST (maximise consistency with recursive, a bit done).
 ==Consistency between BST-AVL (iterative and recursive)
-==Improve iterative BST (maximise consistency with recursive).
 ...
 
 
