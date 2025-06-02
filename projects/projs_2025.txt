@@ -37,6 +37,7 @@ Linked lists (again)?
 enough to be easily used/adapted for other algorithms
 
 
+
 ----------------------------------
 Minimax, alpha-beta
 == Other online animation has binary trees only. Best use multiple
@@ -63,5 +64,5 @@ Polish off current string searching algs
 
 
 ----------------------------------
-World peace
+Local peace as well as World peace
 
