@@ -38,9 +38,24 @@ enough to be easily used/adapted for other algorithms
 
 
 ----------------------------------
+Minimax, alpha-beta
+== Other online animation has binary trees only. Best use multiple
+children, particularly towards the root
+== Not clear how best to input data - could implement syntax with nested
+parentheses (plus some predefined examples)
+== alpha-beta: possible *optional* sorting of children based on
+(approximate) static evaluation function.  Default is on (non-leaves
+have ? or highlight to indicate approximation), when off, only
+display values at leaves.
+== random data generation.  Possibly fix tree shape, generate random
+value v in a given range (5-95 for root), children have range 1-v*1.5
+for max nodes and v*1.5-99 for min nodes.
+
+
+
+----------------------------------
 Ideas from notes.txt etc:
 Maxflow (naive/Ford-Fulkerson; relies on BFS/DFS)?
-Minimax, alpha-beta
 Tries?
 Splay trees
 Polish off current string searching algs

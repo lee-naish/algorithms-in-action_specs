@@ -3,7 +3,21 @@ Link: algorithms-in-action_specs/doc/Lee_TODO.txt
 See also algorithms-in-action_specs/doc/status.txt
 ==================================================
 
-Heapsort background (LINDA), exercises
+DONE Heapsort background (LINDA), still needs more work
+
+DONE Heapsort exercises
+
+various algorithms: add (more) exercises etc
+
+DFS check background mods from Linda??? which DFS, what changes?
+
+QSort background: space complexity is O(n)!, remove "basic/simple"?, more
+complexity details + partition...
+
+DONE AVL Mention t.key etc notation in background
+
+react-markdown table support: need to use remark-gfm, somehow, apparently...
+(avoid fancy tables for now)
 
 DONE Delete/hide simpler Prims
 
