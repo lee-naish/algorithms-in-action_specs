@@ -3,6 +3,11 @@ Link: algorithms-in-action_specs/doc/Lee_TODO.txt
 See also algorithms-in-action_specs/doc/status.txt
 ==================================================
 
+In Extra info, add links (where appropriate) to Wikipedia,
+https://visualgo.net/ (NUS animations etc - search currently seems broken?)
+https://www.w3schools.com/
+https://www.cs.usfca.edu/~galles/visualization/Algorithms.html
+
 DONE Heapsort background (LINDA), still needs more work
 
 DONE Heapsort exercises
