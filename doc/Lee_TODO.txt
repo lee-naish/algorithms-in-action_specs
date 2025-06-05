@@ -8,6 +8,20 @@ https://visualgo.net/ (NUS animations etc - search currently seems broken?)
 https://www.w3schools.com/
 https://www.cs.usfca.edu/~galles/visualization/Algorithms.html
 
+Check out the following (from chatGPT):
+https://visualgo.net
+https://www.algoexpert.io (paid)
+https://cs50.harvard.edu/x/2024/visualize/ (not found)
+https://www.toptal.com/developers/sorting-algorithms
+https://algorithm-visualizer.org
+https://www.cs.usfca.edu/~galles/visualization/Algorithms.html
+
+DONE Progress bar: display chunk number+max chunk number (and also percentage?)
+
+Try to make AIA more visible to search engines etc:
+DONE Add personal web page
+what else can we do?
+
 DONE Heapsort background (LINDA), still needs more work
 
 DONE Heapsort exercises
@@ -18,6 +32,9 @@ DFS check background mods from Linda??? which DFS, what changes?
 
 QSort background: space complexity is O(n)!, remove "basic/simple"?, more
 complexity details + partition...
+
+AVL pointers overlap in rotation sometimes, eg 37% of
+https://dev-aia.vercel.app/?alg=AVLTree&mode=insertion&list=63,27,64,55,74,68,43,88,12,6&value=2
 
 DONE AVL Mention t.key etc notation in background
 
