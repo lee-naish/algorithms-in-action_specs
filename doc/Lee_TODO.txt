@@ -9,7 +9,7 @@ https://www.w3schools.com/
 https://www.cs.usfca.edu/~galles/visualization/Algorithms.html
 
 Check out the following (from chatGPT):
-https://visualgo.net
+https://visualgo.net (NUS)
 https://www.algoexpert.io (paid)
 https://cs50.harvard.edu/x/2024/visualize/ (not found)
 https://www.toptal.com/developers/sorting-algorithms
@@ -35,6 +35,7 @@ complexity details + partition...
 
 AVL pointers overlap in rotation sometimes, eg 37% of
 https://dev-aia.vercel.app/?alg=AVLTree&mode=insertion&list=63,27,64,55,74,68,43,88,12,6&value=2
+hard to avoid some not so good cases?
 
 DONE AVL Mention t.key etc notation in background
 
@@ -73,7 +74,7 @@ Recursive BST (same as AVL minus last two lines of code).
 Fix up irerative BST code.
 Simpler algorithms?:
 selection sort - abstract find smallest, swap
-insertion sort - abstract insert, shuffle right
+DONE draft pseudocode: insertion sort - abstract insert, shuffle right
 search array/list?
 search sorted array/list?
 
@@ -173,23 +174,23 @@ while ((left + runlength) <= size) { XXX should be <, like pseudocode!
 DONE msort_bup best add extra chunk for while left + runlength < size  before loop
 exit
 
-REX stuff
-
+DONE REX stuff
 DONE (kind of) Nice to display binary if we hover over A elements
-
 DONE Add sorted/reverse option (also for LSD/straight)?
-
 DONE Add more info: https://www.geeksforgeeks.org/msd-most-significant-digit-radix-sort/
-
 DONE Polish background
-
 DONE Good to display decimal as well as binary
-
 DONE mask <- maximum bit used doesn't display binary of max key
-
 DONE Stop at line 5?
 
-Quicksort: Show left+right at "if (left < right)"?
+REX Best animate Done line for all base cases
+DONE latter: (could do all recursive calls???); or add explanation(s)
+DONE Top level call to recursive function should be reached (instead of Done)
+
+DONE Progress bar misses second last chunk number always
+
+Quicksort(s): Show left+right at "if (left < right)"?
+Make colors more similar to REX also - try to align these
 
 DONE Revisit sorting colors: mergesort quite colorful now; quicksort + others less
 so.

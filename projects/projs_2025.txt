@@ -25,21 +25,34 @@ components/AlgorithmMenu.js algorithms/index.js)
 ====add keywords for search
 ==colors consistent (1) graph algorithms (2) throughout AIA
 ==update wiki re colors, adding new algorithm,...
+==expand URL stuff so more/all parameters etc are included (eg, table
+size + dynamic flag for hashing, maybe chunk number if easy)
 
 ----------------------------------
 Simple algorithms
-==demonstrate recursion
+==demonstrate recursion (?BST covered by AVL group?)
 ==demonstrate bad complexity, e.g. linear sorts, pre-prepared data input sets
+== Insertion sort (pseudocode draft done)
+== Selection sort
+== Maybe fix up Quicksort(s) a bit to make them more like REX sort
+(display left&right, fix colors)
 
 ----------------------------------
 Linked lists (again)?
 == aim for nice animation of list mergesort but try to make it general
 enough to be easily used/adapted for other algorithms
+== nodes are two joined boxes like 3-nodes in 234 trees, arrows or
+empty list symbol in second box. Maybe have a array of lists with optional
+varName (string), listPosition and listValue thats either emptyList or
+cellPosition (x,y) + headVal (string) + tailVal (list = array index;
+should have its listPosition based on/equal cellPosition). Length of
+array = total number of lists (named or un-named) = number of named vars
+plus number of cons cells.
 
 
 
 ----------------------------------
-Minimax, alpha-beta
+Minimax, alpha-beta (maybe not, for now)
 == Other online animation has binary trees only. Best use multiple
 children, particularly towards the root
 == Not clear how best to input data - could implement syntax with nested
