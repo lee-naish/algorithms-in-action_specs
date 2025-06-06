@@ -6,7 +6,7 @@ Wiki out-of-date    30 April 2025
 Showcase
 Heapsort
 Graph Algorithms
-Quicksort
+Quicksort?
 Mergesort
 
 
@@ -102,14 +102,33 @@ Instructions
 Misc
 
 ================================================================
-Algorithm_name
+Quicksort (+ M3)
+
 Last Reviewed
+Fri 06 Jun 2025 17:24:01 AEST
+
 Pseudocode
+Fine
+
 Inline Explanations
+OK. Could make base case/recursion more like REX and explicitly give
+array segments used for recursive calls.
+Could explain what the pivot is used for.
+
 Animation
+Best align better with REX sort - display left&right + use of colors at
+some points.  Also consider mergesort - slightly different again.
+
 Background
+Fine for basic quicksort.
+XXX M3 version needs to be updated in line with basic version
+
 Extra
+OK.  Could do better for simple QS especially.
+
 Instructions
+OK. Could make RESET/SORT uniform across algorithms and just use RESET
+
 Misc
 
 ================================================================
