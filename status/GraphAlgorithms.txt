@@ -1,0 +1,9 @@
+
+
+Graph Algorithms
+
+General Graph Algorithms
+
+Colors
+	think about colors	Linda to do, Lee has done some
+	make consistent between algorithms 	Lee has done some, ?student project

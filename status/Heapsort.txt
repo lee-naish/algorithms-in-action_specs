@@ -1,0 +1,11 @@
+Heapsort.txt
+
+
+
+
+
+Background/Explanations
+ 
+     	add upheap and downheap    ) 5 March LKS to do
+	polish, e.f. paragraph 1   ) 
+
