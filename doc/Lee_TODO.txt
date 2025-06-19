@@ -3,6 +3,14 @@ Link: algorithms-in-action_specs/doc/Lee_TODO.txt
 See also algorithms-in-action_specs/doc/status.txt
 ==================================================
 
+Heapsort background "cildren"
+
+DONE Heapsort "Exercises/Exploration" heading in extra
+
+mainmenu page should be default, not Heapsort??
+
+QSort M3 background - update like simple QS
+
 In Extra info, add links (where appropriate) to Wikipedia,
 https://visualgo.net/ (NUS animations etc - search currently seems broken?)
 https://www.w3schools.com/
@@ -30,12 +38,23 @@ various algorithms: add (more) exercises etc
 
 DFS check background mods from Linda??? which DFS, what changes?
 
-QSort background: space complexity is O(n)!, remove "basic/simple"?, more
+DONE QSort background: space complexity is O(n)!, remove "basic/simple"?, more
 complexity details + partition...
 
 AVL pointers overlap in rotation sometimes, eg 37% of
 https://dev-aia.vercel.app/?alg=AVLTree&mode=insertion&list=63,27,64,55,74,68,43,88,12,6&value=2
 hard to avoid some not so good cases?
+
+Heapsort: i,j shown after (second) downheap when it's not expanded
+
+Heapsort: at Swap(A[n], A[1]), A[n] highlighted in array but not tree
+just some of the time - eg, first time with below, expand SortHeap(A, n) at
+start
+https://dev-aia.vercel.app/?alg=heapSort&mode=sort&list=30,28,58,54,47,26,51,86,29,10,37,41
+(+maybe highlight at the line before + avoid stopping twice at this line?)
+
+Heapsort: maybe stop at while not (IsLeaf(A[i]) or heap) do when heap==True
+(its in explanation so ok?) -review all the animation details
 
 DONE AVL Mention t.key etc notation in background
 
@@ -43,6 +62,11 @@ react-markdown table support: need to use remark-gfm, somehow, apparently...
 (avoid fancy tables for now)
 
 DONE Delete/hide simpler Prims
+
+DONE Simpler Prims available via search (ok?), but says "Invalid algorithm
+specified" - needs to be listed in URL stuff somewhere but not menus
+
+"Invalid algorithm specified" has Heapsort code etc (not ideal)
 
 OK Warshall's, Kruskcal's: remove Start (appeared once - some weird glitch?)
 
@@ -487,7 +511,7 @@ DONE "t4 is null" persists when it shouldn't, best delete earlier
 
 DONE return leftRotate(t) (etc) is followed by return t
 
-?confusing insert call/balance shown at return from recursive call, see 11% of
+AVL ?confusing insert call/balance shown at return from recursive call, see 11% of
 http://localhost:3000/?alg=AVLTree&mode=insertion&list=10,29,13,81,40,57,41,66,57,63&value=2
 
 DONE Improve node positions when rotating - rotate edge
