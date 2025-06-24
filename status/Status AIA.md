@@ -2,6 +2,7 @@
 
 ## Current ToDo List
 
+(see also ../doc/Lee_TODO.txt)
 30 April 2025:  Wiki out-of-date 
 
 ...       
@@ -27,7 +28,7 @@ Anything here yet?
 Module/ Still to be done/ Who is doing /date
 
 #### Heapsort – 
-    Background to be expanded.  LKS
+    Background to be expanded.  LKS (Lee worked on this)
 
 #### Mergesort?
 
@@ -55,11 +56,11 @@ See that file for details.
 
 #### "UI" and Improve internal design
 
-     + Lee to drive this -- several ideas in the projs|_2025 file, including
+     + Lee to drive this -- several ideas in the projs\_2025 file, including
 
      + colors -- consistency
  
-    + main menu
+     + main menu
 
      + ?update Wiki -- students or us, depending on the topic
 
@@ -82,12 +83,12 @@ See that file for details.
 
     + aim for nice animation of list mergesort but try to make it general enough to be easily used/adapted for other algorithms
 
-    + Lee has several ideas, see projs_2025 file
+    + Lee has several ideas, see projs\_2025 file
     
 
 #### Now we really need to decide on a possible fifth project if we need it.
 
-      + Lee to decide on minimax a/o alpha-beta.  Linda not too familiar with these.  See detailed thoughts in Lee's file projs_2025
+      + Lee to decide on minimax a/o alpha-beta.  Linda not too familiar with these.  See detailed thoughts in Lee's file projs_\2025
 
        + Splay trees?
 

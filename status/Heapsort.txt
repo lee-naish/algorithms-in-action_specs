@@ -1,11 +1,15 @@
 Heapsort.txt
 
 
+Animation
+        Some bugs+imperfections fixed 6/2025
 
 
 
 Background/Explanations
  
+        Lee has done upheap and downheap plus some polishing, could be worth
+        a review (currently quite concise)
      	add upheap and downheap    ) 5 March LKS to do
 	polish, e.f. paragraph 1   ) 
 

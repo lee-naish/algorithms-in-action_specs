@@ -3,7 +3,12 @@ Link: algorithms-in-action_specs/doc/Lee_TODO.txt
 See also algorithms-in-action_specs/doc/status.txt
 ==================================================
 
-Heapsort background "cildren"
+Heapsort - maybe use color in heap creation, eg nodes that are in heaps are
+green (in tree + array) Change blue->white to blue->green and red->white to
+red->green. Green can stay for sorting part also - all the "deselect" parts
+use green.
+
+DONE Heapsort background "cildren"
 
 DONE Heapsort "Exercises/Exploration" heading in extra
 
@@ -45,13 +50,17 @@ AVL pointers overlap in rotation sometimes, eg 37% of
 https://dev-aia.vercel.app/?alg=AVLTree&mode=insertion&list=63,27,64,55,74,68,43,88,12,6&value=2
 hard to avoid some not so good cases?
 
-Heapsort: i,j shown after (second) downheap when it's not expanded
+DONE Heapsort: first array item not grey at end
 
-Heapsort: at Swap(A[n], A[1]), A[n] highlighted in array but not tree
-just some of the time - eg, first time with below, expand SortHeap(A, n) at
-start
+DONE Heapsort: i,j shown after (second) downheap when it's not expanded
+
+DONE Heapsort: at Swap(A[n], A[1]), A[n] highlighted in array but not tree
+just some of the time - eg, first time with below, just expand SortHeap(A, n) at
+start - NOTE: if we expand BuildHeap it's ok
 https://dev-aia.vercel.app/?alg=heapSort&mode=sort&list=30,28,58,54,47,26,51,86,29,10,37,41
-(+maybe highlight at the line before + avoid stopping twice at this line?)
+
+Heapsort point above: (+maybe highlight at the line before + avoid stopping twice
+at this line?)
 
 Heapsort: maybe stop at while not (IsLeaf(A[i]) or heap) do when heap==True
 (its in explanation so ok?) -review all the animation details
