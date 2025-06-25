@@ -13,38 +13,26 @@ List  Module/Date reviewed
 
 Anything here yet?
 
- 
+     + Heapsort
+
+     + Graph Algorithms
+
+     + Quicksort?
+
+     + Mergesort
+
+
+
 ## Showcase Ready Soon
 
-
 Module/ Still to be done/ Who is doing /date
- 
-+ Heapsort    - Linda to finish Background and review all
 
-<<<<<<< HEAD
-+ Graph Algorithms -  Lee to review, update status in the text file 
-=======
 #### Heapsort – 
     Background to be expanded.  LKS (Lee worked on this)
->>>>>>> 6eb6a183b24acc07d7e02341513c22030667b544
 
-+ Quicksort (2 versions)  -- Linda will review
+#### Mergesort?
 
-+ Mergesort (3 versions?) -- Mostly done, needs polishing?, Linda and Lee to review
-
-
-
-## In the works  -- whether us or students
-
-+ AVL trees -- how much redesign?  Lee has improved tree movement and resizing
-              Show recursion, possibly with arcs or boxes 
-              Do we still need to redo highlighting
-
-              I think we decided not to do AVL iterative.  Lee? 
-
-
- 
-
+Mostly done -- ?needs polishing
 
 
 
@@ -65,8 +53,6 @@ See that file for details.
 
      + Consistency between BST-AVL (iterative and recursive) 
 
-     + BST colors to be consistent 
-
 
 #### "UI" and Improve internal design
 
@@ -77,8 +63,6 @@ See that file for details.
      + main menu
 
      + ?update Wiki -- students or us, depending on the topic
-
-     + Landing Page -- consistent; menu; hide modules under construction
 
 
 #### Simple algorithms
