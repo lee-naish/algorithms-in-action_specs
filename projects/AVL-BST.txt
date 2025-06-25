@@ -1,0 +1,8 @@
+AVL-BST
+
+AIA has a number of tree-search algorithms.  The most basic of these in the binary search tree, which can show bad complexity for certain inputs. The AVL tree is another binary tree, with many of the same properties as the binary search tree, with the additional capacity to remain balanced, giving it o(log n) search.
+
+  
+
+
+
