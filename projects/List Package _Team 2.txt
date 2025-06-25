@@ -1,0 +1,5 @@
+Team 2: List Package
+List are often used as auxiliary data structures in complex algorithms.  
+The clients would like this team to implement a list data structure, with defined operations and interface that can be plugged into other algorithm animations.
+The operations needed are initialization, insertion, deletion, and search.
+Iinitially the team will build a framework to demonstrate the list package.  The team will then implement use the package in building a Linked List Mergesort module for Algorithms in Action.
