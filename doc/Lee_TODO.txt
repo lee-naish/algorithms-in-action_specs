@@ -3,7 +3,18 @@ Link: algorithms-in-action_specs/doc/Lee_TODO.txt
 See also algorithms-in-action_specs/doc/status.txt
 ==================================================
 
-Heapsort - maybe use color in heap creation, eg nodes that are in heaps are
+Pseudocode highlighting: highlight line before or after execution has
+always been an issue. Possibly better design is highlight location
+just before/after a loc (need to choose which one to use when control
+flow jumps).  Could possibly highlight line just completed as now *and
+also* highlight next line to execute (perhaps in a less obvious way, eg,
+just line number; need to deal with case where next line = current line).
+Allows to see where control will jump to, more clear that its the state
+after first line executed that is displayed in animation,...
+
+Natural mergesort background formatting, check wording
+
+DONE Heapsort - maybe use color in heap creation, eg nodes that are in heaps are
 green (in tree + array) Change blue->white to blue->green and red->white to
 red->green. Green can stay for sorting part also - all the "deselect" parts
 use green.

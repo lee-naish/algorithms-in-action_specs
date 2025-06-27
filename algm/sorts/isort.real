@@ -4,7 +4,7 @@ producing pseudocode and comments.  More structuring is needed and care
 is needed (of course) - it gets some things wrong.
 
 Should be able to display array with height bars then a gap then a spot
-for temp element (use single array with extra two(?) element and fudge
+for temp element (use single array with extra two(?) elements and fudge
 rendering, eg have " "/null for second last index/value and "tmp"/value
 for last one). Use swapping of elements to get nice tweening. Only use
 this if Insert code is expanded.
@@ -12,14 +12,14 @@ this if Insert code is expanded.
 
 \Code{
 Main
-InsertionSort(A) // sort A[0]...A[N] in increasing order
+InsertionSort(A) // sort A[1]...A[N] in increasing order
 \In{
-    for i <- 1 to N // iterate, starting with second element
-    \Expl{ At each iteration the elements A[0]...A[i-1] are
-        sorted. Initially A[0] (a single element) is sorted.
+    for i <- 2 to N // iterate, starting with second element
+    \Expl{ At each iteration the elements A[1]...A[i-1] are
+        sorted. Initially A[1] (a single element) is sorted.
     \Expl}
     \In{
-        Insert A[i] into the sorted region, A[0]...A[i-1] \Ref Insert
+        Insert A[i] into the sorted region, A[1]...A[i-1] \Ref Insert
         \Expl{ The elements up to A[i-1] are
             already sorted. This step extends the sorted region to A[i].
         \Expl}
@@ -41,7 +41,7 @@ A[j] <- tmp // Insert element into correct position
 \Code{
 ShiftRight
 j <- i // We scan right to left
-while j > 0 and A[j-1] > tmp // For all elements > tmp
+while j > 1 and A[j-1] > tmp // For all elements > tmp
 \Expl{ We stop when we the previous element is less than
     or equal to tmp, or we reach the end of the array.
 \Expl}
