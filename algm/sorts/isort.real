@@ -12,9 +12,9 @@ this if Insert code is expanded.
 
 \Code{
 Main
-InsertionSort(A) // sort A[1]...A[N] in increasing order
+InsertionSort(A, n) // sort A[1]...A[n] in increasing order
 \In{
-    for i <- 2 to N // iterate, starting with second element
+    for i <- 2 to n // iterate, starting with second element
     \Expl{ At each iteration the elements A[1]...A[i-1] are
         sorted. Initially A[1] (a single element) is sorted.
     \Expl}
