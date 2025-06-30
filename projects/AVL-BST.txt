@@ -1,8 +1,17 @@
 AVL-BST
 
-AIA has a number of tree-search algorithms.  The most basic of these in the binary search tree, which can show bad complexity for certain inputs. The AVL tree is another binary tree, with many of the same properties as the binary search tree, with the additional capacity to remain balanced, giving it o(log n) search.
+AIA has a number of tree-search algorithms.  The most basic of these in the binary search tree (BST), which can show bad complexity for certain inputs. The AVL tree is another binary tree, which is basically a BST, with the additional capacity to remain balanced, giving it o(log n) search.
+
+In the current version of AIA, the binary search tree (BST) implementation is iterative, while the AVL tree implementation is recursive.  As clients, we would like to see a recursive BST implemented, to emphasize its similarity to the AVL tree. We would like the two recursive implementations to be consistent, i.e. similar colors, similar coding.  In fact the AVL tree code can be exactly the same as BST, with two additional lines.  
+
+
+LEE -- do we want an iterative AVL tree, too? 
 
   
+Both recursive operations could benefit from a clear design to show how the stack builds up, and smooth rotation (AVL only) and resizing of the tree as it grows.  Other improvements to be implemented in conjunction with the clients.
+
+
+
 
 
 
