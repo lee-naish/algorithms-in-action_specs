@@ -1,6 +1,6 @@
 ## Global Issues
 
-There are several desirable enhancements to AIA that affect multiple
+This project addresses several desirable enhancements to AIA that affect multiple
 algorithms. Some are related to making future development of the code
 easier, for example, adding new algorithms modules.  Others concern the
 function of AIA.

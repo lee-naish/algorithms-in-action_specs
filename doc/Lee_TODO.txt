@@ -3,6 +3,11 @@ Link: algorithms-in-action_specs/doc/Lee_TODO.txt
 See also algorithms-in-action_specs/doc/status.txt
 ==================================================
 
+List mergesort pseudocode: head(L) -> L.head etc (more like AVL tree
+notation)?
+
+Look into geometric algorithms such as convex hull and add to proj list
+
 Pseudocode highlighting: highlight line before or after execution has
 always been an issue. Possibly better design is highlight location
 just before/after a loc (need to choose which one to use when control
