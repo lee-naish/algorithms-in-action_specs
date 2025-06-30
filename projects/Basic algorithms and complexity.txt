@@ -1,0 +1,18 @@
+Basic algorithms and complexity
+
+Most of the AIA modules present complicated algorithms, with the purpose of explaining the workings of the algorithm to students.  There is also a place for implementing a few basic algorithms, with the idea of demonstrating more abstract concepts.  One such concept is complexity.  Using the simpler algorithms, this team will develop input data sets that demosnstrate average, worst, and best case behavior,
+
+Since the input data in AIA modules is generally relatively small, so that the detailed workings of the algorithm can be studied, a challenge for this team will be how to demonstrate the different behaviors, which may only be apparent with larger input data.  The team will develop design ideas for how to achieve this aim and consult further with the clients before implementing them. 
+
+The algorithms this team will implement include: Insertion Sort, Selection Sort, 
+
+LEE fill in here -- simple search BST is already in the AVL-BST proposal
+
+A REAL specification is already available for Insertion Sort.  The team will need to develop a REAL specification  for Selection Sort, and consult with the clients before commencing animation of that module.
+
+
+LEE -- Recursion vs. Iterative -- this might be the purview of the AVL-BST group -- although maybe this team could take their BST's and do some demonstrating of concept -- or at least propose a design?
+
+Also -- we had thought of putting the URL details in with the global issues group -- would it be better in this team?
+
+
