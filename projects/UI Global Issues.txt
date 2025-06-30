@@ -1,0 +1,24 @@
+Global Issues
+
+This team will be working on global issues.  A key requirement here is that new pages work well on all screens, large and small.
+
+One task will be to create a consonant interface with the different algorithm modules.  For example, the colour codings need to be abstract and consistent, rather than being hard-coded in different ways in different algorithm modules.  
+
+
+
+LEE fill in other tasks, please
+
+
+
+
+Some issues may be ill-specified at first.  This team will be expected to present their design ideas to the clients frequently, especially in the initial stages, probably through pen and paper designs or "quick and dirty" mock-ups, in order to prevent wasting time implementing designs that do not fit the purposes the clients require.  Additionally, the team has to organize their work in such a way that they do not collide with teams working on specific modules.
+
+
+A good starting point for this team would be the landing page, the lists of algorithm modules.  The clients would like all algorithms  to be visible at once (with links to the appropriate AIA module), with an improved format.  Importantly, we need a clear mechanism for easily displaying or hiding the algorithm -- this is particularly important when algorithm modules are under development, so that there status can be switched from hidden to visible once the module is ready for use.
+
+LEE -- more detail about the "improved format" above?
+
+
+The Wiki needs to be updated, with clear instructions about colors, adding algorithms, hiding algorithms in the landing page, and more.
+
+LEE -- expand the URL business?
