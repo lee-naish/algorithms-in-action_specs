@@ -14,4 +14,13 @@ Both recursive operations could benefit from a clear design to show how the stac
 
 
 
+Lee notes:
 
+I don't think iterative AVL is worthwile.
+I think we will need to provide more guidance with how recurion and
+other things are displayed. I'm not sure what the current AVL
+animation rules are for highlighting etc. It's probably good to come up
+with something sensible and have that implemented.  As an
+alternative/addition we could add boxes as discussed and see how that
+looks. I suspect we might want the boxes other than the innermost one to
+not stand out too much.

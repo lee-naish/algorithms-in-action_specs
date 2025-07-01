@@ -16,3 +16,26 @@ LEE -- Recursion vs. Iterative -- this might be the purview of the AVL-BST group
 Also -- we had thought of putting the URL details in with the global issues group -- would it be better in this team?
 
 
+Notes from Lee:
+Selection sort pseudocode is done (in this repo /algm/sorts/ - I guess
+we should copy both to the main AIA repository if/when you think they
+are ok)
+
+As I've said, I'm not sure how best to demonstrate complexity in the AIA
+framework and I'm not convinced that AIA is the right tool for this. We
+already have options for different input versions.  It could be improved
+in some cases (eg, Quicksort has the "Ideal" case and that generates new
+data rather than permuting the existing data) but I'm not sure what else
+the students would do here. I think having an insertion sort animation
+is worthwhile (selection sort less so as it's a less useful algorithm).
+If it's a good group and they knock these off with time to spare we
+could get them to do another simple sorting algorithm (bubble sort comes
+to mind, though it's not a good algorithm) or something similar such as
+finding the median (adapting quicksort and using partition).
+
+I guess we could give the URL stuff to this team, though it's not such a
+good fit.
+
+I think the AVL/BST group needs to look at recursion so skip it here.
+
+

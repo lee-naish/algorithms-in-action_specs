@@ -27,9 +27,25 @@ represented by "Null".
 
 Linked lists are better represented by either some symbol that represents
 the empty list or an arrow that points to a box that is divided into
-two part (or two boxes that are joined). The first will contain the
+two parts (or two boxes that are joined). The first will contain the
 list elements and the second will contain the empty list symbol or
 an arrow to the next list cell. AIA contains a module that implements
 graphs, including various forms of trees, and this has similar visual
 elements. Extending it to support lists seems like the best solution.
+
+### Visualisation in merge sort
+
+Exactly how the algorithm is visualised will be determined in consultaion
+with the clients, who have some ideas but these may change as prototypes
+are developed.  For example, a key operation in mergesort is merging two
+sorted lists **L* and **R** to form a new list **M**. The two input lists
+could each be displayed horizontally, one above the other. All arrows
+would point to the right. As the merge operation proceeds, the list cells
+could remain in the same positions but the arrows and labels such as **L**
+and **R** could change (helping illustrate that the algorithm changes pointers
+but not the data in list cells). Arrows may then point right, up, down or
+diagonally. At the end of the merge operation the resulting list **M**
+could be re-rendered horizontally for clarity, with all arrows pointing
+to the right again.
+
 
