@@ -6,14 +6,9 @@ Since the input data in AIA modules is generally relatively small, so that the d
 
 The algorithms this team will implement include: Insertion Sort, Selection Sort, 
 
-LEE fill in here -- simple search BST is already in the AVL-BST proposal
 
 A REAL specification is already available for Insertion Sort.  The team will need to develop a REAL specification  for Selection Sort, and consult with the clients before commencing animation of that module.
 
-
-LEE -- Recursion vs. Iterative -- this might be the purview of the AVL-BST group -- although maybe this team could take their BST's and do some demonstrating of concept -- or at least propose a design?
-
-Also -- we had thought of putting the URL details in with the global issues group -- would it be better in this team?
 
 
 Notes from Lee:
@@ -36,6 +31,6 @@ finding the median (adapting quicksort and using partition).
 I guess we could give the URL stuff to this team, though it's not such a
 good fit.
 
-I think the AVL/BST group needs to look at recursion so skip it here.
+
 
 
