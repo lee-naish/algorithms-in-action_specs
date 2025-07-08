@@ -8,6 +8,8 @@ Reviewed 6 July Linda
 Animation OK, a few things that could be improved (as student start-ups?)
 
 1. Some things appear and disappear: left, right, call stack.  I see the problem with left and right -- the screen tets too crowded, but why not leave the stack?
+Lee: the idea was to not show the stack if recursion isn't expanded
+(could do the same with other recursive algorithms such as quicksort)
 
 2. I still think that the call stack could be shown better:
 
@@ -16,6 +18,10 @@ Animation OK, a few things that could be improved (as student start-ups?)
 - if not graphically, is there an easy way to show it vertically instead of horizontally?
 
 - Call stack (n,p) -- n and p are not anywhere else.  Maybe add to the explanations?: e.g. linda 2 Mergesort(A,left,right), Add to explanation: In the call stack, n is left and p is right.  Similar for line 7 Mergesort(A left, mid): In the call stack, n is left, p is mid), etc?  Too many words?  I think it would be worth it.   
+Lee: (n,p) has been fixed (copy-paste error from recursive DFS)
+I agree we could to the stack in a more similar way to quicksort and rex
+sort - I think I had a go initially but it got messy so I used a simpler
+method
  
 
 3. line 19
@@ -34,6 +40,7 @@ Expanded
 266/367  72%  Sorry, I didn't see the URL option you've been talking about
 
 Is it possible to show ap2 -- making the array larger -- again, not for Lee to do, but as a starter for a student group?
+Lee: noted but not fixed yet
 
 Background is good, doesn't need any more work.
 
