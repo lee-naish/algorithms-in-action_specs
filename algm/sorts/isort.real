@@ -19,7 +19,7 @@ InsertionSort(A, n) // sort A[1]...A[n] in increasing order
         sorted. Initially A[1] (a single element) is sorted.
     \Expl}
     \In{
-        Insert A[i] into the sorted region, A[1]...A[i-1] \Ref Insert
+        Insert element i into the sorted region, elements 1...i-1 \Ref Insert
         \Expl{ The elements up to A[i-1] are
             already sorted. This step extends the sorted region to A[i].
         \Expl}
