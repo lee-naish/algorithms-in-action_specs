@@ -1,0 +1,9 @@
+Natural Mergesort
+
+Reviewed by Linda 9 July 2025
+
+I'm not sure why the module opens with the runs in color at line 3.  Nothing has been done yet to demarcate the runs, so to me this is confusing.  Why not start with them no color, as is done in line 5?
+
+Otherwise, this is all OK, animation and explanation, and all congruent with Mergesort and BUMergesort.
+
+ 
