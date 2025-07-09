@@ -2,5 +2,22 @@
 
 Mergesort Bottum Up
 
-Reviewed 6 July 2025 Linda
+Reviewed 9 July 2025 Linda
 
+
+I think I might have mentioned this before -- when it gets to the end of any iteration, where,  
+where 
+
+line 13: 
+       left <- right + 1  // skip to the next pair of runs (if any)
+
+gives a left that is beyond the end of the array, it doesn't show the left.  Nor are we keeping a counter
+anywhere. So the comparison 
+
+line 7:
+      while left + runlength < size     
+
+is -- clear to anyone who is following what's going on and realizes that left is off the array, but technically it's not clear what we're comparing.
+
+
+Background is good, and congruent with TopDown Mergesort.
