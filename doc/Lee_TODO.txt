@@ -8,7 +8,12 @@ notation)? + explanations
 
 DONE mergesort stack caption has (n,p)
 
-Mergesort ap2 <- ap2+1 goes out of range
+DONE nat mergesort missing \In{
+
+DONE Mergesort ap2 <- ap2+1 goes out of range, also left out of range?
+(did a few other things also - removing variables where not needed etc)
+
+Quicksort(s) - skip highlight of i+j in stack (and pivot also?)
 
 DONE Look into geometric algorithms such as convex hull and add to proj list
 
