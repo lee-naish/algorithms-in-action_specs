@@ -22,6 +22,7 @@ Anything here yet?
      + Mergesort
 
 **TopDown Mergesort** mostly good. Animation and explanation reviewed by Linda 6 July.  Noted: index disappears when off the rhs of the array (see details in Mergesort.txt status file).  As at 9 July, we decided that perhaps students who are working on insertion sort etc. might start with putting in a graphical stack representation in mergesort.  Lee is simplifying the quicksort stack, and suggest we use this as the basis for all the stacks.
+Lee: I'm not working on the stack - just a suggestion currently
 
 **BottomUp Mergesort** good.  Animation and explanation reviewed by Linda 9 July.  One slight glitch in the animation is noted in the status file MergesortBU.txt.
 
