@@ -17,9 +17,9 @@
 +Quicksort
 
 
-     + Graph Algorithms
+     
+	+ Graph Algorithms (not all reviewed yet as at 13 July 2025)
 
-     + Quicksort?
 
 
 
@@ -35,6 +35,27 @@ Background - a problem with Vercel noted to Lee.  Otherwise,
 it's fine.
 
 **Quicksort** All good.  Reviewed by Linda 13 July.  Lee is planning to make the stack less multi-colored, which would be an improvement and good prototype for other algorithm stack representations, but it's OK to use as is.
+
+**Graph Algorithms* -- probably all or mostly good, to be reviewed:
+
+	DFS
+	DFS iterative
+	BFS
+	Dijkstra's Shortest Path
+	A* Heuristic Search
+	Prim's MST
+	Kruskal MST
+	Warshall Transitivte Closure
+
+
+	
+
+
+
+
+
+
+
 
 
 
