@@ -25,20 +25,19 @@ Anything here yet?
 
 **BottomUp Mergesort** good.  Animation and explanation reviewed by Linda 9 July.  One slight glitch in the animation is noted in the status file MergesortBU.txt.
 
-(I am omitting Natural Mergesort from the Showcase Ready list, see individual file for reasons.)
+(I am omitting Natural Mergesort from the Showcase Ready list, reviewed 13 July 2025, see individual file for reasons.)
 
+**Heapsort** good. Reviewed by Linda 13 July 2025.    
+Animation excellent. 
+Background - a problem with Vercel noted to Lee.  Otherwise, 
+it's fine.
 
 
 ## Showcase Ready Soon
 
 Module/ Still to be done/ Who is doing /date
 
-#### Heapsort – 
-    Background to be expanded.  LKS (Lee worked on this)
 
-#### Mergesort?
-
-Mostly done -- ?needs polishing
 
 
 
@@ -71,9 +70,9 @@ See that file for details.
      + ?update Wiki -- students or us, depending on the topic
 
 
-#### Simple algorithms
+#### Other algorithms
 
-     + Demonstrate bad complexity -- linear sorts, pre-prepared data
+
 
            + Insertion sort pseudocode draft has been done
 
