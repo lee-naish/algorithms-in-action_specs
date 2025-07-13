@@ -36,10 +36,17 @@ it's fine.
 
 **Quicksort** All good.  Reviewed by Linda 13 July.  Lee is planning to make the stack less multi-colored, which would be an improvement and good prototype for other algorithm stack representations, but it's OK to use as is.
 
-**Graph Algorithms* -- probably all or mostly good, to be reviewed:
+**DFS Recursive**  All good.  Optional suggestion for highlighting in DFS_Recursive.txt.
 
-	DFS
-	DFS iterative
+
+**DFS iterative**   All good.  Graphical stack would be a good enhancement.  There is a typo in the pseudocode.  See DFS_Iterative.txt
+
+
+
+
+**Graph Algorithms** -- probably all or mostly good, still to be reviewed:
+
+
 	BFS
 	Dijkstra's Shortest Path
 	A* Heuristic Search
