@@ -2,8 +2,18 @@ Natural Mergesort
 
 Reviewed by Linda 9 July 2025
 
-I'm not sure why the module opens with the runs in color at line 3.  Nothing has been done yet to demarcate the runs, so to me this is confusing.  Why not start with them no color, as is done in line 5?
 
-Otherwise, this is all OK, animation and explanation, and all congruent with Mergesort and BUMergesort.
+Animation and explanation, and all congruent with Mergesort and BUMergesort.
+
+Module opens with the runs in color at line 3.  Although the runs actually exist a priori, nothing has been done yet to demarcate them.
+
+The coloring makes sense when the animation is run at the collapsed level, where the first step is to merge the (pre-existing) runs.  However, in my view (LKS), when the code is expanded, and the color then disappears at the next step, I don't think it works.  
+
+Additionally, there is nothing in the code to show how the algorithm finds the end of a run.  It might seem trivial to us, but students might wonder about this.
+
+
+  
+
+
 
  

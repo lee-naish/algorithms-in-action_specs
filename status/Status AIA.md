@@ -9,7 +9,7 @@
 
 ## Showcase Ready
 
-List  Module/Date reviewed
+
 
 Anything here yet?
 
@@ -25,7 +25,7 @@ Anything here yet?
 
 **BottomUp Mergesort** good.  Animation and explanation reviewed by Linda 9 July.  One slight glitch in the animation is noted in the status file MergesortBU.txt.
 
-
+(I am omitting Natural Mergesort from the Showcase Ready list, see individual file for reasons.)
 
 
 
