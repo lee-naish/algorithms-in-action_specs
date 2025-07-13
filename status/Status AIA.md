@@ -7,19 +7,21 @@
 
 ...       
 
-## Showcase Ready
+## Showcase Ready (reviewed)
 
 
++Heapsort
 
-Anything here yet?
++Mergesort (Top-down and bottom-up)
 
-     + Heapsort
++Quicksort
+
 
      + Graph Algorithms
 
      + Quicksort?
 
-     + Mergesort
+
 
 **TopDown Mergesort** mostly good. Animation and explanation reviewed by Linda 6 July.  Noted: index disappears when off the rhs of the array (see details in Mergesort.txt status file).  As at 9 July, we decided that perhaps students who are working on insertion sort etc. might start with putting in a graphical stack representation in mergesort.  Lee is simplifying the quicksort stack, and suggest we use this as the basis for all the stacks.
 
@@ -31,6 +33,9 @@ Anything here yet?
 Animation excellent. 
 Background - a problem with Vercel noted to Lee.  Otherwise, 
 it's fine.
+
+**Quicksort** All good.  Reviewed by Linda 13 July.  Lee is planning to make the stack less multi-colored, which would be an improvement and good prototype for other algorithm stack representations, but it's OK to use as is.
+
 
 
 ## Showcase Ready Soon
