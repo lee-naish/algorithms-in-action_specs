@@ -1,0 +1,13 @@
+
+
+DFS Iterative 
+
+Reviewed by Linda 13 July 2025
+
+
+When node is popped off the stack, it might be worthwhile to highlight this node in the graph view.  It is shown by n in the array, but not in the graph -- depending on a student's learning mode this may or may not be important.  
+
+It's not a problem, as such, animation is OK without it.
+
+Animation clear.
+Background good.

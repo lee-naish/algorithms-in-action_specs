@@ -7,24 +7,61 @@
 
 ...       
 
-## Showcase Ready
+## Showcase Ready (reviewed)
 
-List  Module/Date reviewed
 
-Anything here yet?
++Heapsort
 
-     + Heapsort
++Mergesort (Top-down and bottom-up)
 
-     + Graph Algorithms
++Quicksort
 
-     + Quicksort?
 
-     + Mergesort
+     
+	+ Graph Algorithms (not all reviewed yet as at 13 July 2025)
+
+
+
 
 **TopDown Mergesort** mostly good. Animation and explanation reviewed by Linda 6 July.  Noted: index disappears when off the rhs of the array (see details in Mergesort.txt status file).  As at 9 July, we decided that perhaps students who are working on insertion sort etc. might start with putting in a graphical stack representation in mergesort.  Lee is simplifying the quicksort stack, and suggest we use this as the basis for all the stacks.
 Lee: stack was just a suggestion. Hmm, I might have a go at it though
 
 **BottomUp Mergesort** good.  Animation and explanation reviewed by Linda 9 July.  One slight glitch in the animation is noted in the status file MergesortBU.txt.
+
+(I am omitting Natural Mergesort from the Showcase Ready list, reviewed 13 July 2025, see individual file for reasons.)
+
+**Heapsort** good. Reviewed by Linda 13 July 2025.    
+Animation excellent. 
+Background - a problem with Vercel noted to Lee.  Otherwise, 
+it's fine.
+
+**Quicksort** All good.  Reviewed by Linda 13 July.  Lee is planning to make the stack less multi-colored, which would be an improvement and good prototype for other algorithm stack representations, but it's OK to use as is.
+
+**DFS Recursive**  All good.  Optional suggestion for highlighting in DFS_Recursive.txt.
+
+
+**DFS iterative**   All good.  Graphical stack would be a good enhancement.  There is a typo in the pseudocode.  See DFS_Iterative.txt
+
+
+
+
+**Graph Algorithms** -- probably all or mostly good, still to be reviewed:
+
+
+	BFS
+	Dijkstra's Shortest Path
+	A* Heuristic Search
+	Prim's MST
+	Kruskal MST
+	Warshall Transitivte Closure
+
+
+	
+
+
+
+
+
 
 
 
@@ -34,12 +71,7 @@ Lee: stack was just a suggestion. Hmm, I might have a go at it though
 
 Module/ Still to be done/ Who is doing /date
 
-#### Heapsort – 
-    Background to be expanded.  LKS (Lee worked on this)
 
-#### Mergesort?
-
-Mostly done -- ?needs polishing
 
 
 
@@ -72,9 +104,9 @@ See that file for details.
      + ?update Wiki -- students or us, depending on the topic
 
 
-#### Simple algorithms
+#### Other algorithms
 
-     + Demonstrate bad complexity -- linear sorts, pre-prepared data
+
 
            + Insertion sort pseudocode draft has been done
 
