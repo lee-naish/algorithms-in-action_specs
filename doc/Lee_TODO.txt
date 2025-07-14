@@ -8,7 +8,33 @@ notation)? + explanations
 
 DONE mergesort stack caption has (n,p)
 
-Mergesort ap2 <- ap2+1 goes out of range
+DONE nat mergesort missing \In{
+
+DONE Mergesort ap2 <- ap2+1 goes out of range, also left out of range?
+(did a few other things also - removing variables where not needed etc)
+
+Mergesort - add stack like qs/rexs. Possible problems with array B (want it
+next to array A) and screen real estate. For students. Ideally have left,
+right, stack look/behave similarly in all of these algorithms.  Best base it
+on rex sort?
+
+Array indices and vars for two-element array NQR at line 3 in quicksort -
+something to do with stack rendering
+
+DONE REX sort - avoid stack display when recursion not expanded
+
+DONE Quicksort(s) - add left and right after last recursive call?
+
+DONE Quicksort(s) - avoid stack display when recursion not expanded?
+
+DONE Quicksort(s) - skip highlight of i+j in stack (and pivot also?)
+
+DONE Quicksort(s) - add left and right to array
+
+DONE Expand pseudocode doesn't re-execute properly??
+https://dev-aia.vercel.app/?alg=radixSortMSD&mode=sort&list=58,7,2,27,15,12,32,4,19,1,10,12
+collapse all, step 23, expand line 8 - should show i but doesn't until next
+line
 
 DONE Look into geometric algorithms such as convex hull and add to proj list
 
