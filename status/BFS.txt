@@ -1,0 +1,19 @@
+
+BFS
+
+reviewed by Linda 14 July 2025
+
+Background
+
+OK and in the same format as the other graph algorithms.
+
+Do we want to add a few words here and there -- and maybe in DFS background as well -- explicitly contrasting BFS and DFS?  
+
+I would prefer to add this:
+e.g. paragraph 6: BFS uses a queue for the frontier nodes --> BFS uses a queue for the frontier nodes, in contrast to DFS, which uses a stack.  [and maybe vice versa in DFS]
+
+Maybe this, too.
+par 3: BFS will find paths with the minimum number of edges. --> In contrast to some other algorithms such as DFS, BFS will find paths with the minimum number of edges.
+
+
+Animation:  All good. Consistency with DFS is nice.   
