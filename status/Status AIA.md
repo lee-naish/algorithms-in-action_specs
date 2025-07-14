@@ -37,7 +37,7 @@ it's fine.
 
 **Quicksort** All good.  Reviewed by Linda 13 July.  Lee is planning to make the stack less multi-colored, which would be an improvement and good prototype for other algorithm stack representations, but it's OK to use as is.
 
-**DFS Recursive**  All good.  Optional suggestion for highlighting in DFS_Recursive.txt.There is a typo in the pseudocode.  
+**DFS Recursive**  All good.  Optional suggestion for highlighting in DFS_Recursive.txt.There is a typo in the pseudocode, either line 9 (fully expanded) uses == for equality, line 17 uses =. 
 
 
 **DFS iterative**   All good.  
@@ -47,10 +47,16 @@ See suggested highlighting in DFS_Iterative.txt. Would this necessitate similar 
 Background: Pedagogy might be improved by a few words contrasting BFS with DFS, see BFS.txt.
 Animation:  Good.   
 
+
+**Dijkstra's Shortest Path**  Good to go.
+Background good. 
+Animation: as in DFS iterative, I think there would be pedagogical mileage in highlighting the n node in the graph view after it's been removed from the PQ and while its neighbors are being examined.  Maybe a red or other color rim around the node.   
+
+
+
 **Graph Algorithms** -- probably all or mostly good, still to be reviewed:
 
 
-	Dijkstra's Shortest Path
 	A* Heuristic Search
 	Prim's MST
 	Kruskal MST
