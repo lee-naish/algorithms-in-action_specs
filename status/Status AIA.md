@@ -52,6 +52,12 @@ Animation:  Good.
 Background good. 
 Animation: as in DFS iterative, I think there would be pedagogical mileage in highlighting the n node in the graph view after it's been removed from the PQ and while its neighbors are being examined.  Maybe a red or other color rim around the node.   
 
+**Prim's MST**
+There is an error in the Background -- see PrimMST.txt
+Animation: Picks Node 1 as default Min at the beginning -- see comment in PrimMST.txt.
+
+
+
 
 
 **Graph Algorithms** -- probably all or mostly good, still to be reviewed:
