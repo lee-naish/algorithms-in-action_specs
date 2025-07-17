@@ -6,10 +6,23 @@ Reviewed by Linda 9 July 2025
 Animation and explanation, and all congruent with Mergesort and BUMergesort.
 
 Module opens with the runs in color at line 3.  Although the runs actually exist a priori, nothing has been done yet to demarcate them.
+Lee: this mirrors the BUP version where the initials runs are determined
+by runlength <- 1 and thats where they are highlighted.
 
 The coloring makes sense when the animation is run at the collapsed level, where the first step is to merge the (pre-existing) runs.  However, in my view (LKS), when the code is expanded, and the color then disappears at the next step, I don't think it works.  
+Lee: this is the same as BUP. Just before "merge all consecutive pairs
+of runs" all the runs are highlighted. Within that operation we want to
+highlight single pairs of runs, so initially everything is unhighlighted
+then runs are (re)highlihted as we find them. I'm not sure of a better
+way to do this off hand. I guess potentially we could fade the runs
+instead of unhighlighting them (I'm not quite sure how to do that off
+hand). We could possibly get the global issues group to look into that
+kind of thing. We could potentially use it for stack display also, where
+we want to distinguish two different "partitions".
 
 Additionally, there is nothing in the code to show how the algorithm finds the end of a run.  It might seem trivial to us, but students might wonder about this.
+Lee: Its the mid < size and A[mid] <= A[mid+1] test in the while loop;
+I've changed the explanation to explicitly mention the end of the run.
 
 
   

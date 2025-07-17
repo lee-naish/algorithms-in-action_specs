@@ -7,5 +7,6 @@ Animation:
 At some point we might want to do something more graphical for the stack.
 
 Pseudocode line 17 fully expanded uses = for equality, line 9 uses ==  
+Lee: Fixed
 
 Background good.

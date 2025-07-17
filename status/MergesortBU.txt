@@ -18,6 +18,7 @@ line 7:
       while left + runlength < size     
 
 is -- clear to anyone who is following what's going on and realizes that left is off the array, but technically it's not clear what we're comparing.
+Lee: fixed
 
 
 Background is good, and congruent with TopDown Mergesort.

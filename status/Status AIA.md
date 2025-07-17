@@ -25,6 +25,7 @@
 
 **TopDown Mergesort** mostly good. Animation and explanation reviewed by Linda 6 July.  Noted: index disappears when off the rhs of the array (see details in Mergesort.txt status file).  As at 9 July, we decided that perhaps students who are working on insertion sort etc. might start with putting in a graphical stack representation in mergesort.  Lee is simplifying the quicksort stack, and suggest we use this as the basis for all the stacks.
 Lee: stack was just a suggestion. Hmm, I might have a go at it though
+Lee: fixed the index problem and the stack
 
 **BottomUp Mergesort** good.  Animation and explanation reviewed by Linda 9 July.  One slight glitch in the animation is noted in the status file MergesortBU.txt.
 
@@ -34,10 +35,13 @@ Lee: stack was just a suggestion. Hmm, I might have a go at it though
 Animation excellent. 
 Background - a problem with Vercel noted to Lee.  Otherwise, 
 it's fine.
+Lee: problem went away(?)
 
 **Quicksort** All good.  Reviewed by Linda 13 July.  Lee is planning to make the stack less multi-colored, which would be an improvement and good prototype for other algorithm stack representations, but it's OK to use as is.
+Lee: stack done
 
 **DFS Recursive**  All good.  Optional suggestion for highlighting in DFS_Recursive.txt.There is a typo in the pseudocode, either line 9 (fully expanded) uses == for equality, line 17 uses =. 
+Lee: fixed = verses == versus <- in a bunch of files
 
 
 **DFS iterative**   All good.  
@@ -143,3 +147,5 @@ See that file for details.
        + Do more with the string searching algorithms?
 
        + More user interface issues -- but possibly risky to have two groups working in this area, risky enough with one!
+
+Lee: added convex hull

@@ -9,11 +9,12 @@ Animation OK, a few things that could be improved (as student start-ups?)
 
 1. Some things appear and disappear: left, right, call stack.  I see the problem with left and right -- the screen tets too crowded, but why not leave the stack?
 Lee: the idea was to not show the stack if recursion isn't expanded
-(could do the same with other recursive algorithms such as quicksort)
+(same now done with other recursive algorithms such as quicksort)
 
 2. I still think that the call stack could be shown better:
 
 - preferably IMHO graphically (part of a student project?)
+Lee: listed as student project
 
 - if not graphically, is there an easy way to show it vertically instead of horizontally?
 
