@@ -12,7 +12,7 @@
 
 +Heapsort
 
-+Mergesort (Top-down and bottom-up)
++Mergesort 
 
 +Quicksort
 
@@ -23,53 +23,42 @@
 
 
 
-**TopDown Mergesort** mostly good. Animation and explanation reviewed by Linda 6 July.  Noted: index disappears when off the rhs of the array (see details in Mergesort.txt status file).  As at 9 July, we decided that perhaps students who are working on insertion sort etc. might start with putting in a graphical stack representation in mergesort.  Lee is simplifying the quicksort stack, and suggest we use this as the basis for all the stacks.
-Lee: stack was just a suggestion. Hmm, I might have a go at it though
-Lee: fixed the index problem and the stack
+**TopDown Mergesort** mostly good. Animation and explanation reviewed by Linda 6 July, 17 July.
 
-**BottomUp Mergesort** good.  Animation and explanation reviewed by Linda 9 July.  One slight glitch in the animation is noted in the status file MergesortBU.txt.
+Good to go.  Students might work on improving the stack to be like Qsort and Rex.
+  
 
-(I am omitting Natural Mergesort from the Showcase Ready list, reviewed 13 July 2025, see individual file for reasons.)
+**BottomUp Mergesort** good.  Animation and explanation reviewed by Linda 9 July 2025, 17 July.  
+
 
 **Heapsort** good. Reviewed by Linda 13 July 2025.    
-Animation excellent. 
-Background - a problem with Vercel noted to Lee.  Otherwise, 
-it's fine.
-Lee: problem went away(?)
 
-**Quicksort** All good.  Reviewed by Linda 13 July.  Lee is planning to make the stack less multi-colored, which would be an improvement and good prototype for other algorithm stack representations, but it's OK to use as is.
-Lee: stack done
 
-**DFS Recursive**  All good.  Optional suggestion for highlighting in DFS_Recursive.txt.There is a typo in the pseudocode, either line 9 (fully expanded) uses == for equality, line 17 uses =. 
-Lee: fixed = verses == versus <- in a bunch of files
+**Quicksort** All good.  Reviewed by Linda 13 July, improved and reviewed again 17 July 2025.  
+
+**DFS Recursive**  All good.  Optional suggestion for highlighting in DFS_Recursive.txt. Maybe students to do, maybe Lee.  
 
 
 **DFS iterative**   All good.  
-See suggested highlighting in DFS_Iterative.txt. Would this necessitate similar highlighting in BFS for consistency -- in which case maybe just leave it alone.  BFS is clear without highlighting.
+See suggested (optional) highlighting in DFS_Iterative.txt, as for DFS recursive. 
+
+
 
 **BFS** All good. Consistency with DFS is good.
-Background: Pedagogy might be improved by a few words contrasting BFS with DFS, see BFS.txt.
-Animation:  Good.   
 
 
 **Dijkstra's Shortest Path**  Good to go.
 Background good. 
-Animation: as in DFS iterative, I think there would be pedagogical mileage in highlighting the n node in the graph view after it's been removed from the PQ and while its neighbors are being examined.  Maybe a red or other color rim around the node.   
+Animation: possible optional highlighting as above.
 
 **Prim's MST**
-There is an error in the Background -- see PrimMST.txt
-Animation: Picks Node 1 as default Min at the beginning -- see comment in PrimMST.txt.
-Lee: added explanation
-
-
-
+OK.
 
 
 **Graph Algorithms** -- probably all or mostly good, still to be reviewed:
 
 
 	A* Heuristic Search
-	Prim's MST
 	Kruskal MST
 	Warshall Transitivte Closure
 

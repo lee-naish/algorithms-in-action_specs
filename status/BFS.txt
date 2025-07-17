@@ -11,10 +11,15 @@ Do we want to add a few words here and there -- and maybe in DFS background as w
 
 I would prefer to add this:
 e.g. paragraph 6: BFS uses a queue for the frontier nodes --> BFS uses a queue for the frontier nodes, in contrast to DFS, which uses a stack.  [and maybe vice versa in DFS]
+
 Lee: what about the other algorithms that use various priority queue?
+Linda: I think the other algorithms have different aims, whereas DFS and BFS as I understand them have the same aim, and really the only way in which they differ is the data structure.  Which is why I think the explicit mention here might be helpful, but not necessary for the others.
 
 Maybe this, too.
 par 3: BFS will find paths with the minimum number of edges. --> In contrast to some other algorithms such as DFS, BFS will find paths with the minimum number of edges.
 Lee: As above, what about Dijkstra, and A*?
+Linda: OK, maybe don't mention this.
 
 Animation:  All good. Consistency with DFS is nice.   
+
+n.b. comment by Linda 17 July, BFS is clear without highlighting we have been talking about for some of the other algorithms, e.g. DFS iterative, MST, shortest path.
