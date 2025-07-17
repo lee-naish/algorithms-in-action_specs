@@ -24,6 +24,8 @@ Additionally, there is nothing in the code to show how the algorithm finds the e
 Lee: Its the mid < size and A[mid] <= A[mid+1] test in the while loop;
 I've changed the explanation to explicitly mention the end of the run.
 
+Lee: background has screwed up formatting (best rewrite is to make it
+more similar to BUP also) - I might have a go at this
 
   
 
