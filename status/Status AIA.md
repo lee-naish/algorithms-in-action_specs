@@ -54,13 +54,15 @@ Animation: possible optional highlighting as above.
 **Prim's MST**
 OK.
 
+**Kruskal MST**
+All good.
+
 
 **Graph Algorithms** -- probably all or mostly good, still to be reviewed:
 
 
 	A* Heuristic Search
-	Kruskal MST
-	Warshall Transitivte Closure
+	Warshall Transitive Closure
 
 
 	
