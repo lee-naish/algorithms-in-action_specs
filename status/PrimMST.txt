@@ -5,11 +5,15 @@ Background good, but I think the following statement is incorrect:
 "Finalised" nodes, for which the shortest or least costly path back to the start node has already been finalised, that is the final parent node has been determined and is recorded;
 
 Not path back to the start node, as MST does not always give shortest path to the start node.
+Lee: added explanation - we can get away with "least costly" if we
+define cost in the right way (nice to have consistency with all these
+algorithms)
 
 
 
 
 Animation clear.  At the start, when all costs are Inf except the Start Node, the PQ Min is Node 1.  But we go straight to the neighbors of Start Node.  Not sure if it would be better not to pick a Min yet? Or to mention something in a pop-up explanation.
+Lee: mistake? for me it stops at line 10 with expand all
 
 As mentioned for other Graph algorithms, there might be some mileage in outlining the Node n during the search of neighbors, as it is the same color as all the other finalized nodes.
 

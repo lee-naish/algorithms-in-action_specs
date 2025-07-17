@@ -59,6 +59,7 @@ Animation: as in DFS iterative, I think there would be pedagogical mileage in hi
 **Prim's MST**
 There is an error in the Background -- see PrimMST.txt
 Animation: Picks Node 1 as default Min at the beginning -- see comment in PrimMST.txt.
+Lee: added explanation
 
 
 
