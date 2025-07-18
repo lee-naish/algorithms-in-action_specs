@@ -3,6 +3,8 @@ Link: algorithms-in-action_specs/doc/Lee_TODO.txt
 See also algorithms-in-action_specs/doc/status.txt
 ==================================================
 
+DONE check/fix = vs == vs <-
+
 DONE List mergesort pseudocode: head(L) -> L.head etc (more like AVL tree
 notation)? + explanations
 
@@ -47,7 +49,7 @@ just line number; need to deal with case where next line = current line).
 Allows to see where control will jump to, more clear that its the state
 after first line executed that is displayed in animation,...
 
-Natural mergesort background formatting, check wording
+Natural mergesort background formatting, re-write somewhat
 
 DONE Heapsort - maybe use color in heap creation, eg nodes that are in heaps are
 green (in tree + array) Change blue->white to blue->green and red->white to
