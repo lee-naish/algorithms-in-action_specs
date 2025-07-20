@@ -1,4 +1,5 @@
 Student project ideas for Sem 2 2025
+See markdown doc for students; some extra stuff here
 
 ----------------------------------
 AVL
@@ -11,6 +12,9 @@ AVL
 ==Recursive BST (same as AVL minus last two lines of code).
 ==Improve iterative BST (maximise consistency with recursive, a bit done).
 ==Consistency between BST-AVL (iterative and recursive)
+
+== radio button input options, duplicate key handling - see TODO file
+== maybe add input array to 234 tree? (mostly done)
 ...
 
 
@@ -28,6 +32,8 @@ components/AlgorithmMenu.js algorithms/index.js)
 ==expand URL stuff so more/all parameters etc are included (eg, table
 size + dynamic flag for hashing, maybe chunk number if easy)
 
+== position of error message, improve error message
+
 ----------------------------------
 Simple algorithms
 ==demonstrate recursion (?BST covered by AVL group?)
@@ -35,7 +41,10 @@ Simple algorithms
 == Insertion sort (pseudocode draft done)
 == Selection sort
 == Maybe fix up Quicksort(s) a bit to make them more like REX sort
-(display left&right, fix colors)
+(display left&right, fix colors - mostly done)
+
+== Quicksort(s), TD mergesort, REX sort stack stuff might be good to
+refactor etc (a bit of a mess)
 
 ----------------------------------
 Linked lists (again)?
@@ -77,5 +86,5 @@ Polish off current string searching algs
 
 
 ----------------------------------
-Local peace as well as World peace
+Local peace as well as World peace (might have to wait until 2026):
 
