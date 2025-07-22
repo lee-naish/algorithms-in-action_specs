@@ -58,11 +58,16 @@ OK.
 All good.
 
 
+**Warshall Transitive Closure**
+Animation: good
+A few wording changes suggested for Background.
+
+
 **Graph Algorithms** -- probably all or mostly good, still to be reviewed:
 
 
 	A* Heuristic Search
-	Warshall Transitive Closure
+
 
 
 	
@@ -136,14 +141,4 @@ See that file for details.
 
 #### Now we really need to decide on a possible fifth project if we need it.
 
-      + Lee to decide on minimax a/o alpha-beta.  Linda not too familiar with these.  See detailed thoughts in Lee's file projs_\2025
-
-       + Splay trees?
-
-       + Skip lists?
-
-       + Do more with the string searching algorithms?
-
-       + More user interface issues -- but possibly risky to have two groups working in this area, risky enough with one!
-
-Lee: added convex hull
+Convex hull
