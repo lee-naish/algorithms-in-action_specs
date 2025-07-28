@@ -63,10 +63,9 @@ Animation: good
 A few wording changes suggested for Background.
 
 
-**Graph Algorithms** -- probably all or mostly good, still to be reviewed:
+**A-Star Heuristic Search**
+I find a couple of unexplained things.  See AStar.txt
 
-
-	A* Heuristic Search
 
 
 
