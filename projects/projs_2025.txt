@@ -23,6 +23,7 @@ AVL
 ==main menu:
 ====format
 ====ability to hide algorithms in progress 
+====make noDeploy algs invisible to search also (can still use URL)
 ====have *single* list of algorithms in code (currently
 components/mainmenu/index.js components/mainmenu/GraphAlgorithms.js
 components/AlgorithmMenu.js algorithms/index.js)
@@ -32,19 +33,23 @@ components/AlgorithmMenu.js algorithms/index.js)
 ==expand URL stuff so more/all parameters etc are included (eg, table
 size + dynamic flag for hashing, maybe chunk number if easy)
 
-== position of error message, improve error message
+== position of error message, improve error messages
 
 ----------------------------------
 Simple algorithms
 ==demonstrate recursion (?BST covered by AVL group?)
 ==demonstrate bad complexity, e.g. linear sorts, pre-prepared data input sets
-== Insertion sort (pseudocode draft done)
+== Insertion sort (pseudocode draft done, also code for gap in 1D array)
 == Selection sort
 == Maybe fix up Quicksort(s) a bit to make them more like REX sort
 (display left&right, fix colors - mostly done)
 
 == Quicksort(s), TD mergesort, REX sort stack stuff might be good to
 refactor etc (a bit of a mess)
++ (maybe) redo stack partitions with black/... bits to demarcate start
+and end of partition (eg first element could be 1/4 black and 3/4 the
+other colour; last element similarly)
+
 
 ----------------------------------
 Linked lists (again)?
