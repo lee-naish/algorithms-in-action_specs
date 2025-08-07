@@ -1,11 +1,6 @@
 Prim MST
 
-Background good, some discussion about this sentence:
-
-"Finalised" nodes, for which the shortest or least costly path back to the start node has already been finalised, that is the final parent node has been determined and is recorded;
-
-Not path back to the start node, as MST does not always give shortest path to the start node.
-Lee: now deleted "shortest or least costly" in all these algs
+Background good as updated 22 July 2025
 
 
 
@@ -16,6 +11,7 @@ Lee: One possibility is we add to the explanation at the
 n <- PQRemoveMin(Nodes) line (best do it for all similar algorithms also)
 to say a new Min is computed here and perhaps note the special case
 where all costs are infinite.
+Linda: OK
 
 As mentioned for other Graph algorithms, there might be some mileage in outlining the Node n during the search of neighbors, as it is the same color as all the other finalized nodes.
 

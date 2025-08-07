@@ -1,0 +1,26 @@
+
+Warshall Transitive Closure
+
+Reviewed by Linda 22 July 2025
+
+Animation all good and clear.
+
+Background:
+
+Very good and clear up until the last two lines:
+
+"That is, we assume the binary relations given as input are irreflexive. However, the algorithm for transitive closure works with any binary relation."
+
+True, but a bit opaque for students?  I had to look up irreflexive.
+
+
+I am not sure whether we should build on the explanation of transitive closure:
+
+"Warshalls algorithm computes the transitive closure of a directed graph, that is, what nodes can be reached from other nodes."
+
+?-->
+
+Warshalls algorithm computes the transitive closure of a directed graph, that is, what nodes can be reached from other nodes, directly or through intermediate nodes.
+
+?? too much explanation -- or helpful?
+ 
