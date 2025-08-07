@@ -6,13 +6,18 @@ Background
 	Most OK
 
 	paragraph 2 line 5 mispelled minimum
+LEE: fixed
 
 	paragraph 6-- I am a bit confused about what the heuristic value of the node is.
+LEE: added more on this
 
 Animation
 
 	Opens with heuristic values filled for the nodes.  No hint as to how they are calculated in either the background or the animation...
+LEE: added more on this
 
 The Background talks about the Heuristic Value of the Node.  This is a guess, but it’s not at all clear where it comes from.
+LEE: added more on this
 
 The weight in the array doesn't always match up with the added up edge weights from the graph.  Rounding error?
+LEE: seems OK?
