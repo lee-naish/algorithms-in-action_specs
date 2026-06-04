@@ -5,14 +5,22 @@ See also ../doc/Lee_TODO.txt
 ==============================================================
 New algs:
 ==============================================================
+Tries?
 Patricia tries?
 Maxflow (naive/Ford-Fulkerson; relies on BFS/DFS)?
 Tries?
 Splay trees
 Polish off current string searching algs
 Minimax, alpha-beta (notes below)
-Other list algs (see Linked list mergesort)
+Other list algs (see Linked list mergesort below)
 Deletion in various algs (see below)
+KD trees
+B+ trees
+Warshall's all shortest paths
+Other priority queue data structures
+Maxflow (naive/Ford-Fulkerson; relies on BFS/DFS)?
+Splay trees
+Polish off current string searching algs
 
 ==============================================================
 Fixes:
