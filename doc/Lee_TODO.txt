@@ -3,6 +3,286 @@ Link: algorithms-in-action_specs/doc/Lee_TODO.txt
 See also algorithms-in-action_specs/doc/status.txt
 ==================================================
 
+Colors:
+new interface for *all* algorithms
+vis.array.deselect(i) -> different (+consistent) way to remove colour
+vis.graph.myColorEdge -> rename and avoid "my"
+colours in linked list module -> new interface
+Eventually remove old (un)patch, sorted, select(1...),...
+
+Chaining search doesn't show much!
+
+DONE Straight Radix missing 2 on count array - columnGapAt
+
+DONE URL restore expansion with BSTrec, ...?
+
+
+Semester 2 2025 student stuff: (XXX UPDATE THIS)
+------------------------------
+
+OK?? URL/share expand/collapse broken?
+
+MOSTLY DONE? (check) AVL etc:
+Render root at top always, grow down
+234-tree: change T234_Insert to Insert etc like BST etc
+Maybe with rotation, change pointer from parent one chunk later (at the
+  assignment statement). Hmm, actually two chunks later for lines such as
+  return leftRotate(t). A bit messy to code but probably should do it since
+  we do similar for recursive insert.
+XXX Search broken!? intermittently get build tree first error (when all
+collapsed?)
+Move code to new color scheme (change function names first?)
+Rectangles vanish with alt colour palettes - should specify via ...apple
+For balanceCase, highlight edges/nodes (current is ok)
+  Could change colours perhaps? Use same colour for edges as new node -
+  probably not - better is whatever is used for rotation.
+For rotations, highlight edges/nodes (current is ok)
+  Best use same colour for nodes and edge for rotation, unless one node is
+  the new node (that should stay the new node colour)
+DONE return a single-node tree containing k - don't add edge until next step??
+DONE All collapsed - root node highlighting seems inconsistent?
+DONE look at recBST pseudocode
+  - remove "else return t  // ignore duplicate key" from recBST and AVL plus
+  add extra explanation to AVL and BST at the first if re ignoring equal keys
+  (and possibility of adding else return t to AVL code but here we keep code
+  simple and more similar to recBST code)
+DONE (mostly - see below) fix up iterative BST
+DONE implement recursive BST search
+DONE RESULT NOT FOUND -> Key not found
+DONE BSTrec has AVLT_Search function - change to Insert/Search for BST/AVL
+DONE Empty rectangle smaller
+DONE (see below) BST make base case (+ first insert) same with all variants
+DONE BSTRec/AVL have extra Initialise chunk with no code line highlighted. Should
+it be added to BST or should we highlight Main or avoid the extra chunk? Is
+"Initialise" a special case in AIA code??? Added extra Main chunk in BST for
+now and changed Initialise to Main.
+OK?? Rectangles for search seem to depend on expansion of insertion
+DONE BST label for tree -> "Tree" or "Binary Search Tree" + "AVL Tree" elsewhere
+DONE AVL+BST background: add comment we ignore duplicate keys, add section at end:
+can have list of data items and single key or add left or right - search may
+want to return one or all, for latter we may need to search both subtrees if
+we hit an equal key...
+DONE Just use rectangles for recursion (maybe outer ones faded a bit more.  Don't
+highlight nodes/edges along path.
+DONE Inserted key highlighted until the end. Note new node is never involved in
+rotations - XXX not true - can be for double rotations:(
+DONE Remove highlight at last chunk (plus and rectangles).
+DONE Try to avoid having two chunks for each return from recursion (especially BSTrec)
+
+
+BST (iterative)
+DONE remove outer build function
+DONE remove input array, add Empty message at start
+DONE highlight c at c <- c.left, right
+DONE (c only, p highight) Add p, c labels?
+DONE remove Create_Node() junk; p.left <- n becomes p.left <- new node containing
+DONE duplicate keys + other issues with (pseudo)code
+  k (plus explanation re subtrees being Empty etc)
+DONE Search: falling off tree not animated well - add T = Empty then NOT FOUND
+  like recursive/AVL
+DONE best stop at while loop also?
+DONE Fix background, extra?
+Reconsider colours
+
+Global issues
+talk with Elliott etc?
+arrowhead color
+white on black for some/all colours (old scheme used for all it seems)???
+
+Sorting
+-Insertion sort
+DONE pseudocode
+DONE colour choice
+DONE temp var
+DONE avoid temp var when not expanded
+DONE j versus j-1
+DONE extra chunk at while loop after loop exit for color change
+DONE (fixed by doing below) tweening glitches - vars, speed
+  vars normally just first iteration, but also following (with chrome):
+  http://localhost:3000/animation/?alg=isort&mode=sort&list=62,42,15,99,46,22,43,5,82,75,2,43&step=13&expand={"sort":{"Main":true,"Insert":true,"ShiftRight":true}}
+  Looks like first element of array initially doesn't tween properly!
+DONE get rid of duplicated tracer/renderer etc + rewrite - all the isort stuff is
+  hard coded in Array/Array1DRenderer_insertionSort/index_insertionSort.js :(
+DONE avoid sky colour (for elements not looked at yet - see start of heapsort,
+  quicksort)
+DONE extra-info
+background
+-Selection sort
+pseudocode; code lines not in sync with animation (or anything)
+highlight remains after swap; could change min to stone at swap
+highlight min?
+background
+extra (check/add)
+-Stack stuff
+add to list mergesort?
+add to DC convex hull?
+
+Linked list mergesort
+XXXXX students ended up with something to too far from usable
+support new colour scheme
+DONE fix other colour stuff
+DONE add R after sort L
+DONE remove mid at end of split, E+L+R at end of merge
+DONE Display len
+move/improve len display?
+DONE add explanations of list move in/after merge
+add // Done pseudocode line
+DONE improve merge background, extra
+best pause at if L == Null (a bit tricky currently because Null pointers
+are not shown)
+Add stack display from array version (maybe make it wider to line up with
+list if possible)
+left of animation should depend on window size
+see controllers/list_interface
+extra vars should be boxes with arrows (change layout a bit for this)
+possibly move mergesort-specific code (not worth bothering?)
+add more general interface functions (not urgent).
+DONE Colour bug : right recursive call can colour list from previous call somehow,
+eg
+http://localhost:3000/animation/?alg=msort_list_td&mode=sort&list=83,66,61,17,59,67,90,41,29,54,57,42&step=79&expand={"sort":{"Main":true,"split":true,"scan":true,"MergesortL":true,"MergesortR":true,"Merge":true,"initM":true,"CopySmaller":true,"CopyRest":true}}
+DONE Also: at top level calls:
+// XXX should colour list the cur_L colour and *remove* the
+// colour from the previous cur_L, if any
+
+...
+
+
+
+DONE (by students) Add selection sort some time
+
+Graham scan
+DONE background,
+DONE exercises:
+DONE stack versus list versus array
+DONE ...
+DONE animation: min NQR (p1 is min); replace with P[2] and max -> P[max]? Or sort
+like D&C alg?
+DONE color nodes in hull
+
+Graham scan
+animate base case
+maybe remove min and max now???
+Possibly color nodes to be deleted apple; reset colors one step after all
+
+DONE Notes from meeting with Linda on
+Wed 15 Oct 2025 16:26:23 AEDT
+DONE grahamScan H[0], sorting, ...
+deleted (so if collapsed we can see deleted nodes easily)
+
+DONE gift wrap: add extra var labels?
+
+DONE gift wrap: restore deleted node at end when AKL heuristic in operation
+
+extra console.log messages
+
+allow search and insert to be interspersed. - see email to Elliott on Sep 30.
+
+AVL initial state with 1 node??
+DONE (by students) "array view", height bars???
+
+DONE Merge student stuff:
+pull GI branch, test
+Accept Pull request
+pull 2025_sem2
+Test 2025_sem2 again - AAAARGGGGHHHH! hours go by....
+switch add_gwrap
+merge 2025_sem2
+test
+commit
+save CHullDC-do-not-merge code (controller, pseudocode, convexHullColours.js)
+node addNewAlgorithm.js
+(DC)
+copy CHullDC-do-not-merge code to DC
+test
+commit
+node addNewAlgorithm.js
+(Graham)
+test
+switch add_gwrap
+merge add<DC>
+merge add<GS>
+test
+commit
+switch 2025_sem2
+merge add_gwrap
+commit, push
+e-mail GI, AVL, others
+
+DONE Note to GI group:
+src/algorithms/pseudocode/index.js was missing semicolons at the end of
+the last few lines which broke addNewAlgorithm and left things modified
+in the 2025_sem2 branch
+new alg convHullDC based on gwrap; needed to fix param file:
+     <EuclideanMatrixParams
+        name="convHullDC"
+
+
+gwrap/DC: toggle through graphs -> error
+6-15,11-16,21-16,29-16,40-4,40-12
+
+Check double hash computation - should(?) be collision during table resize for
+http://localhost:3000/?alg=HashingDH&mode=insertion&list=42,65,41,64,31,32,19,6,8,29,38,37&value=2
+New size = 23; 42+23=65, 41+23=64 ...
+
+gwrap graph 1 option -> error??? change default graphs anyway
+
+DONE Add keywords
+
+Add more keywords
+
+npm stuff:
+[DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:48093) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+
+Stack display for REX/quicksort etc: maybe add the numbers, eg
+[ 3,  5,  1,  7][11,  9, 12,  8] (REX)
+[ 3,  5,  1,  7]    [11,  9, 12] (QS)
+
+DONE fix circular dependency problem for menu from GI group
+
+review top level pseudocode for isort so it's the same for arrays
+and lists if possible
+
+DONE Graphs - enter no edges -> kaput!
+'TypeError: can't access property "forEach", t is null'
+
+Look at status/Warshall.txt
+
+Make error message appear somewhere (more) visible (student project?)
+- maybe a popup?  + improve error messages
+
+Make popup explanations go away with second mouse click
+
+BST a bit wierd with duplicate keys (could just avoid them like 234);
+AVL not great also (student project?)
+
+DONE 234 Tree (& maybe other input): enter some data, select sorted/balanced, try to
+enter more -> screws up
+
+DONE (prototype) support gap in 1D array for tweening of tmp var in isort
+- see columnGapAt in src/components/DataStructures/Array/Array1DRenderer/index.js
+
+234 Tree input editing problem: still not great radio button for random stays
+set after selecting but others don't. Want to uncheck buttons when input is
+manually edited; nice to be able to reselect random ay time to get a new
+permutation. Could be made more consistent with input option for sorting etc.
+
+DONE BST, AVL Tree input fix editing problem as in 234
+
+DONE TTFT with weird input editing can result in duplicate keys and two node with
+no data... (may be undefined key)??? Happens with repeated keys
+
+Add keys to insert for 234 tree??? (have version of this - may need updates -
+do diff)
+
+DONE (XXX could do more - input array could be higher and labels not take up
+space) Reduce space for keys to insert in BST -> more space for tree
+
+DONE 2-3-4 - add sorted etc input options, extra info
+
+DONE improve graph search backgrounds
+
 DONE check/fix = vs == vs <-
 
 DONE List mergesort pseudocode: head(L) -> L.head etc (more like AVL tree

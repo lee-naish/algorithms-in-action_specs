@@ -1,4 +1,5 @@
 // Graham scan convex hull algorithm
+// This code is from geeks4geeks, Modified by Lee Naish
 // XXX may want to remove duplicate points
 
 // Class to represent a point

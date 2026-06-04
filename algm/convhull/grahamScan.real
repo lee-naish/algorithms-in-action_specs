@@ -84,8 +84,11 @@ while H length > 2 & (H[1].y-H[2].y)*(H[0].x-H[1].x) - (H[1].x-H[2].x)*(H[0].y-H
 
 \Note{
 // This code is from geeks4geeks, Modified by Lee Naish
+// Graham scan convex hull algorithm
+// XXX may want to remove duplicate points
 
 // Class to represent a point
+// XXX may want to change this for consistency with other CH algorithms
 class Point {
     constructor(x, y) {
         this.x = x;
@@ -120,7 +123,9 @@ function findConvexHull(points) {
     const n = points.length;
 
     // Convex hull is not possible if there are fewer than 3 points
-    if (n < 3) return [[-1]];
+    // XXX
+    // if (n < 3) return [[-1]];
+    if (n < 3) return points;
 
     // Convert input array to Point objects
     let a = points.map(p => new Point(p[0], p[1]));

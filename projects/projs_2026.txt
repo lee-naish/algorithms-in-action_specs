@@ -1,0 +1,93 @@
+2026 project notes
+(add stuff from Linda)
+See also ../doc/Lee_TODO.txt
+
+==============================================================
+New algs:
+==============================================================
+Patricia tries?
+Maxflow (naive/Ford-Fulkerson; relies on BFS/DFS)?
+Tries?
+Splay trees
+Polish off current string searching algs
+Minimax, alpha-beta (notes below)
+Other list algs (see Linked list mergesort)
+Deletion in various algs (see below)
+
+==============================================================
+Fixes:
+==============================================================
+Linked list mergesort
+- colour scheme, consistency with other algs (eg, grey versus white)
+- add stack (array view ok)
+- label positions etc (especially during merge)
+- arrow head positions (general polishing)
+- improve interfaces?
+Could add bottom up + natural mergesort also (need list of lists) to
+round out a project.
+
+==============================================================
+Extra functionality:
+==============================================================
+Combine insert and search (like in hashing) for all similar algs.
+Union-find a good first target (since find changes data structure).
+
+Might want to be able to collapse more code, with "collapse all" being
+replaced by "default" or some such (could also have "collapse
+all" I guess).  Would need to add stuff to pseudocode files etc.
+
+Add a "skip" back/forward button so we can divide up overall computation
+into segments, eg processing of each input item (insert is one segment, as
+is search and delete).  Internally "chunks" can have an extra flag to
+indicate it is the start (or end) of a segment.
+
+Deletion (various algorithms). BST the obvious first choice.
+
+
+
+==============================================================
+From 2025:
+==============================================================
+----------------------------------
+Linked lists (again)?
+== aim for nice animation of list mergesort but try to make it general
+enough to be easily used/adapted for other algorithms
+== nodes are two joined boxes like 3-nodes in 234 trees, arrows or
+empty list symbol in second box. Maybe have a array of lists with optional
+varName (string), listPosition and listValue thats either emptyList or
+cellPosition (x,y) + headVal (string) + tailVal (list = array index;
+should have its listPosition based on/equal cellPosition). Length of
+array = total number of lists (named or un-named) = number of named vars
+plus number of cons cells.
+
+
+
+----------------------------------
+Minimax, alpha-beta (maybe not, for now)
+== Other online animation has binary trees only. Best use multiple
+children, particularly towards the root
+== Not clear how best to input data - could implement syntax with nested
+parentheses (plus some predefined examples)
+== alpha-beta: possible *optional* sorting of children based on
+(approximate) static evaluation function.  Default is on (non-leaves
+have ? or highlight to indicate approximation), when off, only
+display values at leaves.
+== random data generation.  Possibly fix tree shape, generate random
+value v in a given range (5-95 for root), children have range 1-v*1.5
+for max nodes and v*1.5-99 for min nodes.
+
+
+
+----------------------------------
+Ideas from notes.txt etc:
+Maxflow (naive/Ford-Fulkerson; relies on BFS/DFS)?
+Tries?
+Splay trees
+Polish off current string searching algs
+
+
+
+----------------------------------
+Local peace as well as World peace (might have to wait until 2026):
+
+
