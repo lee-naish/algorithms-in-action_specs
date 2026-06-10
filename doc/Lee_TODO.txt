@@ -3,6 +3,9 @@ Link: algorithms-in-action_specs/doc/Lee_TODO.txt
 See also algorithms-in-action_specs/doc/status.txt
 ==================================================
 
+Create non-deployed pseudocode_test "algorithm" (might need a single
+bookmark)
+
 Colors:
 new interface for *all* algorithms
 vis.array.deselect(i) -> different (+consistent) way to remove colour

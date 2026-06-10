@@ -15,12 +15,17 @@ Minimax, alpha-beta (notes below)
 Other list algs (see Linked list mergesort below)
 Deletion in various algs (see below)
 KD trees
+Quad trees
 B+ trees
 Warshall's all shortest paths
 Other priority queue data structures
 Maxflow (naive/Ford-Fulkerson; relies on BFS/DFS)?
 Splay trees
 Polish off current string searching algs
+
+Splay trees:
+Bottom up, recursive first as it is similar to AVL. Avoid two modes.
+Could also do iterative top down.
 
 ==============================================================
 Fixes:
