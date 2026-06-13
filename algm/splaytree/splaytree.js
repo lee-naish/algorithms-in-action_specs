@@ -1,3 +1,11 @@
+// Play tree implementation
+// (XXX should add deletion?)
+// Needs extra augmentation to make it into an AIA controller for
+// animation (best merge AVL tree controller with this code as we want
+// animations to be similar)
+
+// The code is contributed by Nidhi goel to Geeks for Geeks
+// Modified by Lee Naish
 
 // Javascript code addition 
 
@@ -30,18 +38,13 @@ class SplayTree {
   }
 
   // version of splay that may be slightly less efficient but has
-  // a simpler structure
+  // a simpler structure for AIA
   static splay(root, key) {
     // do nothing cases (could add negation of these to other cases)
-    if (root == null || root.key == key
+    if (root == null
+        || root.key == key
         || root.key > key && root.left == null
         || root.key < key && root.right == null) {
-      return root;
-    }
-    if (root.key > key && root.left == null) {
-      return root;
-    }
-    if (root.key < key && root.right == null) {
       return root;
     }
     // left only cases (could combine)
@@ -245,5 +248,3 @@ root = SplayTree.search(root, skey);
 console.log(skey + (root.key == skey? ":)": ":("));
 console.log(SplayTree.inOrderStr(root));
 
-// The code is contributed by Nidhi goel to Geeks for Geeks
-// Modified by Lee Naish
