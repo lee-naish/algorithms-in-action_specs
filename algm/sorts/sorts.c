@@ -436,7 +436,7 @@ List
 mergesort_bup_la(List L, int len) {
         int i, mid;
         List Lmid, R, M, Mlast, tmp;
-        List LLE;
+        List LR;
 
         if (L == Null)
             return L;
@@ -448,18 +448,18 @@ mergesort_bup_la(List L, int len) {
         tail(tmp) = Null;
         ltail(LL) = Null;
 
-        LLE = LL;
+        LR = LL;
 
         while (L != Null) {
-            // LLE.tail <- list with L.head as only element
-            // LLE <- LLE.tail
+            // LR.tail <- list with L.head as only element
+            // LR <- LR.tail
             // L <- L.tail
-            ltail(LLE) = LLE+1; // malloc
-            LLE = ltail(LLE);
-            ltail(LLE) = Null;
+            ltail(LR) = LR+1; // malloc
+            LR = ltail(LR);
+            ltail(LR) = Null;
             tmp = L;
             L = tail(L);
-            lhead(LLE) = tmp;
+            lhead(LR) = tmp;
             tail(tmp) = Null;
         }
         for (i = 1; i < Size; i++)
@@ -467,11 +467,11 @@ mergesort_bup_la(List L, int len) {
 
 
         while (ltail(LL) != Null) { // length(LL) > 1
-            LLE = LL;
+            LR = LL;
 
-            while (LLE != Null && ltail(LLE) != Null) { // length(LLE) > 2
-                L = lhead(LLE);
-                R = lhead(ltail(LLE));
+            while (LR != Null && ltail(LR) != Null) { // length(LR) > 2
+                L = lhead(LR);
+                R = lhead(ltail(LR));
                 
             // M <- merge of L and R
             // XXX rather verbose - should change output code at end
@@ -519,12 +519,12 @@ mergesort_bup_la(List L, int len) {
             for (Lmid = M; Lmid != Null; Lmid = tail(Lmid))
                 printf(" %d", head(Lmid));
             printf("\n");
-                // LLE.head <- M
-                lhead(LLE) = M;
-                // LLE.tail <- LLE.tail.tail
-                ltail(LLE) = ltail(ltail(LLE));
-                // LLE <- LLE.tail
-                LLE = ltail(LLE);
+                // LR.head <- M
+                lhead(LR) = M;
+                // LR.tail <- LR.tail.tail
+                ltail(LR) = ltail(ltail(LR));
+                // LR <- LR.tail
+                LR = ltail(LR);
             }
         }
 // if (left < right-1) { // for testing/debugging
