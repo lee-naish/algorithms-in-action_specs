@@ -7,9 +7,10 @@
 // #define QUICKSORT // some version of quicksort
 // #define MERGE_TD // top-down merge sort
 // #define MERGE_BUP // bottom-up merge sort
-#define MERGE_NAT // natural merge sort
+// #define MERGE_NAT // natural merge sort
 // #define MSD_RADIX // radix exchange sort
 // #define MERGE_TD_LA // top-down merge sort for lists imp as arrays
+#define MERGE_BUP_LA // bottom-up merge sort for lists imp as arrays
 // XXX should do top-down merge sort for lists imp with pointers - main code
 // should be identical - just need to write init code for list and change
 // some macro definitions
@@ -55,6 +56,21 @@ int L = 1; // (index of) first element of list
 #define Null 0
 List mergesort_td_la(int L, int len);
 #endif // MERGE_TD_LA
+
+#ifdef MERGE_BUP_LA
+int Anext[Size]; // pointers for array implementation of lists
+int L = 1; // (index of) first element of list (needed???)
+int LAnext[Size]; // as above for list of lists
+int LA[Size]; // as above for list of lists
+int LL = 1; // as above for list of lists
+#define head(p) A[p]
+#define tail(p) Anext[p]
+#define lhead(p) LA[p]
+#define ltail(p) LAnext[p]
+#define List int
+#define Null 0
+List mergesort_bup_la(int L, int len);
+#endif // MERGE_BUP_LA
 
 #ifdef MERGE_BUP
 void mergesort_bup(int A[], int size);
@@ -103,6 +119,12 @@ main() {
             Anext[i] = i+1;
         Anext[Size-1] = Null;
         L = mergesort_td_la(L, Size-1);
+#endif // MERGE_TD_LA
+#ifdef MERGE_BUP_LA
+        for (i = 1; i < Size-1; i++)
+            Anext[i] = i+1;
+        Anext[Size-1] = Null;
+        L = mergesort_bup_la(L, Size-1);
 #endif // MERGE_TD_LA
 #ifdef MERGE_BUP
         mergesort_bup(A, Size-1);
@@ -403,6 +425,116 @@ mergesort_td_la(int L, int len) {
 }
 
 #endif // MERGE_TD_LA
+
+#ifdef MERGE_BUP_LA
+
+// Sort list L (represented with A[]+Anext[]) of length len (by
+// rearranginging next pointers/indices)
+// Designed so code is the same, independent of list implementation
+// XXX could reduce code duplication
+List
+mergesort_bup_la(List L, int len) {
+        int i, mid;
+        List Lmid, R, M, Mlast, tmp;
+        List LLE;
+
+        if (L == Null)
+            return L;
+        // convert (non-empty) list L into list of lists LL
+        // LL <- list with L.head as only element
+        tmp = L;
+        L = tail(L);
+        lhead(LL) = tmp;
+        tail(tmp) = Null;
+        ltail(LL) = Null;
+
+        LLE = LL;
+
+        while (L != Null) {
+            // LLE.tail <- list with L.head as only element
+            // LLE <- LLE.tail
+            // L <- L.tail
+            ltail(LLE) = LLE+1; // malloc
+            LLE = ltail(LLE);
+            ltail(LLE) = Null;
+            tmp = L;
+            L = tail(L);
+            lhead(LLE) = tmp;
+            tail(tmp) = Null;
+        }
+        for (i = 1; i < Size; i++)
+            printf("%d %d %d %d \n", A[i], Anext[i], LA[i], LAnext[i]);
+
+
+        while (ltail(LL) != Null) { // length(LL) > 1
+            LLE = LL;
+
+            while (LLE != Null && ltail(LLE) != Null) { // length(LLE) > 2
+                L = lhead(LLE);
+                R = lhead(ltail(LLE));
+                
+            // M <- merge of L and R
+            // XXX rather verbose - should change output code at end
+            printf("   Merging: ");
+            for (Lmid = L; Lmid != Null; Lmid = tail(Lmid))
+                printf(" %d", head(Lmid));
+            printf("\n");
+            printf("   With: ");
+            for (Lmid = R; Lmid != Null; Lmid = tail(Lmid))
+                printf(" %d", head(Lmid));
+            printf("\n");
+
+                // Merge lists L and R to produce list M
+                // merge is nicer if we use pointers to pointers but
+                // some folk find that confusing and most imperative
+                // languages don't help abstract things:(
+
+                // Result list M starts with the minimum of the two input lists
+                if (head(L) <= head(R)) {
+                    M = L;
+                    L = tail(L);
+                } else {
+                    M = R;
+                    R = tail(R);
+                }
+                // scan through adding elements to the end of M
+                Mlast = M;
+                while (L != Null && R != Null) {
+                    if (head(L) <= head(R)) {
+                        tail(Mlast) = L;
+                        Mlast = L;
+                        L = tail(L);
+                    } else {
+                        tail(Mlast) = R;
+                        Mlast = R;
+                        R = tail(R);
+                    }
+                }
+                // add any elements not scanned to the end of M
+                if (L == Null)
+                    tail(Mlast) = R;
+                else
+                    tail(Mlast) = L;
+            printf("Merged: ");
+            for (Lmid = M; Lmid != Null; Lmid = tail(Lmid))
+                printf(" %d", head(Lmid));
+            printf("\n");
+                // LLE.head <- M
+                lhead(LLE) = M;
+                // LLE.tail <- LLE.tail.tail
+                ltail(LLE) = ltail(ltail(LLE));
+                // LLE <- LLE.tail
+                LLE = ltail(LLE);
+            }
+        }
+// if (left < right-1) { // for testing/debugging
+// int i1;
+// printf("Ret from ms(%d, %d): ", left, right);
+// for (i1=1; i1 < Size; i1++) printf("%d ", A[i1]); printf("\n");
+// }
+}
+
+#endif // MERGE_BUP_LA
 
 #ifdef MERGE_BUP
 // XXX could reduce duplication with MERGE_TD and MERGE_NAT

@@ -3,21 +3,56 @@ Link: algorithms-in-action_specs/doc/Lee_TODO.txt
 See also algorithms-in-action_specs/doc/status.txt
 ==================================================
 
-Create non-deployed pseudocode_test "algorithm" (might need a single
-bookmark)
-
 Colors:
 new interface for *all* algorithms
+ DONE for most? graph stuff DS
+ Quite a few arrays use selectColor (change to setColor?)
+ but lots use (de)select still also
 vis.array.deselect(i) -> different (+consistent) way to remove colour
-vis.graph.myColorEdge -> rename and avoid "my"
+DONE vis.graph.myColorEdge -> rename and avoid "my" -> setEdgeColor, setNodeColor
+DONE add transparent/invisible as colour
 colours in linked list module -> new interface
 Eventually remove old (un)patch, sorted, select(1...),...
+DONE Delete hsortNewColors
+
+Union find
+Allow optional '?' prefix in data input(?)
+DONE Allow single elements in input -> find (to combine modes)
+DONE Smooth out combined animation
+DONE 1-2,3-4,2-4,1-5,6-8,3-6,6-4 highlight 1 BUG after find(1) in union(1,5)
+DONE Also code highlighting in this case?
+DONE For find(2), label is Union(1)...
+DONE Find should add label k and n/m should be changed only at end
+DONE More space for tree
+Combine two controller files + delete find mode + extra files
+Rename data validator helper function
+DONE Collapse psuedocode for find at calls
+
+DONE BST insertion - highlight whole path, add p pointer
+
+Maybe highlight edges, not just paths in recursive BST and related
+Clean up possible redundency in someple BST code
+
+DONE (not edges) BSTRec/AVLT insert/search - best highlight nodes/edges like
+   in iterative search version
+DONE (not edges) Highlight root node, highlight edge just before
+   recursive call, unhighlight on return
 
 Chaining search doesn't show much!
 
 DONE Straight Radix missing 2 on count array - columnGapAt
 
 DONE URL restore expansion with BSTrec, ...?
+
+D&Q convex hull
+DONE better example 2 that has colinear points?
+At hr <- convex hull of right half of P, restore color to only points on
+the two hulls
+
+DONE Create non-deployed pseudocode_test "algorithm" (might need a single
+bookmark)
+
+DONE Order + naming of conv hull algs
 
 
 Semester 2 2025 student stuff: (XXX UPDATE THIS)
@@ -121,18 +156,13 @@ add to list mergesort?
 add to DC convex hull?
 
 Linked list mergesort
-XXXXX students ended up with something to too far from usable
-support new colour scheme
-DONE fix other colour stuff
-DONE add R after sort L
-DONE remove mid at end of split, E+L+R at end of merge
-DONE Display len
+Arrows should end outside box, not inside it
+support new colour scheme (like arrays, trees), global colour change
+support edge/pointer colours??? At least change to black?
 move/improve len display?
-DONE add explanations of list move in/after merge
 add // Done pseudocode line
-DONE improve merge background, extra
-best pause at if L == Null (a bit tricky currently because Null pointers
-are not shown)
+best pause at if L = Null (a bit tricky currently because Null pointers
+are not shown - should add L = Null to display or something)
 Add stack display from array version (maybe make it wider to line up with
 list if possible)
 left of animation should depend on window size
@@ -140,6 +170,12 @@ see controllers/list_interface
 extra vars should be boxes with arrows (change layout a bit for this)
 possibly move mergesort-specific code (not worth bothering?)
 add more general interface functions (not urgent).
+DONE fix other colour stuff
+DONE add R after sort L
+DONE remove mid at end of split, E+L+R at end of merge
+DONE Display len
+DONE add explanations of list move in/after merge
+DONE improve merge background, extra
 DONE Colour bug : right recursive call can colour list from previous call somehow,
 eg
 http://localhost:3000/animation/?alg=msort_list_td&mode=sort&list=83,66,61,17,59,67,90,41,29,54,57,42&step=79&expand={"sort":{"Main":true,"split":true,"scan":true,"MergesortL":true,"MergesortR":true,"Merge":true,"initM":true,"CopySmaller":true,"CopyRest":true}}
